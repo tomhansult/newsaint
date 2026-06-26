@@ -72,21 +72,20 @@
 
   <script src="main.js"></script>
   <script>
-    // -------------------------------
-    // PRODUCTS ARRAY
-    // Image path: assets/images/products/
-    // (If your folder is "Products" with capital P, change the path below to "assets/images/Products/")
-    // -------------------------------
+    // -------------------------------------------------
+    // PRODUCTS ARRAY – image folder: assets/images/Products/
+    // If any filename is different, just change it below.
+    // -------------------------------------------------
     const products = [
-      { id: 1,  name: "Discipline Hoodie",   price: 890, category: "hoodies",     image: "assets/images/products/hoodie1.PNG" },
-      { id: 2,  name: "Resilience Tee",      price: 450, category: "t-shirts",    image: "assets/images/products/tshirt1.PNG" },
-      { id: 3,  name: "Integrity Cap",       price: 350, category: "accessories", image: "assets/images/products/cap1.PNG" },
-      { id: 4,  name: "Build Yourself Tee",  price: 490, category: "t-shirts",    image: "assets/images/products/tshirt2.PNG" },
-      { id: 5,  name: "Grind Hoodie",        price: 950, category: "hoodies",     image: "assets/images/products/hoodie2.PNG" },
-      { id: 6,  name: "Pay It Forward Tote", price: 280, category: "accessories", image: "assets/images/products/tote.PNG" },
-      { id: 7,  name: "Legacy Crewneck",     price: 780, category: "t-shirts",    image: "assets/images/products/crewneck.PNG" },
-      { id: 8,  name: "Foundation Longsleeve", price: 620, category: "t-shirts",  image: "assets/images/products/longsleeve.PNG" },
-      // You can add more products here as you upload more images
+      { id: 1,  name: "Discipline Hoodie",   price: 890, category: "hoodies",     image: "assets/images/Products/hoodie1.PNG" },
+      { id: 2,  name: "Resilience Tee",      price: 450, category: "t-shirts",    image: "assets/images/Products/tshirt1.PNG" },
+      { id: 3,  name: "Integrity Cap",       price: 350, category: "accessories", image: "assets/images/Products/cap1.PNG" },
+      { id: 4,  name: "Build Yourself Tee",  price: 490, category: "t-shirts",    image: "assets/images/Products/tshirt2.PNG" },
+      { id: 5,  name: "Grind Hoodie",        price: 950, category: "hoodies",     image: "assets/images/Products/hoodie2.PNG" },
+      { id: 6,  name: "Pay It Forward Tote", price: 280, category: "accessories", image: "assets/images/Products/tote.PNG" },
+      { id: 7,  name: "Legacy Crewneck",     price: 780, category: "t-shirts",    image: "assets/images/Products/crewneck.PNG" },
+      { id: 8,  name: "Foundation Longsleeve", price: 620, category: "t-shirts",  image: "assets/images/Products/longsleeve.PNG" },
+      // Add more products here as you upload more images
     ];
 
     const grid = document.getElementById('product-grid');
@@ -96,20 +95,20 @@
       grid.innerHTML = filtered.map(p => `
         <div class="product-card">
           <img src="${p.image}" alt="${p.name}" loading="lazy"
-               onerror="this.onerror=null; this.src='assets/images/products/hoodie1.PNG';">
+               onerror="this.onerror=null; this.src='assets/images/Products/hoodie1.PNG';">
           <h4>${p.name}</h4>
           <p>R${p.price}</p>
           <button class="add-to-cart" data-id="${p.id}">Add to Cart</button>
         </div>
       `).join('');
 
-      // Attach event listeners to the new Add to Cart buttons
+      // Attach event listeners to Add to Cart buttons
       document.querySelectorAll('.add-to-cart').forEach(btn => {
         btn.addEventListener('click', () => {
           const id = parseInt(btn.dataset.id);
           const prod = products.find(p => p.id === id);
-          addToCart(prod);  // This function comes from main.js
-          document.getElementById('cart-icon').click(); // Open cart drawer
+          addToCart(prod);  // from main.js
+          document.getElementById('cart-icon').click(); // open cart drawer
         });
       });
     }
