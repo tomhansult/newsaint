@@ -1,4 +1,4 @@
-// Cart logic (shared)
+// Cart logic (shared across pages)
 let cart = JSON.parse(localStorage.getItem('newSaintCart')) || [];
 
 function saveCart() {
@@ -35,14 +35,14 @@ function updateCartCount() {
   }
 }
 
-// Cart drawer injection (used on pages that have a cart icon)
+// Cart drawer
 function initCartDrawer() {
   const drawerHTML = `
     <div class="cart-overlay" id="cart-overlay"></div>
     <div class="cart-drawer" id="cart-drawer">
       <div class="cart-header">
         <span>Your Cart</span>
-        <button id="close-cart">&times;</button>
+        <button id="close-cart" style="background:none;border:none;font-size:1.5rem;cursor:pointer;">&times;</button>
       </div>
       <div class="cart-items" id="cart-items"></div>
       <div class="cart-total" id="cart-total">Total: R0.00</div>
@@ -91,9 +91,9 @@ function initCartDrawer() {
       total += item.price * item.qty;
       return `
         <div class="cart-item">
-          <img src="${item.image}" alt="${item.name}">
+          <img src="${item.image}" alt="${item.name}" onerror="this.onerror=null; this.src='images/hoodie1.PNG';">
           <div class="cart-item-details">
-            <div class="cart-item-title">${item.name}</div>
+            <div class="cart-item-title" style="font-weight:600;">${item.name}</div>
             <div>R${item.price}</div>
             <div class="qty-control">
               <button class="qty-btn" data-id="${item.id}" data-delta="-1">-</button>
@@ -114,21 +114,13 @@ function initCartDrawer() {
       btn.onclick = () => removeFromCart(parseInt(btn.dataset.id));
     });
   }
-
-  // Re-render cart items whenever cart changes (via storage event for cross-tab sync)
-  window.addEventListener('storage', (e) => {
-    if (e.key === 'newSaintCart') {
-      cart = JSON.parse(e.newValue || '[]');
-      updateCartCount();
-      if (drawer.classList.contains('open')) renderCartItems();
-    }
-  });
 }
 
 // Mobile menu close on link click
 document.querySelectorAll('#nav-links a').forEach(link => {
   link.addEventListener('click', () => {
-    document.getElementById('menu-toggle').checked = false;
+    const toggle = document.getElementById('menu-toggle');
+    if (toggle) toggle.checked = false;
   });
 });
 
@@ -156,12 +148,12 @@ if (newsletterForm) {
   newsletterForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const msg = document.getElementById('newsletter-msg');
-    msg.textContent = 'You’re in. Let’s build.';
+    if (msg) msg.textContent = "You're in. Let's build.";
     newsletterForm.reset();
   });
 }
 
-// Initialize cart drawer if cart icon exists
+// Initialize cart drawer
 if (document.getElementById('cart-icon')) {
   initCartDrawer();
 }
