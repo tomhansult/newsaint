@@ -4,13 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gallery | New Saint</title>
-  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="images/FAVICON.ico">
   <link rel="stylesheet" href="styles.css">
   <style>
     .gallery-hero { text-align: center; padding: 3rem 2rem; }
-    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; max-width: 1200px; margin: 0 auto; padding: 0 2rem 4rem; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; max-width: 1400px; margin: 0 auto; padding: 0 2rem 4rem; }
     .gallery-grid img { width: 100%; height: 400px; object-fit: cover; transition: transform 0.3s; }
     .gallery-grid img:hover { transform: scale(1.02); }
+    .gallery-note { text-align: center; padding-bottom: 3rem; color: #666; }
   </style>
 </head>
 <body>
@@ -31,31 +32,24 @@
 
   <main>
     <section class="gallery-hero">
-      <h1>Lookbook</h1>
+      <h1>LOOKBOOK</h1>
       <p>Moments from the movement.</p>
     </section>
 
     <div class="gallery-grid" id="gallery-grid">
-      <!-- Placeholder images; swap these with your model/lifestyle shots -->
-      <img src="images/model1.jpg" alt="Model in New Saint hoodie" loading="lazy" onerror="this.onerror=null; this.src='images/placeholder.jpg';">
-      <img src="images/model2.jpg" alt="Street style shot" loading="lazy" onerror="this.onerror=null; this.src='images/placeholder.jpg';">
-      <img src="images/model3.jpg" alt="Group shot" loading="lazy" onerror="this.onerror=null; this.src='images/placeholder.jpg';">
-      <img src="images/model4.jpg" alt="Details" loading="lazy" onerror="this.onerror=null; this.src='images/placeholder.jpg';">
-      <img src="images/model5.jpg" alt="Portrait" loading="lazy" onerror="this.onerror=null; this.src='images/placeholder.jpg';">
-      <img src="images/model6.jpg" alt="Action shot" loading="lazy" onerror="this.onerror=null; this.src='images/placeholder.jpg';">
+      <!-- Replace these image names with your own model photos later -->
+      <img src="images/model1.jpg" alt="Model in New Saint" loading="lazy" onerror="this.onerror=null; this.src='images/hoodie1.PNG';">
+      <img src="images/model2.jpg" alt="Lifestyle shot" loading="lazy" onerror="this.onerror=null; this.src='images/hoodie1.PNG';">
+      <img src="images/model3.jpg" alt="Group shot" loading="lazy" onerror="this.onerror=null; this.src='images/hoodie1.PNG';">
+      <img src="images/model4.jpg" alt="Details" loading="lazy" onerror="this.onerror=null; this.src='images/hoodie1.PNG';">
+      <img src="images/model5.jpg" alt="Portrait" loading="lazy" onerror="this.onerror=null; this.src='images/hoodie1.PNG';">
+      <img src="images/model6.jpg" alt="Action shot" loading="lazy" onerror="this.onerror=null; this.src='images/hoodie1.PNG';">
     </div>
-    <p style="text-align:center; padding-bottom:2rem;">More images coming soon. Tag <strong>#WearYourStory</strong> to be featured.</p>
+    <p class="gallery-note">More images coming soon. Tag <strong>#WearYourStory</strong> to be featured.</p>
   </main>
 
   <footer>
-    <div class="footer-content">
-      <p>&copy; 2026 New Saint. Wear Your Story.</p>
-      <div class="social-links">
-        <a href="#" aria-label="Instagram">IG</a>
-        <a href="#" aria-label="Twitter">TW</a>
-        <a href="#" aria-label="TikTok">TK</a>
-      </div>
-    </div>
+    <p>&copy; 2026 New Saint. Wear Your Story.</p>
   </footer>
 
   <button id="back-to-top" title="Back to top">↑</button>
