@@ -73,18 +73,30 @@
   <script src="main.js"></script>
   <script>
     // -------------------------------------------------
-    // PRODUCTS ARRAY – image folder: assets/images/Products/
-    // If any filename is different, just change it below.
+    // PRODUCTS ARRAY – exact filenames from your list
+    // Folder: assets/images/Products/
     // -------------------------------------------------
     const products = [
-      { id: 1,  name: "Discipline Hoodie",   price: 890, category: "hoodies",     image: "assets/images/Products/hoodie1.PNG" },
-      { id: 2,  name: "Resilience Tee",      price: 450, category: "t-shirts",    image: "assets/images/Products/tshirt1.PNG" },
-      { id: 3,  name: "Integrity Cap",       price: 350, category: "accessories", image: "assets/images/Products/cap1.PNG" },
-      { id: 4,  name: "Build Yourself Tee",  price: 490, category: "t-shirts",    image: "assets/images/Products/tshirt2.PNG" },
-      { id: 5,  name: "Grind Hoodie",        price: 950, category: "hoodies",     image: "assets/images/Products/hoodie2.PNG" },
-      { id: 6,  name: "Pay It Forward Tote", price: 280, category: "accessories", image: "assets/images/Products/tote.PNG" },
-      { id: 7,  name: "Legacy Crewneck",     price: 780, category: "t-shirts",    image: "assets/images/Products/crewneck.PNG" },
-      { id: 8,  name: "Foundation Longsleeve", price: 620, category: "t-shirts",  image: "assets/images/Products/longsleeve.PNG" },
+      { id: 1,  name: "Xavier Edition Cropped Tee", price: 550, category: "t-shirts",    image: "assets/images/Products/Xavier edition cropped Tee.avif" },
+      { id: 2,  name: "Xavier Collection",          price: 750, category: "t-shirts",    image: "assets/images/Products/Xavier collection .avif" },
+      { id: 3,  name: "Unsleeved Hoodie",           price: 890, category: "hoodies",     image: "assets/images/Products/Unsleeved .avif" },
+      { id: 4,  name: "Two Tone Hoodie",            price: 950, category: "hoodies",     image: "assets/images/Products/Two tone hoodie.avif" },
+      { id: 5,  name: "Santiano Long Sleeve",       price: 620, category: "t-shirts",    image: "assets/images/Products/Santiano long sleeve .avif" },
+      { id: 6,  name: "Santiano Beanie",            price: 350, category: "accessories", image: "assets/images/Products/Santiano beanie.avif" },
+      { id: 7,  name: "Saint V Tee",                price: 490, category: "t-shirts",    image: "assets/images/Products/Saint V.avif" },
+      { id: 8,  name: "Saint Tears Edition",        price: 780, category: "t-shirts",    image: "assets/images/Products/Saint tears edition .avif" },
+      { id: 9,  name: "Saint Short XO",             price: 680, category: "t-shirts",    image: "assets/images/Products/Saint short xo.avif" },
+      { id: 10, name: "Saint Hoodie",               price: 890, category: "hoodies",     image: "assets/images/Products/Saint hoodie.avif" },
+      { id: 11, name: "Saint Crown Tee",            price: 520, category: "t-shirts",    image: "assets/images/Products/Saint Crown.avif" },
+      { id: 12, name: "Pink Santiano Hoodie",       price: 950, category: "hoodies",     image: "assets/images/Products/Pink santiano hoodie.avif" },
+      { id: 13, name: "New Saint Beanie",           price: 350, category: "accessories", image: "assets/images/Products/New saint beanie .avif" },
+      { id: 14, name: "Leather Shorts Front",       price: 1100, category: "accessories", image: "assets/images/Products/Leather shorts front.avif" },
+      { id: 15, name: "Jesus Crown of Thorns",      price: 780, category: "t-shirts",    image: "assets/images/Products/Jesus crown of thorns.avif" },
+      { id: 16, name: "Crown of Thorns Edition",    price: 780, category: "t-shirts",    image: "assets/images/Products/Crown of thorns edition .avif" },
+      { id: 17, name: "Crown of Thorns Edition II", price: 780, category: "t-shirts",    image: "assets/images/Products/crown of thorns edition .avif" },
+      { id: 18, name: "Cropped Tee",                price: 450, category: "t-shirts",    image: "assets/images/Products/Cropped Tee .avif" },
+      { id: 19, name: "Camo Shorts",                price: 750, category: "accessories", image: "assets/images/Products/Camo shorts.avif" },
+      { id: 20, name: "Camo Designer Piece",        price: 1200, category: "accessories", image: "assets/images/Products/Camo designer.avif" },
       // Add more products here as you upload more images
     ];
 
@@ -95,7 +107,7 @@
       grid.innerHTML = filtered.map(p => `
         <div class="product-card">
           <img src="${p.image}" alt="${p.name}" loading="lazy"
-               onerror="this.onerror=null; this.src='assets/images/Products/hoodie1.PNG';">
+               onerror="this.onerror=null; this.src='assets/images/Products/Saint hoodie.avif';">
           <h4>${p.name}</h4>
           <p>R${p.price}</p>
           <button class="add-to-cart" data-id="${p.id}">Add to Cart</button>
