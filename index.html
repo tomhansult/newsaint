@@ -283,6 +283,49 @@
         font-size: 2.8rem;
       }
     }
+    /* ---- Infinite Hero Ticker ---- */
+.hero-ticker {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.4);   /* subtle dark glass strip */
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 1rem 0;
+  z-index: 2;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.ticker-track {
+  display: inline-block;
+  animation: ticker-scroll 25s linear infinite;
+  will-change: transform;
+}
+
+/* Two identical spans create an endless loop */
+.ticker-track span {
+  display: inline-block;
+  font-size: clamp(0.85rem, 2vw, 1.2rem);
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #fff;
+  padding-right: 3rem;   /* space between repeats */
+}
+
+@keyframes ticker-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
   </style>
 </head>
 <body>
