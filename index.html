@@ -3,17 +3,290 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>New Saint – street_luxe</title>
+  <title>New Saint – Real Recognise Real</title>
   <link rel="icon" type="image/x-icon" href="images/FAVICON.ico">
-  <meta name="description" content="New Saint – The uniform for rebuilding your life. Contemporary streetwear for those who choose to become someone new.">
+  <meta name="description" content="New Saint – Luxury streetwear for those who move in silence. Real Recognise Real.">
   <meta property="og:title" content="New Saint">
-  <meta property="og:description" content="Clothing for the daily grind. A movement of discipline, integrity, resilience.">
-  <meta property="og:image" content="https://newsaint.co.za/images/og-image.jpg">
+  <meta property="og:description" content="If you ain’t got a Saint fit, you unidentified.">
+  <meta property="og:image" content="https://newsaint.co.za/assets/images/hero-beanie-model.jpeg">
   <meta property="og:url" content="https://newsaint.co.za">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="styles.css">
+  <!-- Google Fonts for that luxury feel -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ====== HOMEPAGE SPECIFIC STYLES ====== */
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #fff;
+      color: #000;
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 700px;
+      background: url('assets/images/hero-beanie-model.jpeg') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: #fff;
+      padding: 2rem;
+    }
+    .hero h1 {
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 700;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      font-weight: 400;
+      margin-bottom: 2.5rem;
+      opacity: 0.9;
+    }
+    .btn-hero {
+      display: inline-block;
+      padding: 1rem 3rem;
+      background: #fff;
+      color: #000;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border: 1px solid #fff;
+    }
+    .btn-hero:hover {
+      background: transparent;
+      color: #fff;
+    }
+
+    /* Section containers */
+    .section {
+      padding: 6rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-title {
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      margin-bottom: 4rem;
+      text-transform: uppercase;
+    }
+
+    /* Movement Pillars */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+    .pillar-item {
+      text-align: center;
+      padding: 2rem 1rem;
+      border: 1px solid #e0e0e0;
+      transition: border-color 0.3s;
+    }
+    .pillar-item:hover {
+      border-color: #000;
+    }
+    .pillar-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #ccc;
+      margin-bottom: 0.5rem;
+    }
+    .pillar-title {
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+    .pillar-desc {
+      font-size: 0.9rem;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    /* Featured Products – 2 columns on desktop, 1 on mobile */
+    .featured-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .featured-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .featured-card img {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+    .featured-card:hover img {
+      transform: scale(1.03);
+    }
+    .featured-info {
+      margin-top: 1rem;
+      text-align: center;
+    }
+    .featured-name {
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .featured-price {
+      color: #666;
+      margin: 0.5rem 0 1rem;
+    }
+    .btn-shop {
+      display: inline-block;
+      padding: 0.5rem 1.5rem;
+      background: #000;
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: opacity 0.3s;
+    }
+    .btn-shop:hover {
+      opacity: 0.8;
+    }
+
+    /* Manifesto Quote */
+    .quote-block {
+      background: #000;
+      color: #fff;
+      text-align: center;
+      padding: 6rem 2rem;
+    }
+    .quote-block blockquote {
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      font-weight: 600;
+      max-width: 800px;
+      margin: 0 auto 2rem;
+      line-height: 1.4;
+    }
+    .btn-outline-white {
+      display: inline-block;
+      padding: 0.8rem 2.5rem;
+      border: 1px solid #fff;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: all 0.3s;
+    }
+    .btn-outline-white:hover {
+      background: #fff;
+      color: #000;
+    }
+
+    /* Newsletter */
+    .newsletter {
+      background: #f5f5f5;
+      text-align: center;
+      padding: 6rem 2rem;
+    }
+    .newsletter h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+    .newsletter p {
+      color: #666;
+      margin-bottom: 2rem;
+    }
+    .newsletter-form {
+      display: flex;
+      max-width: 500px;
+      margin: 0 auto;
+      gap: 0.5rem;
+    }
+    .newsletter-form input {
+      flex: 1;
+      padding: 0.9rem;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      background: #fff;
+    }
+    .newsletter-form button {
+      padding: 0.9rem 2rem;
+      background: #000;
+      color: #fff;
+      border: none;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity 0.3s;
+    }
+    .newsletter-form button:hover {
+      opacity: 0.8;
+    }
+
+    /* Fade-in animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .pillars-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .featured-grid {
+        grid-template-columns: 1fr;
+      }
+      .newsletter-form {
+        flex-direction: column;
+      }
+      .section {
+        padding: 4rem 1.5rem;
+      }
+    }
+    @media (max-width: 500px) {
+      .pillars-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+    }
+  </style>
 </head>
 <body>
+  <!-- Sticky Header -->
   <header id="header">
     <nav>
       <a href="index.html" class="logo">NEW SAINT</a>
@@ -30,94 +303,103 @@
   </header>
 
   <main>
-    <!-- Hero section -->
+    <!-- Hero -->
     <section class="hero">
+      <div class="hero-overlay"></div>
       <div class="hero-content">
-        <h1>WEAR YOUR STORY.<br>BUILD YOUR NEW FUTURE.</h1>
-        <p class="hero-sub">The uniform for those who refuse to stay the same.</p>
-        <a href="store.html" class="btn btn-primary">Explore the Collection</a>
+        <h1>REAL RECOGNISE REAL</h1>
+        <p class="hero-sub">if you ain’t got a saint fit, you unidentified</p>
+        <a href="store.html" class="btn-hero">Explore the Collection</a>
       </div>
     </section>
 
     <!-- Movement Pillars -->
-    <section class="pillars">
-      <h2>THIS IS MORE THAN CLOTHING</h2>
+    <section class="section">
+      <h2 class="section-title">The Movement</h2>
       <div class="pillars-grid">
-        <div class="pillar-card fade-in">
-          <h3>01. BUILD YOURSELF</h3>
-          <p>Take radical accountability for your growth. The work starts within.</p>
+        <div class="pillar-item fade-in">
+          <div class="pillar-number">01</div>
+          <div class="pillar-title">Build Yourself</div>
+          <p class="pillar-desc">Radical accountability for your own growth.</p>
         </div>
-        <div class="pillar-card fade-in">
-          <h3>02. BUILD YOUR FAMILY</h3>
-          <p>Create stability and legacy for those closest to you.</p>
+        <div class="pillar-item fade-in">
+          <div class="pillar-number">02</div>
+          <div class="pillar-title">Build Your Family</div>
+          <p class="pillar-desc">Create stability for those closest to you.</p>
         </div>
-        <div class="pillar-card fade-in">
-          <h3>03. BUILD YOUR COMMUNITY</h3>
-          <p>Lift the environment around you. Iron sharpens iron.</p>
+        <div class="pillar-item fade-in">
+          <div class="pillar-number">03</div>
+          <div class="pillar-title">Build Your Community</div>
+          <p class="pillar-desc">Lift the environment around you.</p>
         </div>
-        <div class="pillar-card fade-in">
-          <h3>04. PAY IT FORWARD</h3>
-          <p>Help the next person believe they can do the same.</p>
+        <div class="pillar-item fade-in">
+          <div class="pillar-number">04</div>
+          <div class="pillar-title">Pay It Forward</div>
+          <p class="pillar-desc">Help the next person believe they can do the same.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="section">
+      <h2 class="section-title">Essential Pieces</h2>
+      <div class="featured-grid">
+        <div class="featured-card fade-in">
+          <img src="assets/images/Products/Saint hoodie.avif" alt="Saint Hoodie" loading="lazy">
+          <div class="featured-info">
+            <div class="featured-name">Saint Hoodie</div>
+            <div class="featured-price">R890</div>
+            <a href="store.html" class="btn-shop">Shop Now</a>
+          </div>
+        </div>
+        <div class="featured-card fade-in">
+          <img src="assets/images/Products/Xavier edition cropped Tee.avif" alt="Xavier Cropped Tee" loading="lazy">
+          <div class="featured-info">
+            <div class="featured-name">Xavier Cropped Tee</div>
+            <div class="featured-price">R550</div>
+            <a href="store.html" class="btn-shop">Shop Now</a>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Manifesto Quote -->
-    <section class="quote-block">
+    <section class="quote-block fade-in">
       <blockquote>
-        "Your beginning does not decide your ending, and your past does not own your future."
+        “Your beginning does not decide your ending,<br>and your past does not own your future.”
       </blockquote>
-      <a href="about.html" class="btn btn-outline">Read the Full Manifesto</a>
-    </section>
-
-    <!-- Featured Products -->
-    <section class="featured">
-      <h2>ESSENTIALS</h2>
-      <div class="featured-grid">
-        <div class="product-card fade-in">
-          <img src="images/hoodie1.PNG" alt="Essential Hoodie" loading="lazy">
-          <h3>Essential Hoodie</h3>
-          <p>R890</p>
-          <a href="store.html" class="btn btn-sm">Shop Now</a>
-        </div>
-        <div class="product-card fade-in">
-          <img src="images/tshirt1.PNG" alt="Logo T-Shirt" loading="lazy">
-          <h3>Logo T-Shirt</h3>
-          <p>R450</p>
-          <a href="store.html" class="btn btn-sm">Shop Now</a>
-        </div>
-        <div class="product-card fade-in">
-          <img src="images/cap1.PNG" alt="Cap" loading="lazy">
-          <h3>Cap</h3>
-          <p>R350</p>
-          <a href="store.html" class="btn btn-sm">Shop Now</a>
-        </div>
-      </div>
+      <a href="about.html" class="btn-outline-white">Read the Manifesto</a>
     </section>
 
     <!-- Newsletter -->
-    <section class="newsletter">
-      <h2>JOIN THE MOVEMENT</h2>
-      <p>Sign up for drops and stories of transformation.</p>
+    <section class="newsletter fade-in">
+      <h2>Join the Movement</h2>
+      <p>Drop updates, stories of transformation, and early access.</p>
       <form id="newsletter-form" class="newsletter-form">
         <input type="email" placeholder="Your email" required>
         <button type="submit">Subscribe</button>
       </form>
-      <p id="newsletter-msg" style="margin-top:1rem; color:#fff;"></p>
+      <p id="newsletter-msg" style="margin-top:1.5rem; color:#000; font-weight:500;"></p>
     </section>
   </main>
 
   <footer>
-    <p>&copy; 2026 New Saint. Wear Your Story.</p>
-    <div>
-      <a href="#" aria-label="Instagram">IG</a>
-      <a href="#" aria-label="Twitter">TW</a>
-      <a href="#" aria-label="TikTok">TK</a>
+    <div style="max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:2rem;">
+      <p>&copy; 2026 New Saint. Wear Your Story.</p>
+      <div>
+        <a href="#" aria-label="Instagram" style="margin-left:1rem; text-decoration:none; color:#000; font-weight:600;">IG</a>
+        <a href="#" aria-label="Twitter" style="margin-left:1rem; text-decoration:none; color:#000; font-weight:600;">TW</a>
+        <a href="#" aria-label="TikTok" style="margin-left:1rem; text-decoration:none; color:#000; font-weight:600;">TK</a>
+      </div>
     </div>
   </footer>
 
   <button id="back-to-top" title="Back to top">↑</button>
 
   <script src="main.js"></script>
+  <script>
+    // (main.js already handles cart, menu close, back-to-top, fade-in, newsletter)
+    // No extra scripts needed.
+  </script>
 </body>
 </html>
