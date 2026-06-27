@@ -3,15 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gallery | New Saint</title>
+  <title>Lookbook | New Saint</title>
   <link rel="icon" type="image/x-icon" href="images/FAVICON.ico">
   <link rel="stylesheet" href="styles.css">
   <style>
-    .gallery-hero { text-align: center; padding: 3rem 2rem; }
-    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; max-width: 1400px; margin: 0 auto; padding: 0 2rem 4rem; }
-    .gallery-grid img { width: 100%; height: 400px; object-fit: cover; transition: transform 0.3s; }
-    .gallery-grid img:hover { transform: scale(1.02); }
-    .gallery-note { text-align: center; padding-bottom: 3rem; color: #666; }
+    .gallery-hero {
+      text-align: center;
+      padding: 4rem 2rem 2rem;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;   /* 2 columns */
+      gap: 15px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem 4rem;
+    }
+    .gallery-item {
+      overflow: hidden;
+    }
+    .gallery-item img {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.03);
+    }
+    .gallery-note {
+      text-align: center;
+      padding: 2rem 0 4rem;
+      color: #666;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    @media (max-width: 600px) {
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
@@ -37,19 +69,38 @@
     </section>
 
     <div class="gallery-grid" id="gallery-grid">
-      <!-- Replace these image names with your own model photos later -->
-      <img src="images/model1.jpg" alt="Model in New Saint" loading="lazy" onerror="this.onerror=null; this.src='images/hoodie1.PNG';">
-      <img src="images/model2.jpg" alt="Lifestyle shot" loading="lazy" onerror="this.onerror=null; this.src='images/hoodie1.PNG';">
-      <img src="images/model3.jpg" alt="Group shot" loading="lazy" onerror="this.onerror=null; this.src='images/hoodie1.PNG';">
-      <img src="images/model4.jpg" alt="Details" loading="lazy" onerror="this.onerror=null; this.src='images/hoodie1.PNG';">
-      <img src="images/model5.jpg" alt="Portrait" loading="lazy" onerror="this.onerror=null; this.src='images/hoodie1.PNG';">
-      <img src="images/model6.jpg" alt="Action shot" loading="lazy" onerror="this.onerror=null; this.src='images/hoodie1.PNG';">
+      <!-- Images will be injected by JS to avoid repetition, but we'll hardcode for clarity -->
+      <div class="gallery-item"><img src="assets/images/Lookbook/IMG_1653.PNG" alt="Lookbook image" loading="lazy" onerror="this.onerror=null; this.src='assets/images/Products/Saint hoodie.avif';"></div>
+      <div class="gallery-item"><img src="assets/images/Lookbook/Model vest.JPG" alt="Lookbook image" loading="lazy" onerror="this.onerror=null; this.src='assets/images/Products/Saint hoodie.avif';"></div>
+      <div class="gallery-item"><img src="assets/images/Lookbook/Model x.jpg" alt="Lookbook image" loading="lazy" onerror="this.onerror=null; this.src='assets/images/Products/Saint hoodie.avif';"></div>
+      <div class="gallery-item"><img src="assets/images/Lookbook/Ns rockstar.JPG" alt="Lookbook image" loading="lazy" onerror="this.onerror=null; this.src='assets/images/Products/Saint hoodie.avif';"></div>
+      <div class="gallery-item"><img src="assets/images/Lookbook/Saint look book.JPG" alt="Lookbook image" loading="lazy" onerror="this.onerror=null; this.src='assets/images/Products/Saint hoodie.avif';"></div>
+      <div class="gallery-item"><img src="assets/images/Lookbook/Saint madel c.JPG" alt="Lookbook image" loading="lazy" onerror="this.onerror=null; this.src='assets/images/Products/Saint hoodie.avif';"></div>
+      <div class="gallery-item"><img src="assets/images/Lookbook/Saint model a.jpg" alt="Lookbook image" loading="lazy" onerror="this.onerror=null; this.src='assets/images/Products/Saint hoodie.avif';"></div>
+      <div class="gallery-item"><img src="assets/images/Lookbook/Saint model b.jpg" alt="Lookbook image" loading="lazy" onerror="this.onerror=null; this.src='assets/images/Products/Saint hoodie.avif';"></div>
+      <div class="gallery-item"><img src="assets/images/Lookbook/bff4e616-4496-4b0d-989a-3e9c81e00b40.JPG" alt="Lookbook image" loading="lazy" onerror="this.onerror=null; this.src='assets/images/Products/Saint hoodie.avif';"></div>
+      <div class="gallery-item"><img src="assets/images/Lookbook/1425b46d-683a-4fca-b7fa-7ad674886ba6.JPG" alt="Lookbook image" loading="lazy" onerror="this.onerror=null; this.src='assets/images/Products/Saint hoodie.avif';"></div>
+      <div class="gallery-item"><img src="assets/images/Lookbook/299632b1-1b98-4f0a-9b56-aa6c7847c50d.JPG" alt="Lookbook image" loading="lazy" onerror="this.onerror=null; this.src='assets/images/Products/Saint hoodie.avif';"></div>
+      <div class="gallery-item"><img src="assets/images/Lookbook/2b8b87fa-06ca-493d-9445-74b93afbbe36.JPG" alt="Lookbook image" loading="lazy" onerror="this.onerror=null; this.src='assets/images/Products/Saint hoodie.avif';"></div>
+      <div class="gallery-item"><img src="assets/images/Lookbook/40c5e7e2-192d-480b-a9be-31f056197012.JPG" alt="Lookbook image" loading="lazy" onerror="this.onerror=null; this.src='assets/images/Products/Saint hoodie.avif';"></div>
+      <div class="gallery-item"><img src="assets/images/Lookbook/43ef826f-8c3a-40b9-8f29-95ae32dbfb91.JPG" alt="Lookbook image" loading="lazy" onerror="this.onerror=null; this.src='assets/images/Products/Saint hoodie.avif';"></div>
+      <div class="gallery-item"><img src="assets/images/Lookbook/4ec062ad-bb56-410f-a630-9c52432ab1b3.JPG" alt="Lookbook image" loading="lazy" onerror="this.onerror=null; this.src='assets/images/Products/Saint hoodie.avif';"></div>
+      <div class="gallery-item"><img src="assets/images/Lookbook/579abc50-5939-4d2a-8b59-f5e751498708.JPG" alt="Lookbook image" loading="lazy" onerror="this.onerror=null; this.src='assets/images/Products/Saint hoodie.avif';"></div>
+      <div class="gallery-item"><img src="assets/images/Lookbook/94fd6a45-dc74-46b1-a9a6-191de5cb7d2e.JPG" alt="Lookbook image" loading="lazy" onerror="this.onerror=null; this.src='assets/images/Products/Saint hoodie.avif';"></div>
     </div>
-    <p class="gallery-note">More images coming soon. Tag <strong>#WearYourStory</strong> to be featured.</p>
+
+    <p class="gallery-note">Tag <strong>#WearYourStory</strong> to be featured in our next lookbook.</p>
   </main>
 
   <footer>
-    <p>&copy; 2026 New Saint. Wear Your Story.</p>
+    <div style="max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:2rem;">
+      <p>&copy; 2026 New Saint. Wear Your Story.</p>
+      <div>
+        <a href="#" aria-label="Instagram" style="margin-left:1rem; text-decoration:none; color:#000; font-weight:600;">IG</a>
+        <a href="#" aria-label="Twitter" style="margin-left:1rem; text-decoration:none; color:#000; font-weight:600;">TW</a>
+        <a href="#" aria-label="TikTok" style="margin-left:1rem; text-decoration:none; color:#000; font-weight:600;">TK</a>
+      </div>
+    </div>
   </footer>
 
   <button id="back-to-top" title="Back to top">↑</button>
