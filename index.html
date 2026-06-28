@@ -12,7 +12,6 @@
   <meta property="og:url" content="https://newsaint.co.za">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="styles.css">
-  <!-- Google Fonts for that luxury feel -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -39,7 +38,7 @@
       inset: 0;
       background: rgba(0,0,0,0.5);
     }
-        .hero-content {
+    .hero-content {
       position: relative;
       z-index: 2;
       display: flex;
@@ -47,35 +46,24 @@
       justify-content: center;
       height: 100%;
     }
-    .hero h1 {
-      font-size: clamp(3rem, 8vw, 6rem);
-      font-weight: 700;
-      letter-spacing: -1px;
-      line-height: 1.1;
-      margin-bottom: 1rem;
-      text-transform: uppercase;
-    }
-    .hero-sub {
-      font-size: clamp(1rem, 2.5vw, 1.3rem);
-      font-weight: 400;
-      margin-bottom: 2.5rem;
-      opacity: 0.9;
-    }
     .btn-hero {
       display: inline-block;
-      padding: 1rem 3rem;
-      background: #fff;
-      color: #000;
-      font-weight: 600;
-      letter-spacing: 2px;
+      padding: 0.9rem 2.5rem;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: #fff;
+      font-weight: 500;
+      letter-spacing: 3px;
       text-transform: uppercase;
       text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.4);
       transition: all 0.3s ease;
-      border: 1px solid #fff;
+      font-size: 0.85rem;
     }
     .btn-hero:hover {
-      background: transparent;
-      color: #fff;
+      background: rgba(255, 255, 255, 0.3);
+      border-color: rgba(255, 255, 255, 0.7);
     }
 
     /* Section containers */
@@ -280,53 +268,7 @@
       .pillars-grid {
         grid-template-columns: 1fr;
       }
-      .hero h1 {
-        font-size: 2.8rem;
-      }
     }
-    /* ---- Infinite Hero Ticker ---- */
-.hero-ticker {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.4);   /* subtle dark glass strip */
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  overflow: hidden;
-  white-space: nowrap;
-  padding: 1rem 0;
-  z-index: 2;
-  border-top: 1px solid rgba(255,255,255,0.2);
-  border-bottom: 1px solid rgba(255,255,255,0.2);
-}
-
-.ticker-track {
-  display: inline-block;
-  animation: ticker-scroll 25s linear infinite;
-  will-change: transform;
-}
-
-/* Two identical spans create an endless loop */
-.ticker-track span {
-  display: inline-block;
-  font-size: clamp(0.85rem, 2vw, 1.2rem);
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: #fff;
-  padding-right: 3rem;   /* space between repeats */
-}
-
-@keyframes ticker-scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
   </style>
 </head>
 <body>
@@ -347,15 +289,13 @@
   </header>
 
   <main>
-       <!-- Hero -->
+    <!-- Hero -->
     <section class="hero">
       <div class="hero-overlay"></div>
       <div class="hero-content">
         <a href="store.html" class="btn-hero">Explore the Collection</a>
       </div>
     </section>
-    
-    
 
     <!-- Movement Pillars -->
     <section class="section">
@@ -441,9 +381,5 @@
   <button id="back-to-top" title="Back to top">↑</button>
 
   <script src="main.js"></script>
-  <script>
-    // (main.js already handles cart, menu close, back-to-top, fade-in, newsletter)
-    // No extra scripts needed.
-  </script>
 </body>
 </html>
