@@ -21,9 +21,10 @@
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background: #fff;
       color: #000;
+      margin: 0;
     }
 
-    /* Hero */
+    /* Hero – image is the primary focus, no overlay */
     .hero {
       position: relative;
       height: 100vh;
@@ -32,11 +33,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.5);
     }
     .hero-content {
       position: relative;
@@ -64,6 +60,45 @@
     .btn-hero:hover {
       background: rgba(255, 255, 255, 0.3);
       border-color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* ---- Infinite Hero Ticker ---- */
+    .hero-ticker {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 1rem 0;
+      z-index: 3;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+    .ticker-track {
+      display: inline-block;
+      animation: ticker-scroll 30s linear infinite;
+      will-change: transform;
+    }
+    .ticker-track span {
+      display: inline-block;
+      font-size: clamp(0.85rem, 2vw, 1.2rem);
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #fff;
+      padding-right: 3rem;
+    }
+    @keyframes ticker-scroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
     }
 
     /* Section containers */
@@ -112,6 +147,32 @@
       font-size: 0.9rem;
       color: #666;
       line-height: 1.5;
+    }
+
+    /* ---- Brand Visuals (full-width editorial images) ---- */
+    .brand-visuals {
+      margin: 0 auto;
+      max-width: 100%;
+    }
+    .visual-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+    .visual-item {
+      display: block;
+      overflow: hidden;
+    }
+    .visual-item img {
+      width: 100%;
+      height: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+    .visual-item:hover img {
+      transform: scale(1.03);
     }
 
     /* Featured Products – 2 columns on desktop, 1 on mobile */
@@ -257,6 +318,9 @@
       .featured-grid {
         grid-template-columns: 1fr;
       }
+      .visual-grid {
+        grid-template-columns: 1fr;
+      }
       .newsletter-form {
         flex-direction: column;
       }
@@ -291,9 +355,15 @@
   <main>
     <!-- Hero -->
     <section class="hero">
-      <div class="hero-overlay"></div>
       <div class="hero-content">
         <a href="store.html" class="btn-hero">Explore the Collection</a>
+      </div>
+      <!-- Infinite Text Ticker -->
+      <div class="hero-ticker">
+        <div class="ticker-track">
+          <span>REAL RECOGNISE REAL &nbsp;•&nbsp; IF YOU AIN'T GOT A NEW SAINT FIT, YOU UNIDENTIFIED &nbsp;•&nbsp;</span>
+          <span>REAL RECOGNISE REAL &nbsp;•&nbsp; IF YOU AIN'T GOT A NEW SAINT FIT, YOU UNIDENTIFIED &nbsp;•&nbsp;</span>
+        </div>
       </div>
     </section>
 
@@ -321,6 +391,18 @@
           <div class="pillar-title">Pay It Forward</div>
           <p class="pillar-desc">Help the next person believe they can do the same.</p>
         </div>
+      </div>
+    </section>
+
+    <!-- Brand Visuals (Home Page Visuals) -->
+    <section class="brand-visuals">
+      <div class="visual-grid">
+        <a href="store.html" class="visual-item fade-in">
+          <img src="assets/images/Home page visuals/Santiano drip.avif" alt="Santiano Drip" loading="lazy">
+        </a>
+        <a href="store.html" class="visual-item fade-in">
+          <img src="assets/images/Home page visuals/Mm model.avif" alt="MM Model" loading="lazy">
+        </a>
       </div>
     </section>
 
