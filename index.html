@@ -7,7 +7,7 @@
   <link rel="icon" type="image/x-icon" href="images/FAVICON.ico">
   <meta name="description" content="New Saint – Luxury streetwear for those who move in silence. Real Recognise Real.">
   <meta property="og:title" content="New Saint">
-  <meta property="og:description" content="If you ain’t got a Saint fit, you unidentified.">
+  <meta property="og:description" content="If you ain't got a Saint fit, you unidentified.">
   <meta property="og:image" content="https://newsaint.co.za/assets/images/hero-beanie-model.jpeg">
   <meta property="og:url" content="https://newsaint.co.za">
   <meta name="twitter:card" content="summary_large_image">
@@ -16,7 +16,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* ====== HOMEPAGE SPECIFIC STYLES ====== */
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background: #fff;
@@ -24,7 +23,6 @@
       margin: 0;
     }
 
-    /* Hero – image is the primary focus, no overlay */
     .hero {
       position: relative;
       height: 100vh;
@@ -62,7 +60,6 @@
       border-color: rgba(255, 255, 255, 0.7);
     }
 
-    /* ---- Infinite Hero Ticker ---- */
     .hero-ticker {
       position: absolute;
       bottom: 0;
@@ -93,15 +90,10 @@
       padding-right: 3rem;
     }
     @keyframes ticker-scroll {
-      0% {
-        transform: translateX(0);
-      }
-      100% {
-        transform: translateX(-50%);
-      }
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
 
-    /* Section containers */
     .section {
       padding: 6rem 2rem;
       max-width: 1200px;
@@ -116,7 +108,6 @@
       text-transform: uppercase;
     }
 
-    /* Movement Pillars */
     .pillars-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -128,9 +119,7 @@
       border: 1px solid #e0e0e0;
       transition: border-color 0.3s;
     }
-    .pillar-item:hover {
-      border-color: #000;
-    }
+    .pillar-item:hover { border-color: #000; }
     .pillar-number {
       font-size: 2rem;
       font-weight: 700;
@@ -149,11 +138,7 @@
       line-height: 1.5;
     }
 
-    /* ---- Brand Visuals (full-width editorial images) ---- */
-    .brand-visuals {
-      margin: 0 auto;
-      max-width: 100%;
-    }
+    .brand-visuals { margin: 0 auto; max-width: 100%; }
     .visual-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -171,21 +156,15 @@
       display: block;
       transition: transform 0.6s ease;
     }
-    .visual-item:hover img {
-      transform: scale(1.03);
-    }
+    .visual-item:hover img { transform: scale(1.03); }
 
-    /* Featured Products – 2 columns on desktop, 1 on mobile */
     .featured-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 2rem;
       margin-top: 2rem;
     }
-    .featured-card {
-      position: relative;
-      overflow: hidden;
-    }
+    .featured-card { position: relative; overflow: hidden; }
     .featured-card img {
       width: 100%;
       aspect-ratio: 4/5;
@@ -193,22 +172,14 @@
       display: block;
       transition: transform 0.6s ease;
     }
-    .featured-card:hover img {
-      transform: scale(1.03);
-    }
-    .featured-info {
-      margin-top: 1rem;
-      text-align: center;
-    }
+    .featured-card:hover img { transform: scale(1.03); }
+    .featured-info { margin-top: 1rem; text-align: center; }
     .featured-name {
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
-    .featured-price {
-      color: #666;
-      margin: 0.5rem 0 1rem;
-    }
+    .featured-price { color: #666; margin: 0.5rem 0 1rem; }
     .btn-shop {
       display: inline-block;
       padding: 0.5rem 1.5rem;
@@ -221,11 +192,8 @@
       text-transform: uppercase;
       transition: opacity 0.3s;
     }
-    .btn-shop:hover {
-      opacity: 0.8;
-    }
+    .btn-shop:hover { opacity: 0.8; }
 
-    /* Manifesto Quote */
     .quote-block {
       background: #000;
       color: #fff;
@@ -255,7 +223,6 @@
       color: #000;
     }
 
-    /* Newsletter */
     .newsletter {
       background: #f5f5f5;
       text-align: center;
@@ -267,10 +234,7 @@
       text-transform: uppercase;
       letter-spacing: 3px;
     }
-    .newsletter p {
-      color: #666;
-      margin-bottom: 2rem;
-    }
+    .newsletter p { color: #666; margin-bottom: 2rem; }
     .newsletter-form {
       display: flex;
       max-width: 500px;
@@ -295,11 +259,8 @@
       cursor: pointer;
       transition: opacity 0.3s;
     }
-    .newsletter-form button:hover {
-      opacity: 0.8;
-    }
+    .newsletter-form button:hover { opacity: 0.8; }
 
-    /* Fade-in animation */
     .fade-in {
       opacity: 0;
       transform: translateY(20px);
@@ -310,33 +271,19 @@
       transform: translateY(0);
     }
 
-    /* Responsive adjustments */
     @media (max-width: 768px) {
-      .pillars-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-      .featured-grid {
-        grid-template-columns: 1fr;
-      }
-      .visual-grid {
-        grid-template-columns: 1fr;
-      }
-      .newsletter-form {
-        flex-direction: column;
-      }
-      .section {
-        padding: 4rem 1.5rem;
-      }
+      .pillars-grid { grid-template-columns: 1fr 1fr; }
+      .featured-grid { grid-template-columns: 1fr; }
+      .visual-grid { grid-template-columns: 1fr; }
+      .newsletter-form { flex-direction: column; }
+      .section { padding: 4rem 1.5rem; }
     }
     @media (max-width: 500px) {
-      .pillars-grid {
-        grid-template-columns: 1fr;
-      }
+      .pillars-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-  <!-- Sticky Header -->
   <header id="header">
     <nav>
       <a href="index.html" class="logo">NEW SAINT</a>
@@ -353,12 +300,10 @@
   </header>
 
   <main>
-    <!-- Hero -->
     <section class="hero">
       <div class="hero-content">
         <a href="store.html" class="btn-hero">Explore the Collection</a>
       </div>
-      <!-- Infinite Text Ticker -->
       <div class="hero-ticker">
         <div class="ticker-track">
           <span>REAL RECOGNISE REAL &nbsp;•&nbsp; IF YOU AIN'T GOT A NEW SAINT FIT, YOU UNIDENTIFIED &nbsp;•&nbsp;</span>
@@ -367,7 +312,6 @@
       </div>
     </section>
 
-    <!-- Movement Pillars -->
     <section class="section">
       <h2 class="section-title">The Movement</h2>
       <div class="pillars-grid">
@@ -394,7 +338,6 @@
       </div>
     </section>
 
-    <!-- Brand Visuals (Home Page Visuals) -->
     <section class="brand-visuals">
       <div class="visual-grid">
         <a href="store.html" class="visual-item fade-in">
@@ -406,7 +349,6 @@
       </div>
     </section>
 
-    <!-- Featured Products -->
     <section class="section">
       <h2 class="section-title">Essential Pieces</h2>
       <div class="featured-grid">
@@ -429,15 +371,13 @@
       </div>
     </section>
 
-    <!-- Manifesto Quote -->
     <section class="quote-block fade-in">
       <blockquote>
-        “Your beginning does not decide your ending,<br>and your past does not own your future.”
+        "Your beginning does not decide your ending,<br>and your past does not own your future."
       </blockquote>
       <a href="about.html" class="btn-outline-white">Read the Manifesto</a>
     </section>
 
-    <!-- Newsletter -->
     <section class="newsletter fade-in">
       <h2>Join the Movement</h2>
       <p>Drop updates, stories of transformation, and early access.</p>
@@ -447,6 +387,7 @@
       </form>
       <p id="newsletter-msg" style="margin-top:1.5rem; color:#000; font-weight:500;"></p>
     </section>
+
   </main>
 
   <footer>
@@ -463,5 +404,6 @@
   <button id="back-to-top" title="Back to top">↑</button>
 
   <script src="main.js"></script>
+
 </body>
 </html>
