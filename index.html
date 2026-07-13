@@ -1,409 +1,947 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>New Saint – Real Recognise Real</title>
-  <link rel="icon" type="image/x-icon" href="images/FAVICON.ico">
-  <meta name="description" content="New Saint – Luxury streetwear for those who move in silence. Real Recognise Real.">
-  <meta property="og:title" content="New Saint">
-  <meta property="og:description" content="If you ain't got a Saint fit, you unidentified.">
-  <meta property="og:image" content="https://newsaint.co.za/assets/images/hero-beanie-model.jpeg">
-  <meta property="og:url" content="https://newsaint.co.za">
-  <meta name="twitter:card" content="summary_large_image">
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>New Saint — Streetwear × Luxury</title>
+  <meta name="description" content="Faith in Motion – Streetwear meets Luxury by New Saint." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #fff;
-      color: #000;
-      margin: 0;
+    /* ---------- Reset & Variables ---------- */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      font-family: "Inter", sans-serif;
+      background: var(--bg);
+      color: var(--accent);
+      scroll-behavior: smooth;
+      line-height: 1.6;
+      overflow-x: hidden;
     }
+    :root {
+      --bg: #0b0f12;
+      --card: #0f1416;
+      --muted: #9aa3a6;
+      --accent: #fff;
+      --accent2: #6b7c88;
+      --accent3: #d4af37;
+      --radius: 12px;
+      --transition: .4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --shadow: 0 10px 30px rgba(0,0,0,0.3);
+      --shadow-hover: 0 15px 40px rgba(0,0,0,0.4);
+    }
+    body.light {
+      --bg: #f8f9fa;
+      --card: #fff;
+      --accent: #0b0f12;
+      --accent2: #444;
+      --muted: #666;
+    }
+    a { color: inherit; text-decoration: none; transition: var(--transition); }
+    img { max-width: 100%; height: auto; display: block; }
+    button { cursor: pointer; border: none; transition: var(--transition); font-family: inherit; }
+    .container { max-width: 1200px; margin: auto; padding: 0 1.5rem; }
 
-    .hero {
-      position: relative;
-      height: 100vh;
-      min-height: 700px;
-      background: url('assets/images/hero-beanie-model.jpeg') center/cover no-repeat;
+    /* ---------- Header ---------- */
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(6,8,10,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      z-index: 1000;
+      padding: 0.5rem 0;
+    }
+    header .inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0;
+    }
+    .brand {
       display: flex;
       align-items: center;
-      justify-content: center;
+      gap: 0.75rem;
+      font-weight: 700;
+      font-size: 1.25rem;
     }
-    .hero-content {
-      position: relative;
-      z-index: 2;
+    .brand img {
+      height: 44px;
+      width: 44px;
+      object-fit: contain;
+      border-radius: 6px;
+    }
+    nav ul {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
+      gap: 2rem;
+      list-style: none;
     }
-    .btn-hero {
-      display: inline-block;
-      padding: 0.9rem 2.5rem;
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      color: #fff;
+    nav a {
+      position: relative;
       font-weight: 500;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      text-decoration: none;
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      transition: all 0.3s ease;
-      font-size: 0.85rem;
+      padding: 0.5rem 0;
     }
-    .btn-hero:hover {
-      background: rgba(255, 255, 255, 0.3);
-      border-color: rgba(255, 255, 255, 0.7);
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent3);
+      transition: var(--transition);
+    }
+    nav a:hover::after { width: 100%; }
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .cart-icon {
+      position: relative;
+      font-size: 1.2rem;
+      color: var(--accent);
+    }
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: var(--accent3);
+      color: var(--bg);
+      font-size: 0.7rem;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+    }
+    .cta {
+      background: var(--accent);
+      color: var(--bg);
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+    .cta:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+    .toggle-theme {
+      background: none;
+      color: var(--accent3);
+      font-size: 1.2rem;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .toggle-theme:hover {
+      background: rgba(212,175,55,0.1);
     }
 
-    .hero-ticker {
+    /* ---------- Hero ---------- */
+    .hero {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 3rem;
+      align-items: center;
+      padding: 6rem 0;
+      min-height: 85vh;
+    }
+    .hero-content { max-width: 600px; }
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(to right, #fff, var(--accent3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      color: var(--accent2);
+      margin-bottom: 2.5rem;
+      font-size: 1.1rem;
+      max-width: 500px;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 0.8rem 1.8rem;
+      border-radius: 8px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+    }
+    .btn-outline {
+      border: 1px solid rgba(255,255,255,0.2);
+      background: transparent;
+      color: var(--accent);
+    }
+    .btn-outline:hover {
+      color: var(--accent3);
+      border-color: var(--accent3);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+    }
+    .btn-solid {
+      background: var(--accent);
+      color: var(--bg);
+    }
+    .btn-solid:hover {
+      background: var(--accent3);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+    }
+    .hero-image {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .hero-image img {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+    .hero-image:hover img { transform: scale(1.05); }
+
+    /* ---------- Sections ---------- */
+    .section-header {
+      text-align: center;
+      margin: 5rem 0 3rem;
+    }
+    .section-header h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+    .section-header p {
+      color: var(--accent2);
+      max-width: 600px;
+      margin: auto;
+      font-size: 1.1rem;
+    }
+
+    /* ---------- Collections ---------- */
+    .collections .grid {
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    .collection-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.05);
+      transition: var(--transition);
+    }
+    .collection-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-hover);
+      border-color: rgba(212,175,55,0.3);
+    }
+    .collection-image {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+    }
+    .collection-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+    .collection-card:hover .collection-image img { transform: scale(1.08); }
+    .collection-overlay {
       position: absolute;
       bottom: 0;
       left: 0;
       width: 100%;
-      background: rgba(0, 0, 0, 0.55);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      overflow: hidden;
-      white-space: nowrap;
-      padding: 1rem 0;
-      z-index: 3;
-      border-top: 1px solid rgba(255,255,255,0.2);
-      border-bottom: 1px solid rgba(255,255,255,0.2);
+      padding: 1.5rem;
+      background: linear-gradient(transparent, rgba(0,0,0,0.8));
+      color: white;
+      transform: translateY(10px);
+      opacity: 0;
+      transition: var(--transition);
     }
-    .ticker-track {
-      display: inline-block;
-      animation: ticker-scroll 30s linear infinite;
-      will-change: transform;
+    .collection-card:hover .collection-overlay {
+      transform: translateY(0);
+      opacity: 1;
     }
-    .ticker-track span {
-      display: inline-block;
-      font-size: clamp(0.85rem, 2vw, 1.2rem);
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: #fff;
-      padding-right: 3rem;
+    .collection-body {
+      padding: 1.5rem;
     }
-    @keyframes ticker-scroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+    .collection-body h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.3rem;
+    }
+    .collection-body p {
+      color: var(--accent2);
+      margin-bottom: 1.2rem;
     }
 
-    .section {
-      padding: 6rem 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .section-title {
-      text-align: center;
-      font-size: 1.8rem;
-      font-weight: 600;
-      letter-spacing: 3px;
-      margin-bottom: 4rem;
-      text-transform: uppercase;
-    }
-
-    .pillars-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
+    /* ---------- Products ---------- */
+    .product-grid {
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 2rem;
     }
-    .pillar-item {
-      text-align: center;
-      padding: 2rem 1rem;
-      border: 1px solid #e0e0e0;
-      transition: border-color 0.3s;
-    }
-    .pillar-item:hover { border-color: #000; }
-    .pillar-number {
-      font-size: 2rem;
-      font-weight: 700;
-      color: #ccc;
-      margin-bottom: 0.5rem;
-    }
-    .pillar-title {
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 0.5rem;
-    }
-    .pillar-desc {
-      font-size: 0.9rem;
-      color: #666;
-      line-height: 1.5;
-    }
-
-    .brand-visuals { margin: 0 auto; max-width: 100%; }
-    .visual-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-    }
-    .visual-item {
-      display: block;
+    .product-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), transparent);
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,0.05);
       overflow: hidden;
+      transition: var(--transition);
+      position: relative;
     }
-    .visual-item img {
-      width: 100%;
-      height: 100%;
-      aspect-ratio: 3 / 4;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.6s ease;
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-hover);
+      border-color: rgba(212,175,55,0.3);
     }
-    .visual-item:hover img { transform: scale(1.03); }
-
-    .featured-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-    .featured-card { position: relative; overflow: hidden; }
-    .featured-card img {
-      width: 100%;
-      aspect-ratio: 4/5;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.6s ease;
-    }
-    .featured-card:hover img { transform: scale(1.03); }
-    .featured-info { margin-top: 1rem; text-align: center; }
-    .featured-name {
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    .featured-price { color: #666; margin: 0.5rem 0 1rem; }
-    .btn-shop {
-      display: inline-block;
-      padding: 0.5rem 1.5rem;
-      background: #000;
-      color: #fff;
-      text-decoration: none;
+    .product-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: var(--accent3);
+      color: var(--bg);
+      padding: 0.3rem 0.7rem;
+      border-radius: 20px;
       font-size: 0.8rem;
       font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      transition: opacity 0.3s;
+      z-index: 2;
     }
-    .btn-shop:hover { opacity: 0.8; }
-
-    .quote-block {
-      background: #000;
-      color: #fff;
-      text-align: center;
-      padding: 6rem 2rem;
+    .product-image {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 3/4;
     }
-    .quote-block blockquote {
-      font-size: clamp(1.5rem, 4vw, 2.5rem);
-      font-weight: 600;
-      max-width: 800px;
-      margin: 0 auto 2rem;
-      line-height: 1.4;
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
     }
-    .btn-outline-white {
-      display: inline-block;
-      padding: 0.8rem 2.5rem;
-      border: 1px solid #fff;
-      color: #fff;
-      text-decoration: none;
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      transition: all 0.3s;
+    .product-card:hover .product-image img { transform: scale(1.05); }
+    .product-info {
+      padding: 1.5rem;
     }
-    .btn-outline-white:hover {
-      background: #fff;
-      color: #000;
+    .product-info h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
     }
-
-    .newsletter {
-      background: #f5f5f5;
-      text-align: center;
-      padding: 6rem 2rem;
-    }
-    .newsletter h2 {
-      font-size: 1.8rem;
+    .product-info p {
+      color: var(--accent2);
       margin-bottom: 1rem;
-      text-transform: uppercase;
-      letter-spacing: 3px;
+      font-size: 0.9rem;
     }
-    .newsletter p { color: #666; margin-bottom: 2rem; }
+    .price {
+      font-weight: 700;
+      margin: 0.8rem 0;
+      font-size: 1.2rem;
+    }
+    .old-price {
+      text-decoration: line-through;
+      color: var(--muted);
+      font-size: 1rem;
+      margin-left: 0.5rem;
+    }
+    .product-actions {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .product-actions a, .product-actions button {
+      flex: 1;
+      text-align: center;
+      padding: 0.6rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    .btn-cart {
+      background: var(--accent3);
+      color: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.3rem;
+    }
+    .btn-cart:hover {
+      background: #c19b2c;
+    }
+
+    /* ---------- Newsletter ---------- */
+    .newsletter {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 4rem 2rem;
+      text-align: center;
+      margin: 5rem 0;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    .newsletter h2 { font-size: 2rem; margin-bottom: 1rem; }
+    .newsletter p {
+      color: var(--accent2);
+      max-width: 500px;
+      margin: 0 auto 2rem;
+    }
     .newsletter-form {
       display: flex;
       max-width: 500px;
       margin: 0 auto;
       gap: 0.5rem;
     }
-    .newsletter-form input {
+    .newsletter-input {
       flex: 1;
-      padding: 0.9rem;
-      border: 1px solid #ccc;
-      font-size: 1rem;
-      background: #fff;
+      padding: 0.8rem 1.2rem;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.05);
+      color: var(--accent);
+      font-family: inherit;
     }
-    .newsletter-form button {
-      padding: 0.9rem 2rem;
-      background: #000;
-      color: #fff;
-      border: none;
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: opacity 0.3s;
+    .newsletter-input:focus {
+      outline: none;
+      border-color: var(--accent3);
     }
-    .newsletter-form button:hover { opacity: 0.8; }
 
+    /* ---------- Footer ---------- */
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 3rem 1rem 2rem;
+      color: var(--muted);
+    }
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .footer-column h3 {
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+      font-size: 1.1rem;
+    }
+    .footer-links {
+      list-style: none;
+    }
+    .footer-links li { margin-bottom: 0.7rem; }
+    .footer-links a {
+      color: var(--muted);
+      transition: var(--transition);
+    }
+    .footer-links a:hover { color: var(--accent3); }
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+      color: var(--muted);
+      transition: var(--transition);
+    }
+    .social-links a:hover {
+      background: var(--accent3);
+      color: var(--bg);
+      transform: translateY(-3px);
+    }
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    /* ---------- Toast & Back to Top ---------- */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: var(--accent3);
+      color: var(--bg);
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s, transform 0.4s;
+      transform: translateY(20px);
+      z-index: 9999;
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .toast.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+    #backTop {
+      position: fixed;
+      bottom: 40px;
+      left: 40px;
+      background: var(--accent3);
+      color: var(--bg);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: none;
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+    #backTop:hover { transform: translateY(-5px); }
+    #backTop.show { display: flex; }
+
+    /* ---------- Animations ---------- */
     .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: none;
+    }
+    .stagger > * {
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.6s ease, transform 0.6s ease;
     }
-    .fade-in.visible {
+    .stagger.visible > * {
       opacity: 1;
-      transform: translateY(0);
+      transform: none;
     }
+    .stagger.visible > *:nth-child(1) { transition-delay: 0.1s; }
+    .stagger.visible > *:nth-child(2) { transition-delay: 0.2s; }
+    .stagger.visible > *:nth-child(3) { transition-delay: 0.3s; }
+    .stagger.visible > *:nth-child(4) { transition-delay: 0.4s; }
+    .stagger.visible > *:nth-child(5) { transition-delay: 0.5s; }
 
-    @media (max-width: 768px) {
-      .pillars-grid { grid-template-columns: 1fr 1fr; }
-      .featured-grid { grid-template-columns: 1fr; }
-      .visual-grid { grid-template-columns: 1fr; }
-      .newsletter-form { flex-direction: column; }
-      .section { padding: 4rem 1.5rem; }
+    /* ---------- Mobile Menu ---------- */
+    #menu-btn {
+      display: none;
+      background: none;
+      color: var(--accent3);
+      font-size: 1.5rem;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      align-items: center;
+      justify-content: center;
     }
-    @media (max-width: 500px) {
-      .pillars-grid { grid-template-columns: 1fr; }
+    #menu-btn:hover { background: rgba(212,175,55,0.1); }
+    #mobile-nav {
+      display: none;
+      flex-direction: column;
+      gap: 1rem;
+      background: var(--card);
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 100%;
+      padding: 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      box-shadow: var(--shadow);
+    }
+    #mobile-nav.show { display: flex; }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 768px) {
+      nav ul { display: none; }
+      #menu-btn { display: flex; }
+      .hero {
+        padding: 4rem 0;
+        text-align: center;
+      }
+      .hero-buttons { justify-content: center; }
+      .newsletter-form { flex-direction: column; }
+      .footer-content { grid-template-columns: 1fr; }
+      .section-header h2 { font-size: 2rem; }
+      #backTop { left: 20px; bottom: 20px; width: 45px; height: 45px; }
+    }
+    @media (max-width: 480px) {
+      .container { padding: 0 1rem; }
+      .hero h1 { font-size: 2.2rem; }
+      .collection-card, .product-card { margin: 0 0.5rem; }
+      .section-header { margin: 3rem 0 2rem; }
     }
   </style>
 </head>
 <body>
-  <header id="header">
+
+<header>
+  <div class="inner container">
+    <div class="brand">
+      <img src="https://via.placeholder.com/44x44?text=NS" alt="New Saint" loading="lazy">
+      <span>New Saint</span>
+    </div>
     <nav>
-      <a href="index.html" class="logo">NEW SAINT</a>
-      <input type="checkbox" id="menu-toggle">
-      <label for="menu-toggle" class="hamburger">&#9776;</label>
-      <ul id="nav-links">
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="store.html">Store</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="gallery.html">Gallery</a></li>
-        <li><a href="#" id="cart-icon">Cart (<span id="cart-count">0</span>)</a></li>
+      <ul>
+        <li><a href="#collections">Collections</a></li>
+        <li><a href="#shop">Shop</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
-  </header>
+    <div class="actions">
+      <button class="toggle-theme" id="themeToggle" title="Toggle theme">
+        <i class="fas fa-moon"></i>
+      </button>
+      <a href="#" class="cart-icon">
+        <i class="fas fa-shopping-bag"></i>
+        <span class="cart-count">0</span>
+      </a>
+      <button class="cta" onclick="location.href='#shop'">Shop Now</button>
+      <button id="menu-btn"><i class="fas fa-bars"></i></button>
+    </div>
+  </div>
+  <div id="mobile-nav">
+    <a href="#collections">Collections</a>
+    <a href="#shop">Shop</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+</header>
 
-  <main>
-    <section class="hero">
-      <div class="hero-content">
-        <a href="store.html" class="btn-hero">Explore the Collection</a>
-      </div>
-      <div class="hero-ticker">
-        <div class="ticker-track">
-          <span>REAL RECOGNISE REAL &nbsp;•&nbsp; IF YOU AIN'T GOT A NEW SAINT FIT, YOU UNIDENTIFIED &nbsp;•&nbsp;</span>
-          <span>REAL RECOGNISE REAL &nbsp;•&nbsp; IF YOU AIN'T GOT A NEW SAINT FIT, YOU UNIDENTIFIED &nbsp;•&nbsp;</span>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <h2 class="section-title">The Movement</h2>
-      <div class="pillars-grid">
-        <div class="pillar-item fade-in">
-          <div class="pillar-number">01</div>
-          <div class="pillar-title">Build Yourself</div>
-          <p class="pillar-desc">Radical accountability for your own growth.</p>
-        </div>
-        <div class="pillar-item fade-in">
-          <div class="pillar-number">02</div>
-          <div class="pillar-title">Build Your Family</div>
-          <p class="pillar-desc">Create stability for those closest to you.</p>
-        </div>
-        <div class="pillar-item fade-in">
-          <div class="pillar-number">03</div>
-          <div class="pillar-title">Build Your Community</div>
-          <p class="pillar-desc">Lift the environment around you.</p>
-        </div>
-        <div class="pillar-item fade-in">
-          <div class="pillar-number">04</div>
-          <div class="pillar-title">Pay It Forward</div>
-          <p class="pillar-desc">Help the next person believe they can do the same.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="brand-visuals">
-      <div class="visual-grid">
-        <a href="store.html" class="visual-item fade-in">
-          <img src="assets/images/Home page visuals/Santiano drip.avif" alt="Santiano Drip" loading="lazy">
-        </a>
-        <a href="store.html" class="visual-item fade-in">
-          <img src="assets/images/Home page visuals/Mm model.avif" alt="MM Model" loading="lazy">
-        </a>
-      </div>
-    </section>
-
-    <section class="section">
-      <h2 class="section-title">Essential Pieces</h2>
-      <div class="featured-grid">
-        <div class="featured-card fade-in">
-          <img src="assets/images/Products/Saint hoodie.avif" alt="Saint Hoodie" loading="lazy">
-          <div class="featured-info">
-            <div class="featured-name">Saint Hoodie</div>
-            <div class="featured-price">R890</div>
-            <a href="store.html" class="btn-shop">Shop Now</a>
-          </div>
-        </div>
-        <div class="featured-card fade-in">
-          <img src="assets/images/Products/Xavier edition cropped Tee.avif" alt="Xavier Cropped Tee" loading="lazy">
-          <div class="featured-info">
-            <div class="featured-name">Xavier Cropped Tee</div>
-            <div class="featured-price">R550</div>
-            <a href="store.html" class="btn-shop">Shop Now</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="quote-block fade-in">
-      <blockquote>
-        "Your beginning does not decide your ending,<br>and your past does not own your future."
-      </blockquote>
-      <a href="about.html" class="btn-outline-white">Read the Manifesto</a>
-    </section>
-
-    <section class="newsletter fade-in">
-      <h2>Join the Movement</h2>
-      <p>Drop updates, stories of transformation, and early access.</p>
-      <form id="newsletter-form" class="newsletter-form">
-        <input type="email" placeholder="Your email" required>
-        <button type="submit">Subscribe</button>
-      </form>
-      <p id="newsletter-msg" style="margin-top:1.5rem; color:#000; font-weight:500;"></p>
-    </section>
-
-  </main>
-
-  <footer>
-    <div style="max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:2rem;">
-      <p>&copy; 2026 New Saint. Wear Your Story.</p>
-      <div>
-        <a href="#" aria-label="Instagram" style="margin-left:1rem; text-decoration:none; color:#000; font-weight:600;">IG</a>
-        <a href="#" aria-label="Twitter" style="margin-left:1rem; text-decoration:none; color:#000; font-weight:600;">TW</a>
-        <a href="#" aria-label="TikTok" style="margin-left:1rem; text-decoration:none; color:#000; font-weight:600;">TK</a>
+<main>
+  <!-- Hero -->
+  <section class="hero container fade-in">
+    <div class="hero-content">
+      <h1>Faith in Motion.</h1>
+      <p>Streetwear meets Luxury. Designed for those who walk with purpose. Each piece tells a story of resilience and faith.</p>
+      <div class="hero-buttons">
+        <a href="#collections" class="btn btn-outline"><i class="fas fa-compass"></i> Explore</a>
+        <a href="#shop" class="btn btn-solid"><i class="fas fa-shopping-bag"></i> Shop Now</a>
       </div>
     </div>
-  </footer>
+    <div class="hero-image">
+      <img src="https://images.unsplash.com/photo-1558769132-cb25c5d11e85?ixlib=rb-4.0.3&auto=format&fit=crop&w=1074&q=80" alt="New Saint Streetwear" loading="lazy">
+    </div>
+  </section>
 
-  <button id="back-to-top" title="Back to top">↑</button>
+  <!-- Collections -->
+  <section id="collections" class="collections container fade-in">
+    <div class="section-header">
+      <h2>Collections</h2>
+      <p>Premium pieces balancing faith and fashion.</p>
+    </div>
+    <div class="grid stagger">
+      <div class="collection-card">
+        <div class="collection-image">
+          <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" alt="Tees" loading="lazy">
+          <div class="collection-overlay">
+            <h3>Essential Tees</h3>
+            <p>Soft cotton daily wear with signature embroidery.</p>
+          </div>
+        </div>
+        <div class="collection-body">
+          <h3>Essential Tees</h3>
+          <p>Soft cotton daily wear with signature embroidery.</p>
+          <a href="#shop" class="btn btn-outline">Shop Collection</a>
+        </div>
+      </div>
+      <div class="collection-card">
+        <div class="collection-image">
+          <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" alt="Outerwear" loading="lazy">
+          <div class="collection-overlay">
+            <h3>Utility Outerwear</h3>
+            <p>Technical jackets for modern disciples.</p>
+          </div>
+        </div>
+        <div class="collection-body">
+          <h3>Utility Outerwear</h3>
+          <p>Technical jackets for modern disciples.</p>
+          <a href="#shop" class="btn btn-outline">Shop Collection</a>
+        </div>
+      </div>
+      <div class="collection-card">
+        <div class="collection-image">
+          <img src="https://images.unsplash.com/photo-1601924582970-9238bcb495d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1176&q=80" alt="Accessories" loading="lazy">
+          <div class="collection-overlay">
+            <h3>Accessories</h3>
+            <p>Minimal details that complete the look.</p>
+          </div>
+        </div>
+        <div class="collection-body">
+          <h3>Accessories</h3>
+          <p>Minimal details that complete the look.</p>
+          <a href="#shop" class="btn btn-outline">Shop Collection</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <script src="main.js"></script>
+  <!-- Shop -->
+  <section id="shop" class="container fade-in">
+    <div class="section-header">
+      <h2>Featured Products</h2>
+      <p>Our most loved items of the season.</p>
+    </div>
+    <div class="grid product-grid stagger">
+      <div class="product-card">
+        <div class="product-badge">Bestseller</div>
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80" alt="Obsidian Hoodie" loading="lazy">
+        </div>
+        <div class="product-info">
+          <h3>Obsidian Hoodie</h3>
+          <p>Premium heavyweight cotton with embroidered logo.</p>
+          <div class="price">R899</div>
+          <div class="product-actions">
+            <button class="btn-cart" onclick="addToCart('Obsidian Hoodie', 899)"><i class="fas fa-shopping-cart"></i> Add</button>
+            <a href="#" class="btn btn-outline">View</a>
+          </div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-badge">Sale</div>
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80" alt="Cargo Pants" loading="lazy">
+        </div>
+        <div class="product-info">
+          <h3>Cargo Pants</h3>
+          <p>Durable tactical pants with multiple pockets.</p>
+          <div class="price">R699 <span class="old-price">R799</span></div>
+          <div class="product-actions">
+            <button class="btn-cart" onclick="addToCart('Cargo Pants', 699)"><i class="fas fa-shopping-cart"></i> Add</button>
+            <a href="#" class="btn btn-outline">View</a>
+          </div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=735&q=80" alt="Signature Tee" loading="lazy">
+        </div>
+        <div class="product-info">
+          <h3>Signature Tee</h3>
+          <p>Classic fit with minimalist design.</p>
+          <div class="price">R399</div>
+          <div class="product-actions">
+            <button class="btn-cart" onclick="addToCart('Signature Tee', 399)"><i class="fas fa-shopping-cart"></i> Add</button>
+            <a href="#" class="btn btn-outline">View</a>
+          </div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?ixlib=rb-4.0.3&auto=format&fit=crop&w=1072&q=80" alt="Crossbody Bag" loading="lazy">
+        </div>
+        <div class="product-info">
+          <h3>Crossbody Bag</h3>
+          <p>Compact yet spacious for daily essentials.</p>
+          <div class="price">R549</div>
+          <div class="product-actions">
+            <button class="btn-cart" onclick="addToCart('Crossbody Bag', 549)"><i class="fas fa-shopping-cart"></i> Add</button>
+            <a href="#" class="btn btn-outline">View</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="container fade-in">
+    <div class="section-header">
+      <h2>About New Saint</h2>
+      <p>Born from struggle and faith, crafted for resilience and purpose.</p>
+    </div>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr));align-items:center;gap:3rem;">
+      <div>
+        <p>New Saint is a movement uniting street culture and spiritual strength. Every piece reminds you to keep moving forward in faith.</p>
+        <p style="margin-top:1rem;">Our mission is to create apparel that not only looks good but also carries meaning. Each design is thoughtfully crafted to represent the journey of faith in a modern world.</p>
+        <div style="margin-top:2rem;">
+          <a href="#" class="btn btn-outline">Our Story</a>
+        </div>
+      </div>
+      <div>
+        <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" alt="About New Saint" loading="lazy" style="border-radius:var(--radius); box-shadow:var(--shadow);">
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="newsletter container fade-in">
+    <h2>Join the Movement</h2>
+    <p>Subscribe to our newsletter for exclusive drops, style tips, and early access to new collections.</p>
+    <form class="newsletter-form" id="newsletterForm">
+      <input type="email" class="newsletter-input" placeholder="Your email address" required>
+      <button type="submit" class="btn btn-solid">Subscribe</button>
+    </form>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer id="contact">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-column">
+        <h3>New Saint</h3>
+        <p>Streetwear meets luxury. Faith in motion.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-tiktok"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-column">
+        <h3>Shop</h3>
+        <ul class="footer-links">
+          <li><a href="#">All Products</a></li>
+          <li><a href="#">New Arrivals</a></li>
+          <li><a href="#">Best Sellers</a></li>
+          <li><a href="#">Sale</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Support</h3>
+        <ul class="footer-links">
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Shipping Info</a></li>
+          <li><a href="#">Returns & Exchanges</a></li>
+          <li><a href="#">Size Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>About</h3>
+        <ul class="footer-links">
+          <li><a href="#">Our Story</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 New Saint — Faith in Motion. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Back to Top -->
+<button id="backTop" title="Back to Top"><i class="fas fa-chevron-up"></i></button>
+
+<!-- Toast -->
+<div id="toast" class="toast"><i class="fas fa-check-circle"></i> <span>Product added to cart!</span></div>
+
+<script>
+  // ---------- Theme Toggle ----------
+  const themeToggle = document.getElementById('themeToggle');
+  const themeIcon = themeToggle.querySelector('i');
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  if (savedTheme === 'light') {
+    document.body.classList.add('light');
+    themeIcon.className = 'fas fa-sun';
+  } else {
+    themeIcon.className = 'fas fa-moon';
+  }
+  themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('light');
+    if (document.body.classList.contains('light')) {
+      themeIcon.className = 'fas fa-sun';
+      localStorage.setItem('theme', 'light');
+    } else {
+      themeIcon.className = 'fas fa-moon';
+      localStorage.setItem('theme', 'dark');
+    }
+  });
+
+  // ---------- Mobile Nav ----------
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileNav = document.getElementById('mobile-nav');
+  menuBtn.addEventListener('click', () => {
+    mobileNav.classList.toggle('show');
+    const icon = menuBtn.querySelector('i');
+    icon.className = mobileNav.classList.contains('show') ? 'fas fa-times' : 'fas fa-bars';
+  });
+  mobileNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileNav.classList.remove('show');
+      menuBtn.querySelector('i').className = 'fas fa-bars';
+    });
+  });
+
+  // ---------- Scroll Animations ----------
+  const fadeObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+
+  const staggerObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.stagger').forEach(el => staggerObserver.observe(el));
+
+  // ---------- Back to Top ----------
+  const backTop = document.getElementById('backTop');
+  window.addEventListener('scroll', () => {
+    backTop.classList.toggle('show', window.scrollY > 400);
+  });
+  backTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // ---------- Toast ----------
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.querySelector('span').textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+
+  // ---------- Shopping Cart ----------
+  let cartCount = 0;
+  const cartCountEl = document.querySelector('.cart-count');
+  window.addToCart = function(name, price) {
+    cartCount++;
+    cartCountEl.textContent = cartCount;
+    showToast(`${name} added to cart!`);
+    // pulse animation
+    cartCountEl.classList.add('pulse');
+    setTimeout(() => cartCountEl.classList.remove('pulse'), 300);
+  };
+
+  // add pulse keyframes dynamically
+  const styleSheet = document.createElement("style");
+  styleSheet.textContent = `
+    .pulse { animation: pulse 0.3s ease; }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+      100% { transform: scale(1); }
+    }
+  `;
+  document.head.appendChild(styleSheet);
+
+  // ---------- Newsletter ----------
+  document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    showToast('Thanks for subscribing!');
+    this.reset();
+  });
+</script>
 
 </body>
 </html>
