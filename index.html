@@ -4,15 +4,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#000000">
-  <meta name="description" content="NEW SAINT — Become Real. A philosophy expressed through fashion.">
+  <meta name="description" content="NEW SAINT — Become Real. Autumn/Winter 2026, made in Johannesburg.">
   <meta name="referrer" content="strict-origin-when-cross-origin">
+  <link rel="canonical" href="https://newsaint.co.za/">
   <title>NEW SAINT — Become Real</title>
   <link rel="icon" type="image/x-icon" href="images/FAVICON.ico">
+
+  <!-- Open Graph / Twitter — controls how the site looks when shared on IG, WhatsApp, X -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="New Saint">
+  <meta property="og:title" content="NEW SAINT — Become Real">
+  <meta property="og:description" content="Autumn/Winter 2026. Made in Johannesburg.">
+  <meta property="og:image" content="https://newsaint.co.za/assets/images/hero-beanie-model.jpeg">
+  <meta property="og:url" content="https://newsaint.co.za/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="NEW SAINT — Become Real">
+  <meta name="twitter:description" content="Autumn/Winter 2026. Made in Johannesburg.">
+  <meta name="twitter:image" content="https://newsaint.co.za/assets/images/hero-beanie-model.jpeg">
+
+  <!-- Preload the largest visible image so the hero paints faster -->
+  <link rel="preload" as="image" href="assets/images/hero-beanie-model.jpeg" fetchpriority="high">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 
   <!--
     NEW SAINT — SINGLE-FILE HOMEPAGE
@@ -82,6 +98,25 @@
       clip: rect(0,0,0,0);
       white-space: nowrap;
       border: 0;
+    }
+
+    .skip-link {
+      position: fixed;
+      z-index: 10003;
+      top: -100%;
+      left: 1rem;
+      background: #fff;
+      color: #000;
+      padding: .75rem 1.25rem;
+      font-size: .7rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: top .25s ease;
+    }
+
+    .skip-link:focus {
+      top: 1rem;
     }
 
     .grain {
@@ -873,16 +908,17 @@
     }
 
     .quote blockquote {
-      font-size: clamp(2.3rem, 7vw, 7rem);
-      font-weight: 700;
-      line-height: .98;
-      letter-spacing: -.065em;
+      font-family: "Instrument Serif", Georgia, serif;
+      font-size: clamp(2.6rem, 8vw, 8rem);
+      font-weight: 400;
+      line-height: 1.02;
+      letter-spacing: -.01em;
     }
 
     .quote em {
-      font-style: normal;
-      font-weight: 300;
-      opacity: .35;
+      font-style: italic;
+      font-weight: 400;
+      opacity: .4;
     }
 
     /* -------------------------
@@ -1324,6 +1360,7 @@
 </head>
 
 <body>
+  <a class="skip-link" href="#mainContent">Skip to content</a>
   <div class="site">
 
     <div class="grain" aria-hidden="true"></div>
@@ -1380,7 +1417,7 @@
       <span class="total">09</span>
     </div>
 
-    <main>
+    <main id="mainContent">
 
       <!-- 01 — HERO -->
       <section class="scene hero" data-index="01" data-section="hero">
@@ -1404,17 +1441,17 @@
       <section class="scene statement" data-index="02" data-section="statement">
         <div class="statement-inner">
           <p class="statement-line">
-            <span class="word">Not</span>
-            <span class="word">a</span>
-            <span class="word">clothing</span>
-            <span class="word">company.</span>
+            <span class="word">Nothing</span>
+            <span class="word">here</span>
+            <span class="word">is</span>
+            <span class="word">trying</span>
           </p>
           <p class="statement-line">
-            <span class="word">A</span>
-            <span class="word">philosophy</span>
-            <span class="word">expressed</span>
-            <span class="word">through</span>
-            <span class="word">fashion.</span>
+            <span class="word">to</span>
+            <span class="word">convince</span>
+            <span class="word">you</span>
+            <span class="word">of</span>
+            <span class="word">anything.</span>
           </p>
           <p class="statement-meta">Est. 2021 — Johannesburg</p>
         </div>
@@ -1601,7 +1638,8 @@
             <p class="eyebrow">New Saint / Santiano</p>
             <h2 class="campaign-title">Santiano</h2>
             <p class="campaign-sub">
-              Precision in every thread. Built for the ones who move different.
+              The first drop of the season. Five pieces, cut heavy, made in
+              Johannesburg.
             </p>
           </div>
         </div>
@@ -1625,28 +1663,28 @@
 
             <article class="philosophy-item">
               <div class="philosophy-number">01 / 03</div>
-              <h3>Cut for presence.</h3>
+              <h3>Cut oversized on purpose.</h3>
               <p>
-                Every silhouette is engineered to carry weight without effort.
-                Oversized where it matters, precise where it counts.
+                Patterns drafted for how a piece sits when you're actually
+                moving in it, not standing still on a mannequin.
               </p>
             </article>
 
             <article class="philosophy-item">
               <div class="philosophy-number">02 / 03</div>
-              <h3>Fabric that remembers.</h3>
+              <h3>Heavier than it looks.</h3>
               <p>
-                Heavy-weight cotton, brushed interior, reinforced stitching.
-                Made to outlast the season it was bought in.
+                Heavyweight cotton, brushed inside, reinforced at every seam
+                that takes strain. Built to age, not to fall apart.
               </p>
             </article>
 
             <article class="philosophy-item">
               <div class="philosophy-number">03 / 03</div>
-              <h3>Worn by the ones who know.</h3>
+              <h3>Small runs. No restocks.</h3>
               <p>
-                Not for everyone. Not trying to be. For the ones who understand
-                what it means to build something from nothing.
+                Each drop is limited on purpose. Once a size is gone from a
+                piece, it doesn't come back.
               </p>
             </article>
 
@@ -1689,9 +1727,8 @@
       <section class="quote" data-index="07" data-section="quote">
         <div class="quote-inner" id="quoteInner">
           <blockquote>
-            Your beginning does not<br>
-            decide your ending.<br>
-            <em>Your past does not own your future.</em>
+            Real isn't given.<br>
+            <em>It's worn, washed, and repeated until it's true.</em>
           </blockquote>
         </div>
       </section>
@@ -1746,8 +1783,6 @@
           <div class="footer-col">
             <h4>Connect</h4>
             <a href="https://www.instagram.com/new_saint.za/" target="_blank" rel="noopener noreferrer">Instagram</a>
-            <a href="#" aria-label="TikTok coming soon">TikTok</a>
-            <a href="#" aria-label="Twitter coming soon">Twitter</a>
           </div>
 
         </div>
@@ -1900,6 +1935,39 @@
           el.addEventListener("mouseenter", () => cursor.classList.add("is-large"));
           el.addEventListener("mouseleave", () => cursor.classList.remove("is-large"));
         });
+      }
+
+      /* ---------------------------------
+         MAGNETIC HERO LETTERS
+         Small, quiet nod to cursor-proximity type on desktop.
+         Off entirely on mobile / reduced motion.
+      --------------------------------- */
+      if (!reducedMotion && desktop && window.gsap) {
+        const letters = $$(".hero-title span");
+
+        window.addEventListener("mousemove", e => {
+          letters.forEach(letter => {
+            const rect = letter.getBoundingClientRect();
+            const cx = rect.left + rect.width / 2;
+            const cy = rect.top + rect.height / 2;
+            const dist = Math.hypot(e.clientX - cx, e.clientY - cy);
+            const radius = 140;
+
+            if (dist < radius) {
+              const pull = (1 - dist / radius) * 8;
+              const angle = Math.atan2(e.clientY - cy, e.clientX - cx);
+              gsap.to(letter, {
+                x: Math.cos(angle) * pull,
+                y: Math.sin(angle) * pull,
+                duration: .4,
+                ease: "power2.out",
+                overwrite: "auto"
+              });
+            } else {
+              gsap.to(letter, { x: 0, y: 0, duration: .6, ease: "power2.out", overwrite: "auto" });
+            }
+          });
+        }, { passive: true });
       }
 
       /* ---------------------------------
