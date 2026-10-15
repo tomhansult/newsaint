@@ -27,6 +27,31 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ClothingStore",
+    "name": "New Saint",
+    "description": "Cape Town streetwear brand. AW26 collection.",
+    "url": "https://newsaint.co.za",
+    "image": "https://newsaint.co.za/assets/images/hero-beanie-model.jpeg",
+    "logo": "https://newsaint.co.za/images/FAVICON.ico",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Cape Town",
+      "addressRegion": "Western Cape",
+      "addressCountry": "ZA"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "-33.9249",
+      "longitude": "18.4241"
+    },
+    "sameAs": ["https://www.instagram.com/newsaint.co.za"],
+    "priceRange": "R350 - R1200"
+  }
+  </script>
+
   <style>
     :root {
       --black: #000;
@@ -36,6 +61,7 @@
       --ease: cubic-bezier(.16,1,.3,1);
       --pad: clamp(1.25rem, 4vw, 4rem);
       --nav-h: 76px;
+      --mono: 'SFMono-Regular', Menlo, Consolas, monospace;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -63,370 +89,204 @@
     img { display: block; width: 100%; }
     ::selection { background: #fff; color: #000; }
 
-    .site {
-      position: relative;
-      isolation: isolate;
-      background: #000;
-    }
+    .site { position: relative; isolation: isolate; background: #000; }
 
     .sr-only {
       position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0,0,0,0);
-      white-space: nowrap;
-      border: 0;
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,0,0);
+      white-space: nowrap; border: 0;
     }
 
     .skip-link {
-      position: fixed;
-      z-index: 10003;
-      top: -100%;
-      left: 1rem;
-      background: #fff;
-      color: #000;
+      position: fixed; z-index: 10003; top: -100%; left: 1rem;
+      background: #fff; color: #000;
       padding: .75rem 1.25rem;
-      font-size: .7rem;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      text-decoration: none;
+      font-size: .7rem; letter-spacing: .12em;
+      text-transform: uppercase; text-decoration: none;
       transition: top .25s ease;
     }
-
-    .skip-link:focus {
-      top: 1rem;
-    }
+    .skip-link:focus { top: 1rem; }
 
     .grain {
-      position: fixed;
-      inset: 0;
-      z-index: 10000;
-      pointer-events: none;
-      opacity: .045;
+      position: fixed; inset: 0; z-index: 10000;
+      pointer-events: none; opacity: .045;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
     .progress {
-      position: fixed;
-      z-index: 10001;
-      top: 0;
-      left: 0;
-      width: 0;
-      height: 1px;
+      position: fixed; z-index: 10001; top: 0; left: 0;
+      width: 100%; height: 1px;
       background: #fff;
+      transform: scaleX(0);
       transform-origin: left center;
       pointer-events: none;
     }
 
     .cursor {
-      position: fixed;
-      z-index: 10002;
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #fff;
-      pointer-events: none;
+      position: fixed; z-index: 10002;
+      width: 7px; height: 7px; border-radius: 50%;
+      background: #fff; pointer-events: none;
       mix-blend-mode: difference;
       transform: translate(-50%, -50%);
       opacity: 0;
-      transition:
-        width .35s var(--ease),
-        height .35s var(--ease),
-        opacity .25s ease;
+      transition: width .35s var(--ease), height .35s var(--ease), opacity .25s ease;
     }
-
     .cursor.is-visible { opacity: 1; }
     .cursor.is-large { width: 42px; height: 42px; }
 
     .nav {
-      position: fixed;
-      z-index: 9000;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: var(--nav-h);
+      position: fixed; z-index: 9000; top: 0; left: 0;
+      width: 100%; height: var(--nav-h);
       padding: 0 var(--pad);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      pointer-events: none;
-      mix-blend-mode: difference;
+      display: flex; align-items: center; justify-content: space-between;
+      pointer-events: none; mix-blend-mode: difference;
     }
-
     .nav > * { pointer-events: auto; }
 
     .nav-logo {
-      display: inline-flex;
-      align-items: center;
+      display: inline-flex; align-items: center;
       text-decoration: none;
-      font-size: .9rem;
-      font-weight: 700;
-      letter-spacing: .42em;
-      white-space: nowrap;
+      font-size: .9rem; font-weight: 700;
+      letter-spacing: .42em; white-space: nowrap;
     }
 
     .nav-center {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 2rem;
+      position: absolute; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 2rem;
     }
 
-    .nav-link,
-    .nav-cart {
-      position: relative;
-      color: #fff;
-      text-decoration: none;
-      font-size: .62rem;
-      font-weight: 500;
-      letter-spacing: .28em;
-      text-transform: uppercase;
-      opacity: .62;
-      transition: opacity .3s ease;
+    .nav-link, .nav-cart {
+      position: relative; color: #fff; text-decoration: none;
+      font-size: .62rem; font-weight: 500;
+      letter-spacing: .28em; text-transform: uppercase;
+      opacity: .62; transition: opacity .3s ease;
     }
-
-    .nav-link:hover,
-    .nav-link.active,
-    .nav-cart:hover { opacity: 1; }
-
-    .nav-cart {
-      display: inline-flex;
-      align-items: center;
-      gap: .4rem;
-    }
-
-    .cart-count {
-      min-width: 1rem;
-      text-align: center;
-    }
+    .nav-link:hover, .nav-link.active, .nav-cart:hover { opacity: 1; }
+    .nav-cart { display: inline-flex; align-items: center; gap: .4rem; }
+    .cart-count { min-width: 1rem; text-align: center; }
 
     .menu-toggle {
-      display: none;
-      appearance: none;
-      border: 0;
-      background: transparent;
-      color: #fff;
-      width: 36px;
-      height: 36px;
-      padding: 8px;
-      cursor: pointer;
+      display: none; appearance: none;
+      border: 0; background: transparent; color: #fff;
+      width: 36px; height: 36px; padding: 8px; cursor: pointer;
     }
-
-    .menu-icon {
-      position: relative;
-      display: block;
-      width: 20px;
-      height: 12px;
-    }
-
-    .menu-icon::before,
-    .menu-icon::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      width: 100%;
-      height: 1px;
-      background: #fff;
+    .menu-icon { position: relative; display: block; width: 20px; height: 12px; }
+    .menu-icon::before, .menu-icon::after {
+      content: ""; position: absolute; left: 0;
+      width: 100%; height: 1px; background: #fff;
       transition: transform .45s var(--ease), top .45s var(--ease);
     }
-
     .menu-icon::before { top: 2px; }
     .menu-icon::after { top: 9px; }
-
-    .menu-toggle[aria-expanded="true"] .menu-icon::before {
-      top: 5.5px;
-      transform: rotate(45deg);
-    }
-
-    .menu-toggle[aria-expanded="true"] .menu-icon::after {
-      top: 5.5px;
-      transform: rotate(-45deg);
-    }
+    .menu-toggle[aria-expanded="true"] .menu-icon::before { top: 5.5px; transform: rotate(45deg); }
+    .menu-toggle[aria-expanded="true"] .menu-icon::after { top: 5.5px; transform: rotate(-45deg); }
 
     .mobile-menu {
-      position: fixed;
-      z-index: 8999;
-      inset: 0;
+      position: fixed; z-index: 8999; inset: 0;
       background: #000;
       padding: calc(var(--nav-h) + 3rem) var(--pad) 3rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
+      display: flex; flex-direction: column; justify-content: space-between;
+      opacity: 0; visibility: hidden; pointer-events: none;
       transform: translateY(-12px);
-      transition:
-        opacity .45s var(--ease),
-        transform .6s var(--ease),
-        visibility 0s linear .6s;
+      transition: opacity .45s var(--ease), transform .6s var(--ease), visibility 0s linear .6s;
     }
-
     .mobile-menu.is-open {
-      opacity: 1;
-      visibility: visible;
-      pointer-events: auto;
-      transform: translateY(0);
-      transition-delay: 0s;
+      opacity: 1; visibility: visible; pointer-events: auto;
+      transform: translateY(0); transition-delay: 0s;
     }
-
-    .mobile-menu-links {
-      display: flex;
-      flex-direction: column;
-      gap: .2rem;
-    }
-
+    .mobile-menu-links { display: flex; flex-direction: column; gap: .2rem; }
     .mobile-menu-links a {
       text-decoration: none;
       font-size: clamp(2.5rem, 12vw, 5rem);
-      line-height: .95;
-      letter-spacing: -.055em;
-      font-weight: 500;
-      padding: .15rem 0;
+      line-height: .95; letter-spacing: -.055em;
+      font-weight: 500; padding: .15rem 0;
+    }
+    .mobile-menu-bottom {
+      display: flex; justify-content: space-between; gap: 1rem;
+      font-size: .58rem; letter-spacing: .25em;
+      text-transform: uppercase; opacity: .42;
     }
 
-    .mobile-menu-bottom {
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      font-size: .58rem;
-      letter-spacing: .25em;
+    .corner-meta {
+      position: fixed;
+      z-index: 8997;
+      top: calc(var(--nav-h) + .75rem);
+      left: var(--pad);
+      display: flex; gap: 1.25rem;
+      font-family: var(--mono);
+      font-size: .55rem;
+      letter-spacing: .22em;
+      opacity: .38;
+      pointer-events: none;
+      mix-blend-mode: difference;
       text-transform: uppercase;
-      opacity: .42;
     }
 
     .section-index {
-      position: fixed;
-      z-index: 8998;
-      right: var(--pad);
-      bottom: 1.75rem;
-      display: flex;
-      gap: .45rem;
-      align-items: center;
-      font-size: .57rem;
-      letter-spacing: .28em;
-      font-weight: 500;
-      mix-blend-mode: difference;
-      pointer-events: none;
+      position: fixed; z-index: 8998;
+      right: var(--pad); bottom: 1.75rem;
+      display: flex; gap: .45rem; align-items: center;
+      font-family: var(--mono);
+      font-size: .57rem; letter-spacing: .28em; font-weight: 500;
+      mix-blend-mode: difference; pointer-events: none;
     }
-
     .section-index .current { opacity: .55; }
     .section-index .total { opacity: .28; }
 
     .eyebrow {
-      font-size: .58rem;
-      line-height: 1;
-      letter-spacing: .32em;
-      text-transform: uppercase;
-      font-weight: 500;
-      opacity: .52;
+      font-size: .58rem; line-height: 1;
+      letter-spacing: .32em; text-transform: uppercase;
+      font-weight: 500; opacity: .52;
     }
 
-    .scene {
-      position: relative;
-      overflow: hidden;
-      background: #000;
-    }
-
-    .scene-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-    }
+    .scene { position: relative; overflow: hidden; background: #000; }
+    .scene-inner { position: relative; width: 100%; height: 100%; }
 
     .hero {
-      height: 100svh;
-      min-height: 620px;
-      display: grid;
-      place-items: center;
-      isolation: isolate;
+      height: 100svh; min-height: 620px;
+      display: grid; place-items: center; isolation: isolate;
     }
-
     .hero-media {
-      position: absolute;
-      inset: -7%;
-      z-index: -2;
-      background:
-        url("assets/images/hero-beanie-model.jpeg")
-        center center / cover no-repeat;
+      position: absolute; inset: -7%; z-index: -2;
+      background: url("assets/images/hero-beanie-model.jpeg") center center / cover no-repeat;
       will-change: transform;
     }
-
     .hero-veil {
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      background:
-        linear-gradient(180deg, rgba(0,0,0,.42) 0%, rgba(0,0,0,.06) 43%, rgba(0,0,0,.66) 100%);
+      position: absolute; inset: 0; z-index: -1;
+      background: linear-gradient(180deg, rgba(0,0,0,.42) 0%, rgba(0,0,0,.06) 43%, rgba(0,0,0,.66) 100%);
     }
-
-    .hero-content {
-      text-align: center;
-      padding: 5rem 1.5rem 3rem;
-      will-change: transform, opacity;
-    }
-
+    .hero-content { text-align: center; padding: 5rem 1.5rem 3rem; will-change: transform, opacity; }
     .hero-title {
       overflow: hidden;
       font-size: clamp(3.2rem, 12vw, 11rem);
-      line-height: .84;
-      font-weight: 800;
-      letter-spacing: .105em;
-      text-transform: uppercase;
+      line-height: .84; font-weight: 800;
+      letter-spacing: .105em; text-transform: uppercase;
       white-space: nowrap;
     }
-
-    .hero-title span {
-      display: inline-block;
-      transform: translateY(115%);
-      will-change: transform;
-    }
-
+    .hero-title span { display: inline-block; transform: translateY(115%); will-change: transform; }
     .hero-tagline {
-      margin-top: 1.75rem;
-      font-size: .65rem;
-      letter-spacing: .55em;
-      text-transform: uppercase;
-      opacity: 0;
-      transform: translateY(12px);
+      margin-top: 1.75rem; font-size: .65rem;
+      letter-spacing: .55em; text-transform: uppercase;
+      opacity: 0; transform: translateY(12px);
     }
-
     .hero-scroll {
-      position: absolute;
-      left: 50%;
-      bottom: 2rem;
+      position: absolute; left: 50%; bottom: 2rem;
       transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: .8rem;
-      font-size: .55rem;
-      letter-spacing: .34em;
-      text-transform: uppercase;
-      opacity: .52;
+      display: flex; flex-direction: column; align-items: center; gap: .8rem;
+      font-size: .55rem; letter-spacing: .34em;
+      text-transform: uppercase; opacity: .52;
     }
-
     .hero-scroll-line {
-      width: 1px;
-      height: 42px;
-      overflow: hidden;
+      width: 1px; height: 42px; overflow: hidden;
       background: rgba(255,255,255,.2);
     }
-
     .hero-scroll-line::after {
-      content: "";
-      display: block;
-      width: 100%;
-      height: 100%;
-      background: #fff;
-      transform: translateY(-100%);
+      content: ""; display: block; width: 100%; height: 100%;
+      background: #fff; transform: translateY(-100%);
       animation: scrollLine 1.8s ease-in-out infinite;
     }
-
     @keyframes scrollLine {
       0% { transform: translateY(-100%); }
       55%, 100% { transform: translateY(100%); }
@@ -434,846 +294,413 @@
 
     .statement {
       min-height: 105svh;
-      display: grid;
-      place-items: center;
+      display: grid; place-items: center;
       padding: 10rem var(--pad);
     }
-
-    .statement-inner {
-      width: min(1100px, 100%);
-      text-align: center;
-    }
-
+    .statement-inner { width: min(1100px, 100%); text-align: center; }
     .statement-line {
       overflow: hidden;
       font-size: clamp(2rem, 6vw, 5.8rem);
-      line-height: 1.08;
-      font-weight: 300;
+      line-height: 1.08; font-weight: 300;
       letter-spacing: -.045em;
     }
-
     .statement-line + .statement-line { margin-top: .05em; }
-
     .statement-line .word {
       display: inline-block;
-      transform: translateY(115%);
-      opacity: 0;
+      transform: translateY(115%); opacity: 0;
       will-change: transform, opacity;
     }
-
     .statement-meta {
-      margin-top: 4.5rem;
-      font-size: .57rem;
-      letter-spacing: .32em;
-      text-transform: uppercase;
+      margin-top: 4.5rem; font-size: .57rem;
+      letter-spacing: .32em; text-transform: uppercase;
       opacity: .28;
     }
 
-    .collection {
-      position: relative;
-      background: #000;
-    }
-
-    .collection-desktop {
-      display: block;
-      position: relative;
-      height: 100svh;
-    }
-
+    .collection { position: relative; background: #000; }
+    .collection-desktop { display: block; position: relative; height: 100svh; }
     .collection-track {
-      position: absolute;
-      top: 0;
-      left: 0;
-      display: flex;
-      width: max-content;
-      height: 100%;
+      position: absolute; top: 0; left: 0;
+      display: flex; width: max-content; height: 100%;
       will-change: transform;
     }
-
     .collection-panel {
-      position: relative;
-      width: 100vw;
-      height: 100%;
+      position: relative; width: 100vw; height: 100%;
       flex: 0 0 100vw;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       padding: 6rem var(--pad);
     }
-
-    .collection-intro {
-      justify-content: flex-start;
-      padding-left: max(var(--pad), 12vw);
-    }
-
+    .collection-intro { justify-content: flex-start; padding-left: max(var(--pad), 12vw); }
     .collection-intro h2 {
       font-size: clamp(3rem, 8vw, 8rem);
-      font-weight: 700;
-      letter-spacing: -.07em;
-      line-height: .88;
+      font-weight: 700; letter-spacing: -.07em; line-height: .88;
     }
-
     .collection-intro .eyebrow { margin-bottom: 1.75rem; }
-
     .collection-intro-meta {
-      margin-top: 2rem;
-      display: flex;
-      gap: 1.25rem;
-      align-items: center;
-      font-size: .58rem;
-      letter-spacing: .3em;
-      text-transform: uppercase;
-      opacity: .4;
+      margin-top: 2rem; display: flex; gap: 1.25rem; align-items: center;
+      font-size: .58rem; letter-spacing: .3em;
+      text-transform: uppercase; opacity: .4;
     }
-
     .collection-intro-meta::before {
-      content: "";
-      width: 34px;
-      height: 1px;
-      background: currentColor;
+      content: ""; width: 34px; height: 1px; background: currentColor;
     }
-
-    .product-panel {
-      gap: clamp(2rem, 5vw, 5rem);
-    }
-
+    .product-panel { gap: clamp(2rem, 5vw, 5rem); }
     .product-image-wrap {
       position: relative;
-      width: min(43vw, 510px);
-      height: min(68vh, 680px);
-      overflow: hidden;
-      flex: 0 0 auto;
+      width: min(43vw, 510px); height: min(68vh, 680px);
+      overflow: hidden; flex: 0 0 auto;
       background: #0a0a0a;
       will-change: transform, opacity;
     }
-
-    .product-image {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      will-change: transform;
-    }
-
-    .product-info {
-      width: min(260px, 24vw);
-      flex: 0 0 auto;
-      will-change: transform, opacity;
-    }
-
+    .product-image { width: 100%; height: 100%; object-fit: cover; will-change: transform; }
+    .product-info { width: min(260px, 24vw); flex: 0 0 auto; will-change: transform, opacity; }
     .product-number {
-      font-size: .56rem;
-      letter-spacing: .3em;
-      opacity: .32;
-      margin-bottom: 1.5rem;
+      font-family: var(--mono);
+      font-size: .56rem; letter-spacing: .3em;
+      opacity: .32; margin-bottom: 1.5rem;
     }
-
     .product-name {
       font-size: clamp(1rem, 1.6vw, 1.35rem);
-      font-weight: 600;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      line-height: 1.15;
+      font-weight: 600; letter-spacing: .06em;
+      text-transform: uppercase; line-height: 1.15;
     }
-
     .product-price {
-      margin-top: .8rem;
-      font-size: .7rem;
-      letter-spacing: .18em;
-      opacity: .48;
+      margin-top: .8rem; font-size: .7rem;
+      letter-spacing: .18em; opacity: .48;
     }
-
     .product-link {
-      display: inline-flex;
-      margin-top: 2rem;
+      display: inline-flex; margin-top: 2rem;
       padding-bottom: .45rem;
       border-bottom: 1px solid rgba(255,255,255,.35);
       text-decoration: none;
-      font-size: .58rem;
-      letter-spacing: .3em;
+      font-size: .58rem; letter-spacing: .3em;
       text-transform: uppercase;
       transition: border-color .3s ease;
     }
-
     .product-link:hover { border-color: #fff; }
 
-    .collection-mobile {
-      display: none;
-    }
+    .collection-mobile { display: none; }
 
-    .campaign {
-      position: relative;
-      height: 100svh;
-    }
-
-    .campaign-stage {
-      position: relative;
-      height: 100%;
-      overflow: hidden;
-    }
-
+    .campaign { position: relative; height: 100svh; }
+    .campaign-stage { position: relative; height: 100%; overflow: hidden; }
     .campaign-image {
-      position: absolute;
-      inset: -8%;
-      width: 116%;
-      height: 116%;
-      object-fit: cover;
-      will-change: transform;
+      position: absolute; inset: -8%;
+      width: 116%; height: 116%;
+      object-fit: cover; will-change: transform;
     }
-
     .campaign-overlay {
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(180deg, rgba(0,0,0,.12) 0%, rgba(0,0,0,.05) 45%, rgba(0,0,0,.72) 100%);
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,.12) 0%, rgba(0,0,0,.05) 45%, rgba(0,0,0,.72) 100%);
     }
-
     .campaign-top {
       position: absolute;
       top: calc(var(--nav-h) + 1.5rem);
-      left: var(--pad);
-      right: var(--pad);
-      display: flex;
-      justify-content: space-between;
+      left: var(--pad); right: var(--pad);
+      display: flex; justify-content: space-between;
       z-index: 2;
-      font-size: .57rem;
-      letter-spacing: .3em;
-      text-transform: uppercase;
-      opacity: .55;
+      font-family: var(--mono);
+      font-size: .57rem; letter-spacing: .3em;
+      text-transform: uppercase; opacity: .55;
     }
-
     .campaign-copy {
-      position: absolute;
-      z-index: 2;
-      left: var(--pad);
-      bottom: clamp(3rem, 8vh, 7rem);
+      position: absolute; z-index: 2;
+      left: var(--pad); bottom: clamp(3rem, 8vh, 7rem);
       width: min(680px, calc(100% - 2 * var(--pad)));
     }
-
     .campaign-title {
       margin-top: 1.2rem;
       font-size: clamp(3.5rem, 9vw, 9rem);
-      font-weight: 700;
-      line-height: .83;
-      letter-spacing: -.065em;
+      font-weight: 700; line-height: .83; letter-spacing: -.065em;
     }
-
     .campaign-sub {
-      margin-top: 1.6rem;
-      max-width: 420px;
-      font-size: .75rem;
-      line-height: 1.65;
-      font-weight: 300;
-      letter-spacing: .02em;
-      opacity: .7;
+      margin-top: 1.6rem; max-width: 420px;
+      font-size: .75rem; line-height: 1.65; font-weight: 300;
+      letter-spacing: .02em; opacity: .7;
     }
 
-    .philosophy {
-      position: relative;
-      height: 300svh;
-      background: #000;
-    }
-
+    .philosophy { position: relative; height: 300svh; background: #000; }
     .philosophy-stage {
-      position: sticky;
-      top: 0;
-      height: 100svh;
+      position: sticky; top: 0; height: 100svh;
       overflow: hidden;
-      display: grid;
-      grid-template-columns: 1.05fr .95fr;
+      display: grid; grid-template-columns: 1.05fr .95fr;
     }
-
-    .philosophy-media {
-      position: relative;
-      overflow: hidden;
-      background: #080808;
-    }
-
+    .philosophy-media { position: relative; overflow: hidden; background: #080808; }
     .philosophy-media img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transform: scale(1.04);
+      width: 100%; height: 100%;
+      object-fit: cover; transform: scale(1.04);
       will-change: transform, opacity;
     }
-
     .philosophy-media::after {
-      content: "";
-      position: absolute;
-      inset: 0;
+      content: ""; position: absolute; inset: 0;
       background: linear-gradient(90deg, transparent 70%, rgba(0,0,0,.32));
       pointer-events: none;
     }
-
     .philosophy-copy {
-      position: relative;
-      min-width: 0;
-      display: flex;
-      align-items: center;
+      position: relative; min-width: 0;
+      display: flex; align-items: center;
       padding: 6rem clamp(2rem, 8vw, 8rem);
     }
-
     .philosophy-item {
       position: absolute;
       width: min(430px, calc(100% - 4rem));
-      opacity: 0;
-      transform: translateY(30px);
+      opacity: 0; transform: translateY(30px);
       will-change: transform, opacity;
       pointer-events: none;
     }
-
     .philosophy-item:first-child { opacity: 1; transform: translateY(0); }
-
     .philosophy-number {
+      font-family: var(--mono);
       margin-bottom: 2rem;
-      font-size: .56rem;
-      letter-spacing: .32em;
-      opacity: .3;
+      font-size: .56rem; letter-spacing: .32em; opacity: .3;
     }
-
     .philosophy-item h3 {
       font-size: clamp(2rem, 4vw, 4rem);
-      line-height: .95;
-      letter-spacing: -.05em;
-      font-weight: 500;
+      line-height: .95; letter-spacing: -.05em; font-weight: 500;
     }
-
     .philosophy-item p {
       margin-top: 1.6rem;
-      font-size: .78rem;
-      line-height: 1.8;
-      font-weight: 300;
-      opacity: .48;
-      max-width: 390px;
+      font-size: .78rem; line-height: 1.8;
+      font-weight: 300; opacity: .48; max-width: 390px;
     }
-
     .philosophy-progress {
-      position: absolute;
-      z-index: 3;
-      right: 2rem;
-      bottom: 2rem;
-      display: flex;
-      gap: .5rem;
+      position: absolute; z-index: 3;
+      right: 2rem; bottom: 2rem;
+      display: flex; gap: .5rem;
     }
-
     .philosophy-progress span {
-      display: block;
-      width: 28px;
-      height: 1px;
+      display: block; width: 28px; height: 1px;
       background: rgba(255,255,255,.25);
       transform-origin: left center;
+      transform: scaleX(.3);
+      transition: transform .4s var(--ease);
     }
+    .philosophy-progress span.active { transform: scaleX(1); }
 
-    .diary {
-      padding: 12rem var(--pad) 9rem;
-      background: #000;
-    }
-
+    .diary { padding: 12rem var(--pad) 9rem; background: #000; }
     .diary-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
+      display: flex; justify-content: space-between; align-items: baseline;
       padding-bottom: 5rem;
-      font-size: .58rem;
-      letter-spacing: .32em;
-      text-transform: uppercase;
-      opacity: .48;
+      font-family: var(--mono);
+      font-size: .58rem; letter-spacing: .32em;
+      text-transform: uppercase; opacity: .48;
     }
-
     .diary-grid {
       display: grid;
       grid-template-columns: repeat(12, 1fr);
       gap: clamp(1rem, 2.2vw, 2.2rem);
       align-items: start;
     }
-
     .diary-item {
-      overflow: hidden;
-      position: relative;
+      overflow: hidden; position: relative;
       background: #090909;
       will-change: transform, opacity;
     }
-
     .diary-item img {
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       object-fit: cover;
       transition: transform 1.4s var(--ease);
     }
-
     .diary-item:hover img { transform: scale(1.045); }
-
-    .diary-item:nth-child(1) {
-      grid-column: 1 / span 7;
-      aspect-ratio: 16 / 10;
-    }
-
-    .diary-item:nth-child(2) {
-      grid-column: 9 / span 4;
-      margin-top: 8rem;
-      aspect-ratio: 3 / 4;
-    }
-
-    .diary-item:nth-child(3) {
-      grid-column: 2 / span 4;
-      margin-top: 8rem;
-      aspect-ratio: 3 / 4;
-    }
-
-    .diary-item:nth-child(4) {
-      grid-column: 7 / span 6;
-      aspect-ratio: 16 / 11;
-    }
-
-    .diary-item:nth-child(5) {
-      grid-column: 4 / span 5;
-      margin-top: 5rem;
-      aspect-ratio: 3 / 4;
-    }
+    .diary-item:nth-child(1) { grid-column: 1 / span 7; aspect-ratio: 16 / 10; }
+    .diary-item:nth-child(2) { grid-column: 9 / span 4; margin-top: 8rem; aspect-ratio: 3 / 4; }
+    .diary-item:nth-child(3) { grid-column: 2 / span 4; margin-top: 8rem; aspect-ratio: 3 / 4; }
+    .diary-item:nth-child(4) { grid-column: 7 / span 6; aspect-ratio: 16 / 11; }
+    .diary-item:nth-child(5) { grid-column: 4 / span 5; margin-top: 5rem; aspect-ratio: 3 / 4; }
 
     .quote {
       min-height: 100svh;
-      display: grid;
-      place-items: center;
+      display: grid; place-items: center;
       padding: 8rem var(--pad);
-      text-align: center;
-      overflow: hidden;
+      text-align: center; overflow: hidden;
     }
-
-    .quote-inner {
-      width: min(1200px, 100%);
-      will-change: transform, opacity;
-    }
-
+    .quote-inner { width: min(1200px, 100%); will-change: transform, opacity; }
     .quote blockquote {
       font-family: "Instrument Serif", Georgia, serif;
       font-size: clamp(2.6rem, 8vw, 8rem);
-      font-weight: 400;
-      line-height: 1.02;
+      font-weight: 400; line-height: 1.02;
       letter-spacing: -.01em;
     }
+    .quote em { font-style: italic; font-weight: 400; opacity: .4; }
 
-    .quote em {
-      font-style: italic;
-      font-weight: 400;
-      opacity: .4;
-    }
-
-    .lookbook {
-      padding: 11rem 0 8rem;
-      background: #000;
-    }
-
+    .lookbook { padding: 11rem 0 8rem; background: #000; }
     .lookbook-head {
       padding: 0 var(--pad) 5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      font-size: .58rem;
-      letter-spacing: .32em;
-      text-transform: uppercase;
-      opacity: .48;
+      display: flex; justify-content: space-between; align-items: baseline;
+      font-family: var(--mono);
+      font-size: .58rem; letter-spacing: .32em;
+      text-transform: uppercase; opacity: .48;
     }
-
     .lookbook-grid {
       display: grid;
       grid-template-columns: repeat(12, 1fr);
       gap: 1.2rem;
       padding: 0 var(--pad);
     }
-
     .lookbook-item {
-      overflow: hidden;
-      background: #080808;
+      overflow: hidden; background: #080808;
       will-change: transform, opacity;
     }
-
     .lookbook-item img {
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       object-fit: cover;
       transition: transform 1.4s var(--ease);
     }
-
     .lookbook-item:hover img { transform: scale(1.04); }
-
     .lookbook-item:nth-child(1),
     .lookbook-item:nth-child(2),
     .lookbook-item:nth-child(3),
-    .lookbook-item:nth-child(4) {
-      grid-column: span 3;
-      aspect-ratio: 3 / 4;
-    }
-
+    .lookbook-item:nth-child(4) { grid-column: span 3; aspect-ratio: 3 / 4; }
     .lookbook-item:nth-child(5),
-    .lookbook-item:nth-child(6) {
-      grid-column: span 4;
-      aspect-ratio: 3 / 4;
-    }
+    .lookbook-item:nth-child(6) { grid-column: span 4; aspect-ratio: 3 / 4; }
+    .lookbook-item:nth-child(7) { grid-column: 2 / span 5; aspect-ratio: 4 / 5; margin-top: 4rem; }
+    .lookbook-item:nth-child(8) { grid-column: 8 / span 4; aspect-ratio: 3 / 4; margin-top: 9rem; }
 
-    .lookbook-item:nth-child(7) {
-      grid-column: 2 / span 5;
-      aspect-ratio: 4 / 5;
-      margin-top: 4rem;
-    }
-
-    .lookbook-item:nth-child(8) {
-      grid-column: 8 / span 4;
-      aspect-ratio: 3 / 4;
-      margin-top: 9rem;
-    }
-
-    .footer {
-      padding: 10rem var(--pad) 2.5rem;
-      border-top: 1px solid var(--hairline);
-      background: #000;
-    }
-
+    .footer { padding: 10rem var(--pad) 2.5rem; border-top: 1px solid var(--hairline); background: #000; }
     .footer-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 5rem;
-      padding-bottom: 9rem;
+      display: flex; justify-content: space-between; align-items: flex-start;
+      gap: 5rem; padding-bottom: 9rem;
     }
-
     .footer-brand h2 {
       font-size: clamp(2.5rem, 7vw, 7rem);
-      line-height: .82;
-      letter-spacing: -.055em;
-      font-weight: 700;
+      line-height: .82; letter-spacing: -.055em; font-weight: 700;
     }
-
     .footer-brand p {
-      margin-top: 1.5rem;
-      font-size: .58rem;
-      letter-spacing: .32em;
-      text-transform: uppercase;
-      opacity: .34;
+      margin-top: 1.5rem; font-size: .58rem;
+      letter-spacing: .32em; text-transform: uppercase; opacity: .34;
     }
-
-    .footer-cols {
-      display: flex;
-      gap: clamp(3rem, 7vw, 8rem);
-    }
-
+    .footer-cols { display: flex; gap: clamp(3rem, 7vw, 8rem); }
     .footer-col h4 {
-      margin-bottom: 1.7rem;
-      font-size: .55rem;
-      letter-spacing: .3em;
-      text-transform: uppercase;
-      opacity: .3;
-      font-weight: 500;
+      margin-bottom: 1.7rem; font-size: .55rem;
+      letter-spacing: .3em; text-transform: uppercase;
+      opacity: .3; font-weight: 500;
     }
-
     .footer-col a {
-      display: block;
-      margin-bottom: .9rem;
-      text-decoration: none;
-      font-size: .72rem;
-      opacity: .58;
-      transition: opacity .3s ease;
+      display: block; margin-bottom: .9rem;
+      text-decoration: none; font-size: .72rem;
+      opacity: .58; transition: opacity .3s ease;
     }
-
     .footer-col a:hover { opacity: 1; }
-
     .footer-bottom {
-      padding-top: 2rem;
-      border-top: 1px solid var(--hairline);
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      flex-wrap: wrap;
-      font-size: .52rem;
-      line-height: 1.5;
-      letter-spacing: .24em;
-      text-transform: uppercase;
+      padding-top: 2rem; border-top: 1px solid var(--hairline);
+      display: flex; justify-content: space-between;
+      gap: 1rem; flex-wrap: wrap;
+      font-family: var(--mono);
+      font-size: .52rem; line-height: 1.5;
+      letter-spacing: .24em; text-transform: uppercase;
       opacity: .25;
     }
 
     @media (max-width: 900px) {
       :root { --nav-h: 68px; }
-
       .nav-center { display: none; }
       .menu-toggle { display: block; }
-
-      .nav {
-        padding: 0 1.25rem;
-      }
-
+      .nav { padding: 0 1.25rem; }
       .nav-logo { font-size: .82rem; }
       .nav-cart { display: none; }
-
-      .section-index {
-        right: 1.25rem;
-        bottom: 1.25rem;
-      }
-
-      .hero-title {
-        font-size: clamp(2.8rem, 13vw, 7rem);
-        letter-spacing: .075em;
-      }
-
-      .statement {
-        min-height: 90svh;
-        padding: 8rem 1.25rem;
-      }
-
+      .corner-meta { left: 1.25rem; font-size: .5rem; }
+      .section-index { right: 1.25rem; bottom: 1.25rem; }
+      .hero-title { font-size: clamp(2.8rem, 13vw, 7rem); letter-spacing: .075em; }
+      .statement { min-height: 90svh; padding: 8rem 1.25rem; }
       .collection-desktop { display: none; }
-
-      .collection-mobile {
-        display: block;
-        padding: 7rem 0 5rem;
-        overflow: hidden;
-      }
-
-      .collection-mobile-head {
-        padding: 0 1.25rem 3rem;
-      }
-
+      .collection-mobile { display: block; padding: 7rem 0 5rem; overflow: hidden; }
+      .collection-mobile-head { padding: 0 1.25rem 3rem; }
       .collection-mobile-head h2 {
         margin-top: 1.25rem;
         font-size: clamp(3rem, 16vw, 6rem);
-        line-height: .85;
-        letter-spacing: -.07em;
+        line-height: .85; letter-spacing: -.07em;
       }
-
       .collection-mobile-meta {
-        margin-top: 1.5rem;
-        font-size: .56rem;
-        letter-spacing: .28em;
-        text-transform: uppercase;
-        opacity: .4;
+        margin-top: 1.5rem; font-size: .56rem;
+        letter-spacing: .28em; text-transform: uppercase; opacity: .4;
       }
-
       .mobile-products {
-        display: flex;
-        gap: 1rem;
+        display: flex; gap: 1rem;
         overflow-x: auto;
         padding: 0 1.25rem 1rem;
         scroll-snap-type: x mandatory;
         overscroll-behavior-x: contain;
         scrollbar-width: none;
       }
-
       .mobile-products::-webkit-scrollbar { display: none; }
-
-      .mobile-product {
-        flex: 0 0 78vw;
-        scroll-snap-align: center;
-      }
-
+      .mobile-product { flex: 0 0 78vw; scroll-snap-align: center; }
       .mobile-product-image {
-        width: 100%;
-        aspect-ratio: 4 / 5;
-        object-fit: cover;
-        background: #090909;
+        width: 100%; aspect-ratio: 4 / 5;
+        object-fit: cover; background: #090909;
       }
-
       .mobile-product-meta {
         padding-top: 1.25rem;
-        display: flex;
-        justify-content: space-between;
-        gap: 1rem;
-        align-items: baseline;
+        display: flex; justify-content: space-between; gap: 1rem; align-items: baseline;
       }
-
-      .mobile-product-meta h3 {
-        font-size: .76rem;
-        letter-spacing: .16em;
-        text-transform: uppercase;
-      }
-
-      .mobile-product-meta p {
-        font-size: .62rem;
-        letter-spacing: .15em;
-        opacity: .45;
-      }
-
+      .mobile-product-meta h3 { font-size: .76rem; letter-spacing: .16em; text-transform: uppercase; }
+      .mobile-product-meta p { font-size: .62rem; letter-spacing: .15em; opacity: .45; }
       .mobile-product a {
-        display: inline-block;
-        margin-top: 1rem;
-        font-size: .55rem;
-        letter-spacing: .28em;
-        text-transform: uppercase;
-        text-decoration: none;
+        display: inline-block; margin-top: 1rem;
+        font-size: .55rem; letter-spacing: .28em;
+        text-transform: uppercase; text-decoration: none;
         border-bottom: 1px solid rgba(255,255,255,.3);
         padding-bottom: .4rem;
       }
-
-      .campaign {
-        height: 100svh;
-        min-height: 650px;
-      }
-
-      .campaign-title {
-        font-size: clamp(3.6rem, 18vw, 8rem);
-      }
-
-      .philosophy {
-        height: auto;
-      }
-
-      .philosophy-stage {
-        position: relative;
-        height: auto;
-        display: block;
-      }
-
-      .philosophy-media {
-        height: 70svh;
-        min-height: 520px;
-      }
-
+      .campaign { height: 100svh; min-height: 650px; }
+      .campaign-title { font-size: clamp(3.6rem, 18vw, 8rem); }
+      .philosophy { height: auto; }
+      .philosophy-stage { position: relative; height: auto; display: block; }
+      .philosophy-media { height: 70svh; min-height: 520px; }
       .philosophy-copy {
         min-height: 120svh;
         padding: 0 1.25rem;
         display: block;
       }
-
       .philosophy-item {
-        position: relative;
-        width: 100%;
+        position: relative; width: 100%;
         min-height: 40svh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        opacity: 1 !important;
-        transform: none !important;
+        display: flex; flex-direction: column; justify-content: center;
+        opacity: 1 !important; transform: none !important;
         pointer-events: auto;
       }
-
       .philosophy-progress { display: none; }
-
-      .diary {
-        padding: 8rem 1.25rem 6rem;
-      }
-
+      .diary { padding: 8rem 1.25rem 6rem; }
       .diary-head { padding-bottom: 3.5rem; }
-
-      .diary-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 1rem;
-      }
-
-      .diary-item:nth-child(n) {
-        grid-column: auto;
-        margin-top: 0;
-        aspect-ratio: 3 / 4;
-      }
-
-      .diary-item:nth-child(1) {
-        grid-column: 1 / -1;
-        aspect-ratio: 4 / 3;
-      }
-
-      .diary-item:nth-child(4) {
-        grid-column: 1 / -1;
-        aspect-ratio: 4 / 3;
-      }
-
-      .quote {
-        min-height: 80svh;
-        padding: 7rem 1.25rem;
-      }
-
-      .lookbook {
-        padding: 7rem 0 5rem;
-      }
-
-      .lookbook-head {
-        padding: 0 1.25rem 3.5rem;
-      }
-
-      .lookbook-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: .8rem;
-        padding: 0 1.25rem;
-      }
-
-      .lookbook-item:nth-child(n) {
-        grid-column: auto;
-        margin-top: 0;
-        aspect-ratio: 3 / 4;
-      }
-
+      .diary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+      .diary-item:nth-child(n) { grid-column: auto; margin-top: 0; aspect-ratio: 3 / 4; }
+      .diary-item:nth-child(1) { grid-column: 1 / -1; aspect-ratio: 4 / 3; }
+      .diary-item:nth-child(4) { grid-column: 1 / -1; aspect-ratio: 4 / 3; }
+      .quote { min-height: 80svh; padding: 7rem 1.25rem; }
+      .lookbook { padding: 7rem 0 5rem; }
+      .lookbook-head { padding: 0 1.25rem 3.5rem; }
+      .lookbook-grid { grid-template-columns: 1fr 1fr; gap: .8rem; padding: 0 1.25rem; }
+      .lookbook-item:nth-child(n) { grid-column: auto; margin-top: 0; aspect-ratio: 3 / 4; }
       .lookbook-item:nth-child(1),
       .lookbook-item:nth-child(4),
-      .lookbook-item:nth-child(7) {
-        grid-column: 1 / -1;
-        aspect-ratio: 4 / 5;
-      }
-
-      .footer {
-        padding: 7rem 1.25rem 2rem;
-      }
-
-      .footer-top {
-        display: block;
-        padding-bottom: 5rem;
-      }
-
+      .lookbook-item:nth-child(7) { grid-column: 1 / -1; aspect-ratio: 4 / 5; }
+      .footer { padding: 7rem 1.25rem 2rem; }
+      .footer-top { display: block; padding-bottom: 5rem; }
       .footer-brand { margin-bottom: 4rem; }
-
-      .footer-cols {
-        gap: 2.5rem;
-        flex-wrap: wrap;
-      }
+      .footer-cols { gap: 2.5rem; flex-wrap: wrap; }
     }
 
     @media (max-width: 480px) {
       .hero { min-height: 560px; }
-
-      .hero-title {
-        font-size: 15vw;
-        letter-spacing: .04em;
-      }
-
-      .hero-tagline {
-        font-size: .56rem;
-        letter-spacing: .42em;
-      }
-
+      .hero-title { font-size: 15vw; letter-spacing: .04em; }
+      .hero-tagline { font-size: .56rem; letter-spacing: .42em; }
       .mobile-product { flex-basis: 84vw; }
-
-      .campaign-copy {
-        width: calc(100% - 2.5rem);
-      }
-
-      .campaign-sub {
-        max-width: 330px;
-      }
-
-      .footer-cols {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-      }
+      .campaign-copy { width: calc(100% - 2.5rem); }
+      .campaign-sub { max-width: 330px; }
+      .footer-cols { display: grid; grid-template-columns: 1fr 1fr; }
     }
 
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto !important; }
-
-      *,
-      *::before,
-      *::after {
+      *, *::before, *::after {
         animation-duration: .01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: .01ms !important;
         scroll-behavior: auto !important;
       }
-
-      .cursor,
-      .grain { display: none; }
-
+      .cursor, .grain { display: none; }
       .collection-desktop { display: none; }
       .collection-mobile { display: block; }
-
       .hero-title span,
       .statement-line .word,
-      .hero-tagline {
-        transform: none !important;
-        opacity: 1 !important;
-      }
+      .hero-tagline { transform: none !important; opacity: 1 !important; }
     }
   </style>
 </head>
@@ -1301,14 +728,8 @@
           Cart (<span class="cart-count" id="cartCount">0</span>)
         </a>
 
-        <button
-          class="menu-toggle"
-          id="menuToggle"
-          type="button"
-          aria-label="Open menu"
-          aria-controls="mobileMenu"
-          aria-expanded="false"
-        >
+        <button class="menu-toggle" id="menuToggle" type="button"
+          aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
           <span class="menu-icon" aria-hidden="true"></span>
         </button>
       </div>
@@ -1321,12 +742,16 @@
         <a href="about.html">About</a>
         <a href="gallery.html">Gallery</a>
       </nav>
-
       <div class="mobile-menu-bottom">
         <span>NEW SAINT</span>
         <span>AW26</span>
       </div>
     </aside>
+
+    <div class="corner-meta" aria-hidden="true">
+      <span>NS-26</span>
+      <span>Spiritual Warfare</span>
+    </div>
 
     <div class="section-index" aria-hidden="true">
       <span class="current" id="sectionCurrent">01</span>
@@ -1373,7 +798,6 @@
       </section>
 
       <section class="collection" data-index="03" data-section="collection" id="collectionSection">
-
         <div class="collection-desktop" id="collectionDesktop">
           <div class="collection-track" id="collectionTrack">
 
@@ -1387,13 +811,8 @@
 
             <article class="collection-panel product-panel">
               <div class="product-image-wrap">
-                <img
-                  class="product-image"
-                  src="assets/images/Products/Saint hoodie.avif"
-                  alt="Saint Hoodie"
-                  loading="eager"
-                  decoding="async"
-                >
+                <img class="product-image" src="assets/images/Products/Saint hoodie.avif"
+                  alt="Saint Hoodie" loading="eager" decoding="async">
               </div>
               <div class="product-info">
                 <div class="product-number">01 / 05</div>
@@ -1405,13 +824,8 @@
 
             <article class="collection-panel product-panel">
               <div class="product-image-wrap">
-                <img
-                  class="product-image"
-                  src="assets/images/Products/Xavier edition cropped Tee.avif"
-                  alt="Xavier Cropped Tee"
-                  loading="lazy"
-                  decoding="async"
-                >
+                <img class="product-image" src="assets/images/Products/Xavier edition cropped Tee.avif"
+                  alt="Xavier Cropped Tee" loading="lazy" decoding="async">
               </div>
               <div class="product-info">
                 <div class="product-number">02 / 05</div>
@@ -1423,13 +837,8 @@
 
             <article class="collection-panel product-panel">
               <div class="product-image-wrap">
-                <img
-                  class="product-image"
-                  src="assets/images/Products/Two tone hoodie.avif"
-                  alt="Two Tone Hoodie"
-                  loading="lazy"
-                  decoding="async"
-                >
+                <img class="product-image" src="assets/images/Products/Two tone hoodie.avif"
+                  alt="Two Tone Hoodie" loading="lazy" decoding="async">
               </div>
               <div class="product-info">
                 <div class="product-number">03 / 05</div>
@@ -1441,13 +850,8 @@
 
             <article class="collection-panel product-panel">
               <div class="product-image-wrap">
-                <img
-                  class="product-image"
-                  src="assets/images/Products/Pink santiano hoodie.avif"
-                  alt="Pink Santiano Hoodie"
-                  loading="lazy"
-                  decoding="async"
-                >
+                <img class="product-image" src="assets/images/Products/Pink santiano hoodie.avif"
+                  alt="Pink Santiano Hoodie" loading="lazy" decoding="async">
               </div>
               <div class="product-info">
                 <div class="product-number">04 / 05</div>
@@ -1459,13 +863,8 @@
 
             <article class="collection-panel product-panel">
               <div class="product-image-wrap">
-                <img
-                  class="product-image"
-                  src="assets/images/Products/Santiano beanie.avif"
-                  alt="Santiano Beanie"
-                  loading="lazy"
-                  decoding="async"
-                >
+                <img class="product-image" src="assets/images/Products/Santiano beanie.avif"
+                  alt="Santiano Beanie" loading="lazy" decoding="async">
               </div>
               <div class="product-info">
                 <div class="product-number">05 / 05</div>
@@ -1488,41 +887,27 @@
           <div class="mobile-products" aria-label="New Saint collection">
             <article class="mobile-product">
               <img class="mobile-product-image" src="assets/images/Products/Saint hoodie.avif" alt="Saint Hoodie" loading="lazy">
-              <div class="mobile-product-meta">
-                <h3>Saint Hoodie</h3><p>R890</p>
-              </div>
+              <div class="mobile-product-meta"><h3>Saint Hoodie</h3><p>R890</p></div>
               <a href="store.html">Shop Piece</a>
             </article>
-
             <article class="mobile-product">
               <img class="mobile-product-image" src="assets/images/Products/Xavier edition cropped Tee.avif" alt="Xavier Cropped Tee" loading="lazy">
-              <div class="mobile-product-meta">
-                <h3>Xavier Cropped Tee</h3><p>R550</p>
-              </div>
+              <div class="mobile-product-meta"><h3>Xavier Cropped Tee</h3><p>R550</p></div>
               <a href="store.html">Shop Piece</a>
             </article>
-
             <article class="mobile-product">
               <img class="mobile-product-image" src="assets/images/Products/Two tone hoodie.avif" alt="Two Tone Hoodie" loading="lazy">
-              <div class="mobile-product-meta">
-                <h3>Two Tone Hoodie</h3><p>R950</p>
-              </div>
+              <div class="mobile-product-meta"><h3>Two Tone Hoodie</h3><p>R950</p></div>
               <a href="store.html">Shop Piece</a>
             </article>
-
             <article class="mobile-product">
               <img class="mobile-product-image" src="assets/images/Products/Pink santiano hoodie.avif" alt="Pink Santiano Hoodie" loading="lazy">
-              <div class="mobile-product-meta">
-                <h3>Pink Santiano Hoodie</h3><p>R950</p>
-              </div>
+              <div class="mobile-product-meta"><h3>Pink Santiano Hoodie</h3><p>R950</p></div>
               <a href="store.html">Shop Piece</a>
             </article>
-
             <article class="mobile-product">
               <img class="mobile-product-image" src="assets/images/Products/Santiano beanie.avif" alt="Santiano Beanie" loading="lazy">
-              <div class="mobile-product-meta">
-                <h3>Santiano Beanie</h3><p>R350</p>
-              </div>
+              <div class="mobile-product-meta"><h3>Santiano Beanie</h3><p>R350</p></div>
               <a href="store.html">Shop Piece</a>
             </article>
           </div>
@@ -1531,14 +916,9 @@
 
       <section class="scene campaign" data-index="04" data-section="campaign">
         <div class="campaign-stage">
-          <img
-            class="campaign-image"
-            id="campaignImage"
+          <img class="campaign-image" id="campaignImage"
             src="assets/images/Home page visuals/Santiano drip.avif"
-            alt="New Saint Santiano campaign"
-            loading="lazy"
-            decoding="async"
-          >
+            alt="New Saint Santiano campaign" loading="lazy" decoding="async">
           <div class="campaign-overlay"></div>
 
           <div class="campaign-top">
@@ -1550,8 +930,7 @@
             <p class="eyebrow">New Saint / Santiano</p>
             <h2 class="campaign-title">Santiano</h2>
             <p class="campaign-sub">
-              The first drop of the season. Five pieces, cut heavy, made in
-              Cape Town.
+              The first drop of the season. Five pieces, cut heavy, made in Cape Town.
             </p>
           </div>
         </div>
@@ -1559,52 +938,33 @@
 
       <section class="philosophy" data-index="05" data-section="philosophy" id="philosophySection">
         <div class="philosophy-stage">
-
           <div class="philosophy-media">
-            <img
-              id="philosophyImage"
+            <img id="philosophyImage"
               src="assets/images/Home page visuals/Mm model.avif"
-              alt="New Saint model"
-              loading="lazy"
-              decoding="async"
-            >
+              alt="New Saint model" loading="lazy" decoding="async">
           </div>
 
           <div class="philosophy-copy">
-
             <article class="philosophy-item">
               <div class="philosophy-number">01 / 03</div>
               <h3>Cut oversized on purpose.</h3>
-              <p>
-                Patterns drafted for how a piece sits when you're actually
-                moving in it, not standing still on a mannequin.
-              </p>
+              <p>Patterns drafted for how a piece sits when you're actually moving in it, not standing still on a mannequin.</p>
             </article>
-
             <article class="philosophy-item">
               <div class="philosophy-number">02 / 03</div>
               <h3>Heavier than it looks.</h3>
-              <p>
-                Heavyweight cotton, brushed inside, reinforced at every seam
-                that takes strain. Built to age, not to fall apart.
-              </p>
+              <p>Heavyweight cotton, brushed inside, reinforced at every seam that takes strain. Built to age, not to fall apart.</p>
             </article>
-
             <article class="philosophy-item">
               <div class="philosophy-number">03 / 03</div>
               <h3>Small runs. No restocks.</h3>
-              <p>
-                Each drop is limited on purpose. Once a size is gone from a
-                piece, it doesn't come back.
-              </p>
+              <p>Each drop is limited on purpose. Once a size is gone from a piece, it doesn't come back.</p>
             </article>
-
           </div>
 
           <div class="philosophy-progress" aria-hidden="true">
-            <span></span><span></span><span></span>
+            <span class="active"></span><span></span><span></span>
           </div>
-
         </div>
       </section>
 
@@ -1615,21 +975,11 @@
         </div>
 
         <div class="diary-grid">
-          <div class="diary-item">
-            <img src="assets/images/Home page visuals/2272b109-6a8f-4641-b29a-862cbde59513.avif" alt="New Saint visual diary image 01" loading="lazy">
-          </div>
-          <div class="diary-item">
-            <img src="assets/images/Home page visuals/3cd7043c-eca3-4b5a-b695-516b3d1b72dc.avif" alt="New Saint visual diary image 02" loading="lazy">
-          </div>
-          <div class="diary-item">
-            <img src="assets/images/Home page visuals/423e17e8-dc6b-4c4b-8a63-f11e3e0076b6.avif" alt="New Saint visual diary image 03" loading="lazy">
-          </div>
-          <div class="diary-item">
-            <img src="assets/images/Home page visuals/84c5cf2e-69a2-4651-9ba1-715938eebe9a.avif" alt="New Saint visual diary image 04" loading="lazy">
-          </div>
-          <div class="diary-item">
-            <img src="assets/images/Home page visuals/bad74da2-b0b6-4a68-8f6d-1adf2345b70d.avif" alt="New Saint visual diary image 05" loading="lazy">
-          </div>
+          <div class="diary-item"><img src="assets/images/Home page visuals/2272b109-6a8f-4641-b29a-862cbde59513.avif" alt="New Saint visual diary 01" loading="lazy"></div>
+          <div class="diary-item"><img src="assets/images/Home page visuals/3cd7043c-eca3-4b5a-b695-516b3d1b72dc.avif" alt="New Saint visual diary 02" loading="lazy"></div>
+          <div class="diary-item"><img src="assets/images/Home page visuals/423e17e8-dc6b-4c4b-8a63-f11e3e0076b6.avif" alt="New Saint visual diary 03" loading="lazy"></div>
+          <div class="diary-item"><img src="assets/images/Home page visuals/84c5cf2e-69a2-4651-9ba1-715938eebe9a.avif" alt="New Saint visual diary 04" loading="lazy"></div>
+          <div class="diary-item"><img src="assets/images/Home page visuals/bad74da2-b0b6-4a68-8f6d-1adf2345b70d.avif" alt="New Saint visual diary 05" loading="lazy"></div>
         </div>
       </section>
 
@@ -1664,14 +1014,12 @@
 
     <footer class="footer" data-index="09" data-section="footer">
       <div class="footer-top">
-
         <div class="footer-brand">
           <h2>NEW<br>SAINT</h2>
           <p>Become Real</p>
         </div>
 
         <div class="footer-cols">
-
           <div class="footer-col">
             <h4>Shop</h4>
             <a href="store.html">All Products</a>
@@ -1679,19 +1027,17 @@
             <a href="store.html">Tees</a>
             <a href="store.html">Accessories</a>
           </div>
-
           <div class="footer-col">
             <h4>Brand</h4>
             <a href="about.html">About</a>
             <a href="gallery.html">Lookbook</a>
             <a href="about.html">Manifesto</a>
           </div>
-
           <div class="footer-col">
             <h4>Connect</h4>
             <a href="https://www.instagram.com/newsaint.co.za/" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://www.tiktok.com/@newsaint.co.za" target="_blank" rel="noopener noreferrer">TikTok</a>
           </div>
-
         </div>
       </div>
 
@@ -1722,13 +1068,11 @@
       function getCartCount() {
         const keys = ["cart", "newSaintCart", "cartItems"];
         let total = 0;
-
         for (const key of keys) {
           try {
             const raw = localStorage.getItem(key);
             if (!raw) continue;
             const parsed = JSON.parse(raw);
-
             if (Array.isArray(parsed)) {
               total = parsed.reduce((sum, item) => {
                 const qty = Number(item?.quantity ?? item?.qty ?? 1);
@@ -1736,7 +1080,6 @@
               }, 0);
               if (total > 0) break;
             }
-
             if (parsed && typeof parsed === "object") {
               if (Array.isArray(parsed.items)) {
                 total = parsed.items.reduce((sum, item) => {
@@ -1750,7 +1093,6 @@
             }
           } catch (_) {}
         }
-
         return total;
       }
 
@@ -1758,7 +1100,6 @@
         const el = $("#cartCount");
         if (el) el.textContent = getCartCount();
       }
-
       updateCartCount();
       window.addEventListener("storage", updateCartCount);
 
@@ -1767,7 +1108,6 @@
 
       function setMenu(open) {
         if (!menuToggle || !mobileMenu) return;
-
         menuToggle.setAttribute("aria-expanded", String(open));
         menuToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
         mobileMenu.setAttribute("aria-hidden", String(!open));
@@ -1790,7 +1130,6 @@
 
       const navLinks = $$(".nav-link");
       const pageName = location.pathname.split("/").pop() || "index.html";
-
       navLinks.forEach(link => {
         const href = link.getAttribute("href");
         link.classList.toggle("active", href === pageName || (pageName === "" && href === "index.html"));
@@ -1798,14 +1137,10 @@
 
       if (!reducedMotion && desktop) {
         const cursor = $("#cursor");
-        let mouseX = -100;
-        let mouseY = -100;
-        let currentX = mouseX;
-        let currentY = mouseY;
+        let mouseX = -100, mouseY = -100, currentX = mouseX, currentY = mouseY;
 
         window.addEventListener("mousemove", e => {
-          mouseX = e.clientX;
-          mouseY = e.clientY;
+          mouseX = e.clientX; mouseY = e.clientY;
           cursor.classList.add("is-visible");
         }, { passive: true });
 
@@ -1828,7 +1163,6 @@
 
       if (!reducedMotion && desktop && window.gsap) {
         const letters = $$(".hero-title span");
-
         window.addEventListener("mousemove", e => {
           letters.forEach(letter => {
             const rect = letter.getBoundingClientRect();
@@ -1836,16 +1170,13 @@
             const cy = rect.top + rect.height / 2;
             const dist = Math.hypot(e.clientX - cx, e.clientY - cy);
             const radius = 140;
-
             if (dist < radius) {
               const pull = (1 - dist / radius) * 8;
               const angle = Math.atan2(e.clientY - cy, e.clientX - cx);
               gsap.to(letter, {
                 x: Math.cos(angle) * pull,
                 y: Math.sin(angle) * pull,
-                duration: .4,
-                ease: "power2.out",
-                overwrite: "auto"
+                duration: .4, ease: "power2.out", overwrite: "auto"
               });
             } else {
               gsap.to(letter, { x: 0, y: 0, duration: .6, ease: "power2.out", overwrite: "auto" });
@@ -1865,129 +1196,71 @@
 
       if (!reducedMotion && desktop && window.Lenis) {
         lenis = new Lenis({
-          duration: 1.15,
-          smoothWheel: true,
-          syncTouch: false,
-          wheelMultiplier: 0.9,
-          touchMultiplier: 1,
-          infinite: false
+          duration: 1.15, smoothWheel: true,
+          syncTouch: false, wheelMultiplier: 0.9,
+          touchMultiplier: 1, infinite: false
         });
-
         lenis.on("scroll", ScrollTrigger.update);
-
-        gsap.ticker.add(time => {
-          lenis.raf(time * 1000);
-        });
-
+        gsap.ticker.add(time => { lenis.raf(time * 1000); });
         gsap.ticker.lagSmoothing(1000, 16);
       }
 
       const progress = $("#scrollProgress");
-
       const updateProgress = () => {
         const doc = document.documentElement;
         const max = doc.scrollHeight - window.innerHeight;
         const pct = max > 0 ? window.scrollY / max : 0;
         progress.style.transform = "scaleX(" + Math.max(0, Math.min(1, pct)) + ")";
       };
-
       window.addEventListener("scroll", updateProgress, { passive: true });
       updateProgress();
 
       const sectionCurrent = $("#sectionCurrent");
-      const trackedSections = $$("[data-section]");
-
-      trackedSections.forEach(section => {
+      $$("[data-section]").forEach(section => {
         ScrollTrigger.create({
           trigger: section,
           start: "top 50%",
           end: "bottom 50%",
-          onEnter: () => {
-            sectionCurrent.textContent = section.dataset.index || "01";
-          },
-          onEnterBack: () => {
-            sectionCurrent.textContent = section.dataset.index || "01";
-          }
+          onEnter: () => { sectionCurrent.textContent = section.dataset.index || "01"; },
+          onEnterBack: () => { sectionCurrent.textContent = section.dataset.index || "01"; }
         });
       });
 
       if (reducedMotion) {
-        $$(".hero-title span").forEach(el => {
-          el.style.transform = "none";
-        });
+        $$(".hero-title span").forEach(el => { el.style.transform = "none"; });
         $("#heroTagline").style.opacity = "1";
         $$(".statement-line .word").forEach(el => {
-          el.style.transform = "none";
-          el.style.opacity = "1";
+          el.style.transform = "none"; el.style.opacity = "1";
         });
         ScrollTrigger.refresh();
         return;
       }
 
       const heroTimeline = gsap.timeline({ delay: .25 });
-
       heroTimeline
-        .to(".hero-title span", {
-          y: "0%",
-          duration: 1.25,
-          stagger: .055,
-          ease: "expo.out"
-        })
-        .to("#heroTagline", {
-          opacity: .76,
-          y: 0,
-          duration: .9,
-          ease: "power3.out"
-        }, "-=.65");
+        .to(".hero-title span", { y: "0%", duration: 1.25, stagger: .055, ease: "expo.out" })
+        .to("#heroTagline", { opacity: .76, y: 0, duration: .9, ease: "power3.out" }, "-=.65");
 
       gsap.to("#heroMedia", {
-        scale: 1.16,
-        yPercent: 5,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".hero",
-          start: "top top",
-          end: "bottom top",
-          scrub: 1.1
-        }
+        scale: 1.16, yPercent: 5, ease: "none",
+        scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 1.1 }
       });
 
       gsap.to("#heroContent", {
-        y: -100,
-        opacity: 0,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".hero",
-          start: "top top",
-          end: "bottom top",
-          scrub: 1
-        }
+        y: -100, opacity: 0, ease: "none",
+        scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 1 }
       });
 
       gsap.to(".hero-scroll", {
-        opacity: 0,
-        y: 30,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".hero",
-          start: "top top",
-          end: "45% top",
-          scrub: 1
-        }
+        opacity: 0, y: 30, ease: "none",
+        scrollTrigger: { trigger: ".hero", start: "top top", end: "45% top", scrub: 1 }
       });
 
-      $$(".statement-line").forEach((line, lineIndex) => {
+      $$(".statement-line").forEach(line => {
         gsap.to($$(".word", line), {
-          y: "0%",
-          opacity: 1,
-          duration: 1.05,
-          stagger: .07,
-          ease: "expo.out",
-          scrollTrigger: {
-            trigger: line,
-            start: "top 78%",
-            once: true
-          }
+          y: "0%", opacity: 1, duration: 1.05,
+          stagger: .07, ease: "expo.out",
+          scrollTrigger: { trigger: line, start: "top 78%", once: true }
         });
       });
 
@@ -2000,11 +1273,7 @@
         const track = $("#collectionTrack");
         if (!section || !track) return;
 
-        if (collectionTrigger) {
-          collectionTrigger.kill();
-          collectionTrigger = null;
-        }
-
+        if (collectionTrigger) { collectionTrigger.kill(); collectionTrigger = null; }
         gsap.set(track, { x: 0 });
 
         const getDistance = () => Math.max(0, track.scrollWidth - window.innerWidth);
@@ -2013,21 +1282,17 @@
           trigger: section,
           start: "top top",
           end: () => "+=" + getDistance(),
-          pin: true,
-          scrub: 1,
-          anticipatePin: 1,
+          pin: true, scrub: 1, anticipatePin: 1,
           invalidateOnRefresh: true,
           animation: gsap.to(track, {
-            x: () => -getDistance(),
-            ease: "none",
-            paused: true,
-            overwrite: "auto"
+            x: () => -getDistance(), ease: "none",
+            paused: true, overwrite: "auto"
           })
         });
 
         const panels = $$(".product-panel", track);
 
-        panels.forEach((panel, index) => {
+        panels.forEach(panel => {
           const image = $(".product-image-wrap", panel);
           const info = $(".product-info", panel);
           const imageEl = $(".product-image", panel);
@@ -2035,15 +1300,11 @@
           gsap.fromTo(image,
             { scale: .9, opacity: .35 },
             {
-              scale: 1,
-              opacity: 1,
-              ease: "none",
+              scale: 1, opacity: 1, ease: "none",
               scrollTrigger: {
                 trigger: panel,
                 containerAnimation: collectionTrigger.animation,
-                start: "left 92%",
-                end: "left 35%",
-                scrub: true
+                start: "left 92%", end: "left 35%", scrub: true
               }
             }
           );
@@ -2051,15 +1312,11 @@
           gsap.fromTo(info,
             { x: 55, opacity: 0 },
             {
-              x: 0,
-              opacity: 1,
-              ease: "none",
+              x: 0, opacity: 1, ease: "none",
               scrollTrigger: {
                 trigger: panel,
                 containerAnimation: collectionTrigger.animation,
-                start: "left 75%",
-                end: "left 40%",
-                scrub: true
+                start: "left 75%", end: "left 40%", scrub: true
               }
             }
           );
@@ -2067,14 +1324,11 @@
           gsap.fromTo(imageEl,
             { scale: 1.12 },
             {
-              scale: 1,
-              ease: "none",
+              scale: 1, ease: "none",
               scrollTrigger: {
                 trigger: panel,
                 containerAnimation: collectionTrigger.animation,
-                start: "left 95%",
-                end: "right 15%",
-                scrub: true
+                start: "left 95%", end: "right 15%", scrub: true
               }
             }
           );
@@ -2084,29 +1338,15 @@
       setupCollection();
 
       gsap.to("#campaignImage", {
-        scale: 1.12,
-        yPercent: 6,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".campaign",
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1.1
-        }
+        scale: 1.12, yPercent: 6, ease: "none",
+        scrollTrigger: { trigger: ".campaign", start: "top bottom", end: "bottom top", scrub: 1.1 }
       });
 
       gsap.fromTo(".campaign-copy",
         { y: 80, opacity: .15 },
         {
-          y: 0,
-          opacity: 1,
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".campaign",
-            start: "top 75%",
-            end: "center center",
-            scrub: 1
-          }
+          y: 0, opacity: 1, ease: "none",
+          scrollTrigger: { trigger: ".campaign", start: "top 75%", end: "center center", scrub: 1 }
         }
       );
 
@@ -2119,11 +1359,8 @@
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: philosophy,
-            start: "top top",
-            end: "bottom bottom",
-            scrub: 1,
-            pin: false,
-            invalidateOnRefresh: true
+            start: "top top", end: "bottom bottom",
+            scrub: 1, pin: false, invalidateOnRefresh: true
           }
         });
 
@@ -2131,13 +1368,7 @@
           const at = i;
 
           if (i > 0) {
-            tl.to(items[i - 1], {
-              opacity: 0,
-              y: -35,
-              duration: .45,
-              ease: "power2.inOut"
-            }, at);
-
+            tl.to(items[i - 1], { opacity: 0, y: -35, duration: .45, ease: "power2.inOut" }, at);
             tl.fromTo(item,
               { opacity: 0, y: 35 },
               { opacity: 1, y: 0, duration: .55, ease: "power3.out" },
@@ -2145,19 +1376,17 @@
             );
           }
 
-          tl.to(bars[i], {
-            scaleX: 1,
-            opacity: 1,
-            duration: .7,
-            ease: "none"
-          }, at);
+          tl.to(bars[i], { scaleX: 1, opacity: 1, duration: .7, ease: "none" }, at);
+
+          if (i > 0) {
+            tl.to(bars[i - 1], { scaleX: .3, opacity: .4, duration: .3 }, at);
+          }
 
           tl.to(image, {
             scale: 1.04 + i * .035,
             xPercent: i === 0 ? 0 : (i === 1 ? -3 : -6),
             yPercent: i * 2,
-            ease: "none",
-            duration: .9
+            ease: "none", duration: .9
           }, at);
         });
       }
@@ -2166,15 +1395,8 @@
         gsap.fromTo(item,
           { y: 90 + (index % 2) * 25, opacity: 0 },
           {
-            y: 0,
-            opacity: 1,
-            duration: 1.2,
-            ease: "expo.out",
-            scrollTrigger: {
-              trigger: item,
-              start: "top 88%",
-              once: true
-            }
+            y: 0, opacity: 1, duration: 1.2, ease: "expo.out",
+            scrollTrigger: { trigger: item, start: "top 88%", once: true }
           }
         );
       });
@@ -2182,16 +1404,8 @@
       gsap.fromTo("#quoteInner",
         { scale: .84, opacity: .18, y: 40 },
         {
-          scale: 1,
-          opacity: 1,
-          y: 0,
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".quote",
-            start: "top 82%",
-            end: "center center",
-            scrub: 1
-          }
+          scale: 1, opacity: 1, y: 0, ease: "none",
+          scrollTrigger: { trigger: ".quote", start: "top 82%", end: "center center", scrub: 1 }
         }
       );
 
@@ -2199,29 +1413,18 @@
         gsap.fromTo(item,
           { y: 70, opacity: 0 },
           {
-            y: 0,
-            opacity: 1,
-            duration: 1.15,
-            delay: index * .03,
-            ease: "expo.out",
-            scrollTrigger: {
-              trigger: item,
-              start: "top 90%",
-              once: true
-            }
+            y: 0, opacity: 1, duration: 1.15,
+            delay: index * .03, ease: "expo.out",
+            scrollTrigger: { trigger: item, start: "top 90%", once: true }
           }
         );
       });
 
       let resizeTimer;
-
       const refreshLayout = () => {
         clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => {
-          ScrollTrigger.refresh(true);
-        }, 180);
+        resizeTimer = setTimeout(() => { ScrollTrigger.refresh(true); }, 180);
       };
-
       window.addEventListener("resize", refreshLayout, { passive: true });
       window.addEventListener("orientationchange", () => {
         setTimeout(() => ScrollTrigger.refresh(true), 350);
@@ -2229,18 +1432,13 @@
 
       const images = $$("img");
       let loaded = 0;
-
       const imageDone = () => {
         loaded++;
-        if (loaded >= images.length) {
-          ScrollTrigger.refresh(true);
-        }
+        if (loaded >= images.length) { ScrollTrigger.refresh(true); }
       };
-
       images.forEach(img => {
-        if (img.complete) {
-          imageDone();
-        } else {
+        if (img.complete) { imageDone(); }
+        else {
           img.addEventListener("load", imageDone, { once: true });
           img.addEventListener("error", imageDone, { once: true });
         }
