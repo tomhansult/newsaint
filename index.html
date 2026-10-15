@@ -4,43 +4,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#000000">
-  <meta name="description" content="NEW SAINT — Become Real. Autumn/Winter 2026, made in Johannesburg.">
+  <meta name="description" content="NEW SAINT — Become Real. Autumn/Winter 2026, made in Cape Town.">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <link rel="canonical" href="https://newsaint.co.za/">
   <title>NEW SAINT — Become Real</title>
   <link rel="icon" type="image/x-icon" href="images/FAVICON.ico">
 
-  <!-- Open Graph / Twitter — controls how the site looks when shared on IG, WhatsApp, X -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="New Saint">
   <meta property="og:title" content="NEW SAINT — Become Real">
-  <meta property="og:description" content="Autumn/Winter 2026. Made in Johannesburg.">
+  <meta property="og:description" content="Autumn/Winter 2026. Made in Cape Town.">
   <meta property="og:image" content="https://newsaint.co.za/assets/images/hero-beanie-model.jpeg">
   <meta property="og:url" content="https://newsaint.co.za/">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="NEW SAINT — Become Real">
-  <meta name="twitter:description" content="Autumn/Winter 2026. Made in Johannesburg.">
+  <meta name="twitter:description" content="Autumn/Winter 2026. Made in Cape Town.">
   <meta name="twitter:image" content="https://newsaint.co.za/assets/images/hero-beanie-model.jpeg">
 
-  <!-- Preload the largest visible image so the hero paints faster -->
   <link rel="preload" as="image" href="assets/images/hero-beanie-model.jpeg" fetchpriority="high">
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-
-  <!--
-    NEW SAINT — SINGLE-FILE HOMEPAGE
-    Creative direction:
-    - restrained, premium, editorial
-    - scroll becomes the interaction
-    - pinned cinematic scenes
-    - horizontal collection controlled by vertical scroll on desktop
-    - native swipe carousel on mobile
-    - no dependency on main.js
-    - existing store/about/gallery pages remain normal links
-  -->
 
   <style>
     :root {
@@ -83,10 +68,6 @@
       isolation: isolate;
       background: #000;
     }
-
-    /* -------------------------
-       UTILITY
-    ------------------------- */
 
     .sr-only {
       position: absolute;
@@ -140,10 +121,6 @@
       pointer-events: none;
     }
 
-    /* -------------------------
-       CUSTOM CURSOR
-    ------------------------- */
-
     .cursor {
       position: fixed;
       z-index: 10002;
@@ -163,10 +140,6 @@
 
     .cursor.is-visible { opacity: 1; }
     .cursor.is-large { width: 42px; height: 42px; }
-
-    /* -------------------------
-       NAVIGATION
-    ------------------------- */
 
     .nav {
       position: fixed;
@@ -326,10 +299,6 @@
       opacity: .42;
     }
 
-    /* -------------------------
-       SECTION INDEX
-    ------------------------- */
-
     .section-index {
       position: fixed;
       z-index: 8998;
@@ -347,10 +316,6 @@
 
     .section-index .current { opacity: .55; }
     .section-index .total { opacity: .28; }
-
-    /* -------------------------
-       SHARED
-    ------------------------- */
 
     .eyebrow {
       font-size: .58rem;
@@ -372,10 +337,6 @@
       width: 100%;
       height: 100%;
     }
-
-    /* -------------------------
-       HERO
-    ------------------------- */
 
     .hero {
       height: 100svh;
@@ -471,10 +432,6 @@
       55%, 100% { transform: translateY(100%); }
     }
 
-    /* -------------------------
-       STATEMENT
-    ------------------------- */
-
     .statement {
       min-height: 105svh;
       display: grid;
@@ -511,10 +468,6 @@
       text-transform: uppercase;
       opacity: .28;
     }
-
-    /* -------------------------
-       HORIZONTAL COLLECTION
-       ------------------------- */
 
     .collection {
       position: relative;
@@ -647,10 +600,6 @@
       display: none;
     }
 
-    /* -------------------------
-       PINNED CAMPAIGN
-    ------------------------- */
-
     .campaign {
       position: relative;
       height: 100svh;
@@ -717,10 +666,6 @@
       letter-spacing: .02em;
       opacity: .7;
     }
-
-    /* -------------------------
-       STICKY PHILOSOPHY
-    ------------------------- */
 
     .philosophy {
       position: relative;
@@ -818,10 +763,6 @@
       transform-origin: left center;
     }
 
-    /* -------------------------
-       VISUAL DIARY
-    ------------------------- */
-
     .diary {
       padding: 12rem var(--pad) 9rem;
       background: #000;
@@ -889,10 +830,6 @@
       aspect-ratio: 3 / 4;
     }
 
-    /* -------------------------
-       QUOTE
-    ------------------------- */
-
     .quote {
       min-height: 100svh;
       display: grid;
@@ -920,10 +857,6 @@
       font-weight: 400;
       opacity: .4;
     }
-
-    /* -------------------------
-       LOOKBOOK
-    ------------------------- */
 
     .lookbook {
       padding: 11rem 0 8rem;
@@ -988,10 +921,6 @@
       aspect-ratio: 3 / 4;
       margin-top: 9rem;
     }
-
-    /* -------------------------
-       FOOTER
-    ------------------------- */
 
     .footer {
       padding: 10rem var(--pad) 2.5rem;
@@ -1061,10 +990,6 @@
       opacity: .25;
     }
 
-    /* -------------------------
-       RESPONSIVE
-    ------------------------- */
-
     @media (max-width: 900px) {
       :root { --nav-h: 68px; }
 
@@ -1093,8 +1018,6 @@
         padding: 8rem 1.25rem;
       }
 
-      /* Mobile collection becomes a real touch carousel.
-         This avoids desktop-style scroll hijacking on small screens. */
       .collection-desktop { display: none; }
 
       .collection-mobile {
@@ -1327,10 +1250,6 @@
       }
     }
 
-    /* -------------------------
-       REDUCED MOTION
-    ------------------------- */
-
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto !important; }
 
@@ -1367,7 +1286,6 @@
     <div class="progress" id="scrollProgress" aria-hidden="true"></div>
     <div class="cursor" id="cursor" aria-hidden="true"></div>
 
-    <!-- NAV -->
     <header class="nav" id="siteNav">
       <a class="nav-logo" href="index.html" aria-label="New Saint home">NEW SAINT</a>
 
@@ -1396,7 +1314,6 @@
       </div>
     </header>
 
-    <!-- MOBILE MENU -->
     <aside class="mobile-menu" id="mobileMenu" aria-hidden="true">
       <nav class="mobile-menu-links" aria-label="Mobile navigation">
         <a href="index.html">Home</a>
@@ -1419,7 +1336,6 @@
 
     <main id="mainContent">
 
-      <!-- 01 — HERO -->
       <section class="scene hero" data-index="01" data-section="hero">
         <div class="hero-media" id="heroMedia" aria-hidden="true"></div>
         <div class="hero-veil" aria-hidden="true"></div>
@@ -1437,7 +1353,6 @@
         </div>
       </section>
 
-      <!-- 02 — STATEMENT -->
       <section class="scene statement" data-index="02" data-section="statement">
         <div class="statement-inner">
           <p class="statement-line">
@@ -1453,11 +1368,10 @@
             <span class="word">of</span>
             <span class="word">anything.</span>
           </p>
-          <p class="statement-meta">Est. 2021 — Johannesburg</p>
+          <p class="statement-meta">Est. 2021 — Cape Town</p>
         </div>
       </section>
 
-      <!-- 03 — COLLECTION DESKTOP -->
       <section class="collection" data-index="03" data-section="collection" id="collectionSection">
 
         <div class="collection-desktop" id="collectionDesktop">
@@ -1564,7 +1478,6 @@
           </div>
         </div>
 
-        <!-- 03 — COLLECTION MOBILE -->
         <div class="collection-mobile">
           <div class="collection-mobile-head">
             <p class="eyebrow">The Collection</p>
@@ -1616,7 +1529,6 @@
         </div>
       </section>
 
-      <!-- 04 — CAMPAIGN -->
       <section class="scene campaign" data-index="04" data-section="campaign">
         <div class="campaign-stage">
           <img
@@ -1639,13 +1551,12 @@
             <h2 class="campaign-title">Santiano</h2>
             <p class="campaign-sub">
               The first drop of the season. Five pieces, cut heavy, made in
-              Johannesburg.
+              Cape Town.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- 05 — PINNED PHILOSOPHY -->
       <section class="philosophy" data-index="05" data-section="philosophy" id="philosophySection">
         <div class="philosophy-stage">
 
@@ -1697,7 +1608,6 @@
         </div>
       </section>
 
-      <!-- 06 — VISUAL DIARY -->
       <section class="diary" data-index="06" data-section="diary">
         <div class="diary-head">
           <span>Visual Diary</span>
@@ -1723,7 +1633,6 @@
         </div>
       </section>
 
-      <!-- 07 — QUOTE -->
       <section class="quote" data-index="07" data-section="quote">
         <div class="quote-inner" id="quoteInner">
           <blockquote>
@@ -1733,11 +1642,10 @@
         </div>
       </section>
 
-      <!-- 08 — LOOKBOOK -->
       <section class="lookbook" data-index="08" data-section="lookbook">
         <div class="lookbook-head">
           <span>Lookbook — AW26</span>
-          <span>@newsaint</span>
+          <span>@newsaint.co.za</span>
         </div>
 
         <div class="lookbook-grid">
@@ -1754,7 +1662,6 @@
 
     </main>
 
-    <!-- 09 — FOOTER -->
     <footer class="footer" data-index="09" data-section="footer">
       <div class="footer-top">
 
@@ -1782,7 +1689,7 @@
 
           <div class="footer-col">
             <h4>Connect</h4>
-            <a href="https://www.instagram.com/new_saint.za/" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://www.instagram.com/newsaint.co.za/" target="_blank" rel="noopener noreferrer">Instagram</a>
           </div>
 
         </div>
@@ -1790,13 +1697,12 @@
 
       <div class="footer-bottom">
         <span>&copy; <span id="year"></span> New Saint — All rights reserved</span>
-        <span>Johannesburg — 26.2041° S, 28.0473° E</span>
+        <span>Cape Town — 33.9249° S, 18.4241° E</span>
       </div>
     </footer>
 
   </div>
 
-  <!-- GSAP + ScrollTrigger + Lenis -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
@@ -1811,16 +1717,8 @@
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       const desktop = window.matchMedia("(min-width: 901px)").matches;
 
-      /* ---------------------------------
-         YEAR
-      --------------------------------- */
       $("#year").textContent = new Date().getFullYear();
 
-      /* ---------------------------------
-         CART COUNT
-         Reads common localStorage patterns without
-         taking control away from an existing store system.
-      --------------------------------- */
       function getCartCount() {
         const keys = ["cart", "newSaintCart", "cartItems"];
         let total = 0;
@@ -1864,9 +1762,6 @@
       updateCartCount();
       window.addEventListener("storage", updateCartCount);
 
-      /* ---------------------------------
-         MOBILE MENU
-      --------------------------------- */
       const menuToggle = $("#menuToggle");
       const mobileMenu = $("#mobileMenu");
 
@@ -1893,9 +1788,6 @@
         if (e.key === "Escape") setMenu(false);
       });
 
-      /* ---------------------------------
-         ACTIVE NAVIGATION
-      --------------------------------- */
       const navLinks = $$(".nav-link");
       const pageName = location.pathname.split("/").pop() || "index.html";
 
@@ -1904,9 +1796,6 @@
         link.classList.toggle("active", href === pageName || (pageName === "" && href === "index.html"));
       });
 
-      /* ---------------------------------
-         CUSTOM CURSOR
-      --------------------------------- */
       if (!reducedMotion && desktop) {
         const cursor = $("#cursor");
         let mouseX = -100;
@@ -1937,11 +1826,6 @@
         });
       }
 
-      /* ---------------------------------
-         MAGNETIC HERO LETTERS
-         Small, quiet nod to cursor-proximity type on desktop.
-         Off entirely on mobile / reduced motion.
-      --------------------------------- */
       if (!reducedMotion && desktop && window.gsap) {
         const letters = $$(".hero-title span");
 
@@ -1970,21 +1854,13 @@
         }, { passive: true });
       }
 
-      /* ---------------------------------
-         GSAP SETUP
-      --------------------------------- */
       if (!window.gsap || !window.ScrollTrigger) {
-        console.warn("GSAP or ScrollTrigger failed to load. The page will remain usable with CSS/native scrolling.");
+        console.warn("GSAP or ScrollTrigger failed to load.");
         return;
       }
 
       gsap.registerPlugin(ScrollTrigger);
 
-      /* ---------------------------------
-         LENIS SMOOTH SCROLL
-         Desktop only. Native touch scrolling stays
-         native on mobile to avoid scroll traps.
-      --------------------------------- */
       let lenis = null;
 
       if (!reducedMotion && desktop && window.Lenis) {
@@ -2006,9 +1882,6 @@
         gsap.ticker.lagSmoothing(1000, 16);
       }
 
-      /* ---------------------------------
-         SCROLL PROGRESS
-      --------------------------------- */
       const progress = $("#scrollProgress");
 
       const updateProgress = () => {
@@ -2021,9 +1894,6 @@
       window.addEventListener("scroll", updateProgress, { passive: true });
       updateProgress();
 
-      /* ---------------------------------
-         SECTION INDEX
-      --------------------------------- */
       const sectionCurrent = $("#sectionCurrent");
       const trackedSections = $$("[data-section]");
 
@@ -2041,9 +1911,6 @@
         });
       });
 
-      /* ---------------------------------
-         REDUCED MOTION EXIT
-      --------------------------------- */
       if (reducedMotion) {
         $$(".hero-title span").forEach(el => {
           el.style.transform = "none";
@@ -2057,9 +1924,6 @@
         return;
       }
 
-      /* ---------------------------------
-         HERO INTRO
-      --------------------------------- */
       const heroTimeline = gsap.timeline({ delay: .25 });
 
       heroTimeline
@@ -2076,9 +1940,6 @@
           ease: "power3.out"
         }, "-=.65");
 
-      /* ---------------------------------
-         HERO SCROLL CHOREOGRAPHY
-      --------------------------------- */
       gsap.to("#heroMedia", {
         scale: 1.16,
         yPercent: 5,
@@ -2115,9 +1976,6 @@
         }
       });
 
-      /* ---------------------------------
-         STATEMENT WORD REVEAL
-      --------------------------------- */
       $$(".statement-line").forEach((line, lineIndex) => {
         gsap.to($$(".word", line), {
           y: "0%",
@@ -2133,12 +1991,6 @@
         });
       });
 
-      /* ---------------------------------
-         DESKTOP HORIZONTAL COLLECTION
-         Vertical scroll controls horizontal movement.
-         The section itself is pinned, so the viewport
-         stays visually locked while the collection moves.
-      --------------------------------- */
       let collectionTrigger = null;
 
       function setupCollection() {
@@ -2173,7 +2025,6 @@
           })
         });
 
-        /* Product choreography tied to the same scroll position. */
         const panels = $$(".product-panel", track);
 
         panels.forEach((panel, index) => {
@@ -2232,9 +2083,6 @@
 
       setupCollection();
 
-      /* ---------------------------------
-         CAMPAIGN — CINEMATIC PARALLAX
-      --------------------------------- */
       gsap.to("#campaignImage", {
         scale: 1.12,
         yPercent: 6,
@@ -2262,10 +2110,6 @@
         }
       );
 
-      /* ---------------------------------
-         PINNED PHILOSOPHY
-         One fixed visual stage, three narrative states.
-      --------------------------------- */
       if (desktop) {
         const philosophy = $("#philosophySection");
         const items = $$(".philosophy-item", philosophy);
@@ -2283,7 +2127,6 @@
           }
         });
 
-        /* Give each state equal time. */
         items.forEach((item, i) => {
           const at = i;
 
@@ -2319,9 +2162,6 @@
         });
       }
 
-      /* ---------------------------------
-         DIARY REVEALS
-      --------------------------------- */
       $$(".diary-item").forEach((item, index) => {
         gsap.fromTo(item,
           { y: 90 + (index % 2) * 25, opacity: 0 },
@@ -2339,9 +2179,6 @@
         );
       });
 
-      /* ---------------------------------
-         QUOTE — SCALE INTO VIEW
-      --------------------------------- */
       gsap.fromTo("#quoteInner",
         { scale: .84, opacity: .18, y: 40 },
         {
@@ -2358,9 +2195,6 @@
         }
       );
 
-      /* ---------------------------------
-         LOOKBOOK REVEAL
-      --------------------------------- */
       $$(".lookbook-item").forEach((item, index) => {
         gsap.fromTo(item,
           { y: 70, opacity: 0 },
@@ -2379,9 +2213,6 @@
         );
       });
 
-      /* ---------------------------------
-         SMART RESIZE / REFRESH
-      --------------------------------- */
       let resizeTimer;
 
       const refreshLayout = () => {
@@ -2396,7 +2227,6 @@
         setTimeout(() => ScrollTrigger.refresh(true), 350);
       }, { passive: true });
 
-      /* Wait for images before the first serious measurement. */
       const images = $$("img");
       let loaded = 0;
 
@@ -2421,9 +2251,6 @@
         updateProgress();
       });
 
-      /* ---------------------------------
-         ANCHOR / INTERNAL LINK SAFETY
-      --------------------------------- */
       $$('a[href="#"]').forEach(link => {
         link.addEventListener("click", e => e.preventDefault());
       });
