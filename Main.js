@@ -46,7 +46,7 @@ function initCartDrawer() {
       </div>
       <div class="cart-items" id="cart-items"></div>
       <div class="cart-total" id="cart-total">Total: R0.00</div>
-      <button class="checkout-btn" id="checkout-btn">Checkout</button>
+      <button class="checkout-btn" id="checkout-btn">Checkout via Instagram</button>
     </div>
   `;
   document.body.insertAdjacentHTML('beforeend', drawerHTML);
@@ -66,16 +66,23 @@ function initCartDrawer() {
     overlay.classList.remove('show');
   }
 
-  cartIcon.addEventListener('click', (e) => {
-    e.preventDefault();
-    openCart();
-  });
+  if (cartIcon) {
+    cartIcon.addEventListener('click', (e) => {
+      e.preventDefault();
+      openCart();
+    });
+  }
   closeCart.addEventListener('click', closeCartFunc);
   overlay.addEventListener('click', closeCartFunc);
 
   document.getElementById('checkout-btn').addEventListener('click', () => {
-    if (cart.length === 0) alert('Your cart is empty.');
-    else alert('Checkout coming soon. The dynamic store is in progress.');
+    if (cart.length === 0) {
+      alert('Your cart is empty.');
+      return;
+    }
+    const items = cart.map(i => `${i.name} x${i.qty}`).join(', ');
+    const message = encodeURIComponent(`Hi NEW SAINT, I'd like to order: ${items}`);
+    window.open(`https://www.instagram.com/newsaint.co.za/?message=${message}`, '_blank');
   });
 
   function renderCartItems() {
@@ -91,7 +98,7 @@ function initCartDrawer() {
       total += item.price * item.qty;
       return `
         <div class="cart-item">
-          <img src="${item.image}" alt="${item.name}" onerror="this.onerror=null; this.src='images/hoodie1.PNG';">
+          <img src="${item.image}" alt="${item.name}" onerror="this.onerror=null; this.src='assets/images/Products/Saint hoodie.avif';">
           <div class="cart-item-details">
             <div class="cart-item-title" style="font-weight:600;">${item.name}</div>
             <div>R${item.price}</div>
