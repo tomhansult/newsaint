@@ -35,14 +35,13 @@ function updateCartCount() {
   }
 }
 
-// Cart drawer
 function initCartDrawer() {
   const drawerHTML = `
     <div class="cart-overlay" id="cart-overlay"></div>
     <div class="cart-drawer" id="cart-drawer">
       <div class="cart-header">
         <span>Your Cart</span>
-        <button id="close-cart" style="background:none;border:none;font-size:1.5rem;cursor:pointer;">&times;</button>
+        <button id="close-cart" aria-label="Close cart">&times;</button>
       </div>
       <div class="cart-items" id="cart-items"></div>
       <div class="cart-total" id="cart-total">Total: R0.00</div>
@@ -100,7 +99,7 @@ function initCartDrawer() {
         <div class="cart-item">
           <img src="${item.image}" alt="${item.name}" onerror="this.onerror=null; this.src='assets/images/Products/Saint hoodie.avif';">
           <div class="cart-item-details">
-            <div class="cart-item-title" style="font-weight:600;">${item.name}</div>
+            <div class="cart-item-title">${item.name}</div>
             <div>R${item.price}</div>
             <div class="qty-control">
               <button class="qty-btn" data-id="${item.id}" data-delta="-1">-</button>
@@ -108,7 +107,7 @@ function initCartDrawer() {
               <button class="qty-btn" data-id="${item.id}" data-delta="1">+</button>
             </div>
           </div>
-          <button class="remove-item" data-id="${item.id}">&times;</button>
+          <button class="remove-item" data-id="${item.id}" aria-label="Remove">&times;</button>
         </div>
       `;
     }).join('');
@@ -123,7 +122,6 @@ function initCartDrawer() {
   }
 }
 
-// Mobile menu close on link click
 document.querySelectorAll('#nav-links a').forEach(link => {
   link.addEventListener('click', () => {
     const toggle = document.getElementById('menu-toggle');
@@ -131,7 +129,6 @@ document.querySelectorAll('#nav-links a').forEach(link => {
   });
 });
 
-// Back to top
 const btt = document.getElementById('back-to-top');
 if (btt) {
   window.addEventListener('scroll', () => {
@@ -140,7 +137,6 @@ if (btt) {
   btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 }
 
-// Fade-in on scroll
 const fadeEls = document.querySelectorAll('.fade-in');
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -149,7 +145,6 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.2 });
 fadeEls.forEach(el => observer.observe(el));
 
-// Newsletter form
 const newsletterForm = document.getElementById('newsletter-form');
 if (newsletterForm) {
   newsletterForm.addEventListener('submit', (e) => {
@@ -160,7 +155,6 @@ if (newsletterForm) {
   });
 }
 
-// Initialize cart drawer
 if (document.getElementById('cart-icon')) {
   initCartDrawer();
 }
