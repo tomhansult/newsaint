@@ -6,117 +6,10 @@
   <title>Store | New Saint</title>
   <meta name="description" content="Shop NEW SAINT — Cape Town streetwear. Hoodies, tees, accessories. Order via Instagram.">
   <link rel="icon" type="image/x-icon" href="images/FAVICON.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <style>
-    .store-hero { text-align: center; padding: 4rem 2rem 2rem; }
-    .filter-bar { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin: 2rem 0; }
-    .filter-btn {
-      background: transparent;
-      border: 1px solid #000;
-      padding: 0.5rem 1.2rem;
-      cursor: pointer;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: all 0.2s;
-    }
-    .filter-btn.active { background: #000; color: #fff; }
-
-    .product-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 1rem 4rem;
-    }
-    .product-card { text-align: center; background: #fff; }
-    .img-container {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 4 / 5;
-      overflow: hidden;
-      background: #f5f5f5;
-    }
-    .img-container img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: block;
-    }
-    .product-card h4 {
-      margin: 0.75rem 0 0.25rem;
-      font-size: 0.9rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    .product-card p { margin: 0 0 0.75rem; color: #666; font-size: 0.85rem; }
-
-    .add-to-cart {
-      display: inline-block;
-      background: #000;
-      color: #fff;
-      border: none;
-      padding: 0.6rem 1.5rem;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      cursor: pointer;
-      transition: opacity 0.2s;
-      margin-bottom: 1rem;
-    }
-    .add-to-cart:hover { opacity: 0.8; }
-
-    .cart-drawer {
-      position: fixed;
-      top: 0;
-      right: -100%;
-      width: 380px;
-      max-width: 90vw;
-      height: 100vh;
-      background: #fff;
-      box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-      z-index: 2000;
-      transition: right 0.3s ease;
-      padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      color: #000;
-    }
-    .cart-drawer.open { right: 0; }
-    .cart-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.4);
-      z-index: 1999;
-      display: none;
-    }
-    .cart-overlay.show { display: block; }
-    .cart-header { display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-size: 1.2rem; }
-    .cart-items { flex: 1; overflow-y: auto; margin: 1rem 0; }
-    .cart-item { display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #eee; }
-    .cart-item img { width: 60px; height: 60px; object-fit: contain; background: #f5f5f5; }
-    .cart-item-details { flex: 1; }
-    .qty-control { display: flex; gap: 0.3rem; align-items: center; margin-top: 0.3rem; }
-    .qty-btn { background: #f0f0f0; border: none; width: 24px; height: 24px; cursor: pointer; font-size: 1rem; }
-    .remove-item { background: none; border: none; color: #999; cursor: pointer; font-size: 1.2rem; }
-    .cart-total { font-size: 1.2rem; font-weight: bold; margin: 1rem 0; }
-    .checkout-btn {
-      background: #000;
-      color: #fff;
-      border: none;
-      padding: 1rem;
-      width: 100%;
-      cursor: pointer;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
-
-    @media (max-width: 500px) {
-      .product-grid { grid-template-columns: 1fr; }
-    }
-  </style>
 </head>
 <body>
   <header id="header">
@@ -134,6 +27,14 @@
     </nav>
   </header>
 
+  <div class="corner-meta" aria-hidden="true">
+    <span>NS-26</span>
+    <span>Store / AW26</span>
+  </div>
+  <div class="page-index" aria-hidden="true">
+    <span class="current">02</span> / 09
+  </div>
+
   <main>
     <section class="store-hero">
       <h1>STORE</h1>
@@ -150,13 +51,12 @@
     <div class="product-grid" id="product-grid"></div>
   </main>
 
-  <footer style="padding:2rem; text-align:center; border-top:1px solid #eee;">
-    <p style="margin-bottom:0.5rem;">&copy; 2026 New Saint. Wear Your Story.</p>
-    <p style="font-size:0.75rem; color:#888; letter-spacing:2px; text-transform:uppercase;">
-      Cape Town — 33.9249° S, 18.4241° E
-    </p>
+  <footer>
+    <p>&copy; 2026 New Saint. Wear Your Story.</p>
+    <p>Cape Town — 33.9249° S, 18.4241° E</p>
     <p style="margin-top:1rem;">
-      <a href="https://www.instagram.com/newsaint.co.za/" target="_blank" rel="noopener noreferrer" style="text-decoration:none; color:#000; font-weight:600; letter-spacing:2px;">Instagram</a>
+      <a href="https://www.instagram.com/newsaint.co.za/" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <a href="https://www.tiktok.com/@newsaint.co.za" target="_blank" rel="noopener noreferrer">TikTok</a>
     </p>
   </footer>
 
@@ -191,9 +91,10 @@
 
     function renderProducts(filter = 'all') {
       const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
-      grid.innerHTML = filtered.map(p => `
+      grid.innerHTML = filtered.map((p, i) => `
         <div class="product-card">
           <div class="img-container">
+            <span class="sku-label">NS-${String(p.id).padStart(2, '0')} / ${String(i + 1).padStart(2, '0')}</span>
             <img src="${p.image}" alt="${p.name}" loading="lazy"
                  onerror="this.onerror=null; this.src='assets/images/Products/Saint hoodie.avif';">
           </div>
