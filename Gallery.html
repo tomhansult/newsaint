@@ -4,24 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lookbook | New Saint</title>
+  <meta name="description" content="NEW SAINT lookbook. Cape Town streetwear, styled on the streets.">
   <link rel="icon" type="image/x-icon" href="images/FAVICON.ico">
   <link rel="stylesheet" href="styles.css">
   <style>
-    .gallery-hero {
-      text-align: center;
-      padding: 4rem 2rem 2rem;
-    }
+    .gallery-hero { text-align: center; padding: 4rem 2rem 2rem; }
     .gallery-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;   /* 2 columns */
+      grid-template-columns: 1fr 1fr;
       gap: 15px;
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 1rem 4rem;
     }
-    .gallery-item {
-      overflow: hidden;
-    }
+    .gallery-item { overflow: hidden; }
     .gallery-item img {
       width: 100%;
       aspect-ratio: 3 / 4;
@@ -29,9 +25,7 @@
       display: block;
       transition: transform 0.4s ease;
     }
-    .gallery-item:hover img {
-      transform: scale(1.03);
-    }
+    .gallery-item:hover img { transform: scale(1.03); }
     .gallery-note {
       text-align: center;
       padding: 2rem 0 4rem;
@@ -40,9 +34,7 @@
       margin: 0 auto;
     }
     @media (max-width: 600px) {
-      .gallery-grid {
-        grid-template-columns: 1fr;
-      }
+      .gallery-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -69,7 +61,6 @@
     </section>
 
     <div class="gallery-grid" id="gallery-grid">
-      <!-- Images will be injected by JS to avoid repetition, but we'll hardcode for clarity -->
       <div class="gallery-item"><img src="assets/images/Lookbook/IMG_1653.PNG" alt="Lookbook image" loading="lazy" onerror="this.onerror=null; this.src='assets/images/Products/Saint hoodie.avif';"></div>
       <div class="gallery-item"><img src="assets/images/Lookbook/Model vest.JPG" alt="Lookbook image" loading="lazy" onerror="this.onerror=null; this.src='assets/images/Products/Saint hoodie.avif';"></div>
       <div class="gallery-item"><img src="assets/images/Lookbook/Model x.jpg" alt="Lookbook image" loading="lazy" onerror="this.onerror=null; this.src='assets/images/Products/Saint hoodie.avif';"></div>
@@ -92,15 +83,15 @@
     <p class="gallery-note">Tag <strong>#WearYourStory</strong> to be featured in our next lookbook.</p>
   </main>
 
-  <footer>
-    <div style="max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; padding:2rem;">
-      <p>&copy; 2026 New Saint. Wear Your Story.</p>
-      <div>
-        <a href="#" aria-label="Instagram" style="margin-left:1rem; text-decoration:none; color:#000; font-weight:600;">IG</a>
-        <a href="#" aria-label="Twitter" style="margin-left:1rem; text-decoration:none; color:#000; font-weight:600;">TW</a>
-        <a href="#" aria-label="TikTok" style="margin-left:1rem; text-decoration:none; color:#000; font-weight:600;">TK</a>
-      </div>
-    </div>
+  <footer style="padding:2rem; text-align:center; border-top:1px solid #eee;">
+    <p style="margin-bottom:0.5rem;">&copy; 2026 New Saint. Wear Your Story.</p>
+    <p style="font-size:0.75rem; color:#888; letter-spacing:2px; text-transform:uppercase;">
+      Cape Town — 33.9249° S, 18.4241° E
+    </p>
+    <p style="margin-top:1rem;">
+      <a href="https://www.instagram.com/newsaint.co.za/" target="_blank" rel="noopener noreferrer" style="text-decoration:none; color:#000; font-weight:600; letter-spacing:2px; margin:0 0.75rem;">Instagram</a>
+      <a href="https://www.tiktok.com/@newsaint.co.za" target="_blank" rel="noopener noreferrer" style="text-decoration:none; color:#000; font-weight:600; letter-spacing:2px; margin:0 0.75rem;">TikTok</a>
+    </p>
   </footer>
 
   <button id="back-to-top" title="Back to top">↑</button>
