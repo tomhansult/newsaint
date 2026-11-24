@@ -1,21 +1,17 @@
-
 /**
- * NEW SAINT — AW26 Collection Configuration
- *
- * The horizontal engine owns the parent scroll animation.
- * This file owns collection-specific child animations.
+ * NEW SAINT — AW26 Collection
+ * Unified desktop/mobile horizontal collection.
  */
 
 (function () {
   "use strict";
 
-  if (!window.gsap || !window.ScrollTrigger) {
-    console.error("[NewSaintCollection] GSAP unavailable.");
-    return;
-  }
+  const gsap = window.gsap;
+  const ScrollTrigger = window.ScrollTrigger;
+  const HorizontalEngine = window.NewSaintHorizontal;
 
-  if (!window.NewSaintHorizontal) {
-    console.error("[NewSaintCollection] Horizontal engine unavailable.");
+  if (!gsap || !ScrollTrigger || !HorizontalEngine) {
+    console.error("[NewSaintCollection] Dependencies missing.");
     return;
   }
 
@@ -25,7 +21,10 @@
     '[data-horizontal-section="collection"]'
   );
 
-  if (!section) return;
+  if (!section) {
+    console.warn("[NewSaintCollection] Collection section not found.");
+    return;
+  }
 
   const viewport = section.querySelector(
     "[data-horizontal-viewport]"
@@ -40,34 +39,18 @@
   );
 
   if (!viewport || !track || !panels.length) {
-    console.warn("[NewSaintCollection] Invalid collection markup.");
+    console.error("[NewSaintCollection] Invalid collection markup.");
     return;
   }
 
-  let collectionInstance;
-  let childAnimations = [];
+  function createPanelAnimations(parentTween) {
+    const animations = [];
 
-  const cleanupChildren = () => {
-    childAnimations.forEach((animation) => {
-      animation.scrollTrigger?.kill();
-      animation.kill();
-    });
+    panels.forEach((panel) => {
+      const image = panel.querySelector(".product-image img, img");
 
-    childAnimations = [];
-  };
-
-  const createChildren = (horizontalTween) => {
-    cleanupChildren();
-
-    if (!horizontalTween) return;
-
-    panels.forEach((panel, index) => {
-      const image = panel.querySelector(
-        ".product-image, .collection-image, img"
-      );
-
-      const information = panel.querySelector(
-        ".product-info, .product-content, .collection-content"
+      const content = panel.querySelector(
+        ".product-info, .collection-content"
       );
 
       const isIntro = panel.classList.contains(
@@ -75,79 +58,85 @@
       );
 
       if (image) {
-        const imageAnimation = gsap.fromTo(
+        const imageReveal = gsap.fromTo(
           image,
           {
             opacity: 0.7,
-            scale: 1.08,
-            x: 30
+            scale: 1.045
           },
           {
             opacity: 1,
             scale: 1,
-            x: 0,
             ease: "none",
+
             scrollTrigger: {
               trigger: panel,
-              containerAnimation: horizontalTween,
-              start: "left right",
-              end: "center center",
+              containerAnimation: parentTween,
+              start: "left 90%",
+              end: "center 55%",
               scrub: true
             }
           }
         );
 
-        childAnimations.push(imageAnimation);
+        animations.push(imageReveal);
       }
 
-      if (information && !isIntro) {
-        const infoAnimation = gsap.fromTo(
-          information,
+      if (content && !isIntro) {
+        const contentReveal = gsap.fromTo(
+          content,
           {
             opacity: 0,
-            y: 35
+            y: 22
           },
           {
             opacity: 1,
             y: 0,
             ease: "none",
+
             scrollTrigger: {
               trigger: panel,
-              containerAnimation: horizontalTween,
-              start: "left 75%",
-              end: "center 50%",
+              containerAnimation: parentTween,
+              start: "left 82%",
+              end: "center 55%",
               scrub: true
             }
           }
         );
 
-        childAnimations.push(infoAnimation);
+        animations.push(contentReveal);
       }
 
       if (image && !isIntro) {
         const parallax = gsap.to(image, {
-          yPercent: -5,
+          yPercent: -3,
           ease: "none",
+
           scrollTrigger: {
             trigger: panel,
-            containerAnimation: horizontalTween,
+            containerAnimation: parentTween,
             start: "left right",
             end: "right left",
             scrub: true
           }
         });
 
-        childAnimations.push(parallax);
+        animations.push(parallax);
       }
     });
-  };
 
-  collectionInstance = window.NewSaintHorizontal.create({
+    return function cleanup() {
+      animations.forEach((animation) => {
+        animation.scrollTrigger?.kill();
+        animation.kill();
+      });
+    };
+  }
+
+  const instance = HorizontalEngine.create({
     viewport,
     track,
     panels,
-
-    id: "new-saint-collection",
 
     breakpoint: 900,
 
@@ -157,65 +146,9 @@
     desktopScrub: 1,
     mobileScrub: 1,
 
-    start: "top top",
-
-    refreshOnImages: true,
-    refreshOnResize: true,
-    refreshOnOrientationChange: true,
-    refreshOnResizeObserver: true
+    onAnimation: createPanelAnimations
   });
 
-  if (!collectionInstance) return;
-
-  const setupChildAnimations = () => {
-    cleanupChildren();
-
-    const tween = collectionInstance.tween;
-
-    if (!tween) return;
-
-    createChildren(tween);
-  };
-
-  setupChildAnimations();
-
-  ScrollTrigger.addEventListener(
-    "refresh",
-    setupChildAnimations
-  );
-
-  window.addEventListener(
-    "pagehide",
-    () => {
-      cleanupChildren();
-
-      ScrollTrigger.removeEventListener(
-        "refresh",
-        setupChildAnimations
-      );
-
-      collectionInstance.destroy();
-    },
-    {
-      once: true
-    }
-  );
-
-  window.NewSaintCollection = {
-    refresh() {
-      collectionInstance.refresh();
-    },
-
-    destroy() {
-      cleanupChildren();
-
-      ScrollTrigger.removeEventListener(
-        "refresh",
-        setupChildAnimations
-      );
-
-      collectionInstance.destroy();
-    }
-  };
+  window.NewSaintCollection = instance;
 
 })();
