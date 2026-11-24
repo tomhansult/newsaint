@@ -1,99 +1,221 @@
-/* ==========================================================
-   NEW SAINT — COLLECTION CONFIGURATION
-   Section-specific effects live here, not in the core engine.
-========================================================== */
-(function (window, document) {
+
+/**
+ * NEW SAINT — AW26 Collection Configuration
+ *
+ * The horizontal engine owns the parent scroll animation.
+ * This file owns collection-specific child animations.
+ */
+
+(function () {
   "use strict";
 
-  function initCollection() {
-    if (!window.NewSaintHorizontal) return;
+  if (!window.gsap || !window.ScrollTrigger) {
+    console.error("[NewSaintCollection] GSAP unavailable.");
+    return;
+  }
 
-    const section = document.querySelector("#collectionSection");
-    if (!section) return;
+  if (!window.NewSaintHorizontal) {
+    console.error("[NewSaintCollection] Horizontal engine unavailable.");
+    return;
+  }
 
-    window.NewSaintHorizontal.create({
-      section: section,
-      viewport: "#collectionViewport",
-      track: "#collectionTrack",
-      panels: "[data-horizontal-panel]",
-      scrub: 0.9,
-      start: "top top",
-      pin: true,
-      pinSpacing: true,
-      anticipatePin: 1,
+  gsap.registerPlugin(ScrollTrigger);
 
-      onPanelAnimation: function (context) {
-        const gsap = context.gsap;
-        const horizontalTween = context.horizontalTween;
+  const section = document.querySelector(
+    '[data-horizontal-section="collection"]'
+  );
 
-        context.panels.forEach(function (panel) {
-          if (!panel.classList.contains("product-panel")) return;
+  if (!section) return;
 
-          const imageWrap = panel.querySelector(".product-image-wrap");
-          const image = panel.querySelector(".product-image");
-          const info = panel.querySelector(".product-info");
+  const viewport = section.querySelector(
+    "[data-horizontal-viewport]"
+  );
 
-          if (imageWrap) {
-            gsap.fromTo(imageWrap,
-              { scale: 0.94, opacity: 0.4 },
-              {
-                scale: 1,
-                opacity: 1,
-                ease: "none",
-                scrollTrigger: {
-                  trigger: panel,
-                  containerAnimation: horizontalTween,
-                  start: "left 90%",
-                  end: "left 38%",
-                  scrub: true
-                }
-              }
-            );
+  const track = section.querySelector(
+    "[data-horizontal-track]"
+  );
+
+  const panels = Array.from(
+    section.querySelectorAll("[data-horizontal-panel]")
+  );
+
+  if (!viewport || !track || !panels.length) {
+    console.warn("[NewSaintCollection] Invalid collection markup.");
+    return;
+  }
+
+  let collectionInstance;
+  let childAnimations = [];
+
+  const cleanupChildren = () => {
+    childAnimations.forEach((animation) => {
+      animation.scrollTrigger?.kill();
+      animation.kill();
+    });
+
+    childAnimations = [];
+  };
+
+  const createChildren = (horizontalTween) => {
+    cleanupChildren();
+
+    if (!horizontalTween) return;
+
+    panels.forEach((panel, index) => {
+      const image = panel.querySelector(
+        ".product-image, .collection-image, img"
+      );
+
+      const information = panel.querySelector(
+        ".product-info, .product-content, .collection-content"
+      );
+
+      const isIntro = panel.classList.contains(
+        "collection-intro"
+      );
+
+      if (image) {
+        const imageAnimation = gsap.fromTo(
+          image,
+          {
+            opacity: 0.7,
+            scale: 1.08,
+            x: 30
+          },
+          {
+            opacity: 1,
+            scale: 1,
+            x: 0,
+            ease: "none",
+            scrollTrigger: {
+              trigger: panel,
+              containerAnimation: horizontalTween,
+              start: "left right",
+              end: "center center",
+              scrub: true
+            }
           }
+        );
 
-          if (info) {
-            gsap.fromTo(info,
-              { x: 38, opacity: 0 },
-              {
-                x: 0,
-                opacity: 1,
-                ease: "none",
-                scrollTrigger: {
-                  trigger: panel,
-                  containerAnimation: horizontalTween,
-                  start: "left 78%",
-                  end: "left 42%",
-                  scrub: true
-                }
-              }
-            );
+        childAnimations.push(imageAnimation);
+      }
+
+      if (information && !isIntro) {
+        const infoAnimation = gsap.fromTo(
+          information,
+          {
+            opacity: 0,
+            y: 35
+          },
+          {
+            opacity: 1,
+            y: 0,
+            ease: "none",
+            scrollTrigger: {
+              trigger: panel,
+              containerAnimation: horizontalTween,
+              start: "left 75%",
+              end: "center 50%",
+              scrub: true
+            }
           }
+        );
 
-          if (image) {
-            gsap.fromTo(image,
-              { xPercent: -7, scale: 1.1 },
-              {
-                xPercent: 7,
-                scale: 1,
-                ease: "none",
-                scrollTrigger: {
-                  trigger: panel,
-                  containerAnimation: horizontalTween,
-                  start: "left right",
-                  end: "right left",
-                  scrub: true
-                }
-              }
-            );
+        childAnimations.push(infoAnimation);
+      }
+
+      if (image && !isIntro) {
+        const parallax = gsap.to(image, {
+          yPercent: -5,
+          ease: "none",
+          scrollTrigger: {
+            trigger: panel,
+            containerAnimation: horizontalTween,
+            start: "left right",
+            end: "right left",
+            scrub: true
           }
         });
+
+        childAnimations.push(parallax);
       }
     });
-  }
+  };
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initCollection, { once: true });
-  } else {
-    initCollection();
-  }
-})(window, document);
+  collectionInstance = window.NewSaintHorizontal.create({
+    viewport,
+    track,
+    panels,
+
+    id: "new-saint-collection",
+
+    breakpoint: 900,
+
+    desktopPin: true,
+    mobilePin: true,
+
+    desktopScrub: 1,
+    mobileScrub: 1,
+
+    start: "top top",
+
+    refreshOnImages: true,
+    refreshOnResize: true,
+    refreshOnOrientationChange: true,
+    refreshOnResizeObserver: true
+  });
+
+  if (!collectionInstance) return;
+
+  const setupChildAnimations = () => {
+    cleanupChildren();
+
+    const tween = collectionInstance.tween;
+
+    if (!tween) return;
+
+    createChildren(tween);
+  };
+
+  setupChildAnimations();
+
+  ScrollTrigger.addEventListener(
+    "refresh",
+    setupChildAnimations
+  );
+
+  window.addEventListener(
+    "pagehide",
+    () => {
+      cleanupChildren();
+
+      ScrollTrigger.removeEventListener(
+        "refresh",
+        setupChildAnimations
+      );
+
+      collectionInstance.destroy();
+    },
+    {
+      once: true
+    }
+  );
+
+  window.NewSaintCollection = {
+    refresh() {
+      collectionInstance.refresh();
+    },
+
+    destroy() {
+      cleanupChildren();
+
+      ScrollTrigger.removeEventListener(
+        "refresh",
+        setupChildAnimations
+      );
+
+      collectionInstance.destroy();
+    }
+  };
+
+})();
