@@ -1,185 +1,329 @@
-/* ==========================================================
-   NEW SAINT — REUSABLE HORIZONTAL SECTION ENGINE
-   Classic browser script. No build step or ES modules required.
-   Requires GSAP 3 + ScrollTrigger.
-========================================================== */
-(function (window, document) {
+
+/**
+ * NEW SAINT — Unified Horizontal Scroll Engine
+ * GSAP 3.12.5 + ScrollTrigger
+ *
+ * Responsibilities:
+ * - Horizontal travel calculation
+ * - ScrollTrigger pinning
+ * - Responsive configurations
+ * - Reduced-motion support
+ * - Resize/image refresh lifecycle
+ * - Duplicate initialization protection
+ * - Cleanup
+ */
+
+(function (window) {
   "use strict";
+
+  if (!window.gsap || !window.ScrollTrigger) {
+    console.error(
+      "[NewSaintHorizontal] GSAP and ScrollTrigger are required."
+    );
+    return;
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
 
   const instances = new WeakMap();
 
-  function resolveElement(value, scope) {
-    if (!value) return null;
-    if (typeof value === "string") return (scope || document).querySelector(value);
-    return value;
-  }
+  const DEFAULTS = {
+    start: "top top",
+    scrub: 1,
+    anticipatePin: 1,
+    pin: true,
+    invalidateOnRefresh: true,
+    ease: "none",
+    breakpoint: 900,
+    mobilePin: true,
+    desktopPin: true,
+    refreshOnImages: true,
+    refreshOnResize: true,
+    refreshOnOrientationChange: true,
+    refreshOnResizeObserver: true
+  };
 
-  function resolveElements(value, scope) {
-    if (!value) return [];
-    if (typeof value === "string") return Array.from((scope || document).querySelectorAll(value));
-    if (value instanceof Element) return [value];
-    return Array.from(value);
-  }
-
-  function createHorizontalSection(options) {
-    const config = Object.assign({
-      section: null,
-      viewport: null,
-      track: null,
-      panels: "[data-horizontal-panel]",
-      scrub: 1,
-      start: "top top",
-      pin: true,
-      pinSpacing: true,
-      anticipatePin: 1,
-      travel: null,
-      onPanelAnimation: null,
-      onRefresh: null,
-      refreshOnImages: true,
-      refreshOnResize: true,
-      mobileBreakpoint: 900,
-      markers: false
-    }, options || {});
-
-    const section = resolveElement(config.section);
-    if (!section) {
-      console.warn("[NewSaintHorizontal] Section not found.", config.section);
-      return { destroy: function () {} };
-    }
-
-    if (instances.has(section)) {
-      return instances.get(section);
-    }
-
-    const viewport = resolveElement(config.viewport, section);
-    const track = resolveElement(config.track, section);
-    const panels = resolveElements(config.panels, track || section);
-
-    if (!viewport || !track || !panels.length) {
-      console.warn("[NewSaintHorizontal] Missing viewport, track or panels.", section);
-      return { destroy: function () {} };
-    }
-
-    if (!window.gsap || !window.ScrollTrigger) {
-      console.warn("[NewSaintHorizontal] GSAP and ScrollTrigger are required.");
-      return { destroy: function () {} };
-    }
-
-    const gsap = window.gsap;
-    const ScrollTrigger = window.ScrollTrigger;
-    gsap.registerPlugin(ScrollTrigger);
-
-    const media = gsap.matchMedia();
-    let destroyed = false;
-
-    const getDistance = function () {
-      if (typeof config.travel === "function") {
-        return Math.max(0, config.travel({ section, viewport, track, panels }));
-      }
-      return Math.max(0, track.scrollWidth - viewport.clientWidth);
+  function create(options = {}) {
+    const config = {
+      ...DEFAULTS,
+      ...options
     };
 
-    media.add("(prefers-reduced-motion: no-preference)", function () {
-      let resizeTimer = 0;
-      const imageListeners = [];
+    const viewport =
+      typeof config.viewport === "string"
+        ? document.querySelector(config.viewport)
+        : config.viewport;
 
-      gsap.set(track, { x: 0 });
+    const track =
+      typeof config.track === "string"
+        ? document.querySelector(config.track)
+        : config.track;
 
+    if (!viewport || !track) {
+      console.warn(
+        "[NewSaintHorizontal] Missing viewport or track.",
+        config
+      );
+
+      return null;
+    }
+
+    if (instances.has(viewport)) {
+      return instances.get(viewport);
+    }
+
+    const panels = config.panels
+      ? Array.from(config.panels)
+      : Array.from(track.querySelectorAll("[data-horizontal-panel]"));
+
+    let destroyed = false;
+    let media;
+    let resizeObserver;
+    let imageListeners = [];
+    let refreshTimeout;
+
+    let horizontalTween = null;
+
+    const originalTransform = track.style.transform;
+
+    const getDistance = () =>
+      Math.max(0, track.scrollWidth - viewport.clientWidth);
+
+    const refresh = () => {
+      if (destroyed) return;
+
+      clearTimeout(refreshTimeout);
+
+      refreshTimeout = setTimeout(() => {
+        if (destroyed) return;
+
+        ScrollTrigger.refresh();
+      }, 100);
+    };
+
+    const removeImageListeners = () => {
+      imageListeners.forEach(({ image, event, handler }) => {
+        image.removeEventListener(event, handler);
+      });
+
+      imageListeners = [];
+    };
+
+    const listenForImages = () => {
+      if (!config.refreshOnImages) return;
+
+      removeImageListeners();
+
+      const images = Array.from(track.querySelectorAll("img"));
+
+      images.forEach((image) => {
+        if (image.complete) return;
+
+        ["load", "error"].forEach((event) => {
+          const handler = refresh;
+
+          image.addEventListener(event, handler, {
+            once: true
+          });
+
+          imageListeners.push({
+            image,
+            event,
+            handler
+          });
+        });
+      });
+    };
+
+    const createHorizontalAnimation = ({
+      pin,
+      scrub,
+      start,
+      end,
+      breakpointName
+    }) => {
       const distance = getDistance();
-      if (distance < 1) return;
 
-      const horizontalTween = gsap.to(track, {
-        x: function () { return -getDistance(); },
+      gsap.set(track, {
+        x: 0
+      });
+
+      if (distance <= 0) {
+        horizontalTween = null;
+        return null;
+      }
+
+      horizontalTween = gsap.to(track, {
+        x: () => -getDistance(),
         ease: "none",
-        overwrite: "auto",
+
         scrollTrigger: {
-          trigger: section,
-          start: config.start,
-          end: function () { return "+=" + getDistance(); },
-          pin: config.pin,
-          pinSpacing: config.pinSpacing,
-          scrub: config.scrub,
+          trigger: viewport,
+          start,
+          end: () => `+=${getDistance()}`,
+          pin,
+          scrub,
           anticipatePin: config.anticipatePin,
           invalidateOnRefresh: true,
-          fastScrollEnd: true,
-          markers: config.markers
+          pinSpacing: true,
+
+          onRefresh: () => {
+            gsap.set(track, {
+              x: 0
+            });
+          },
+
+          id: config.id
+            ? `${config.id}-${breakpointName}`
+            : undefined
         }
       });
 
-      if (typeof config.onPanelAnimation === "function") {
-        config.onPanelAnimation({
-          gsap,
-          ScrollTrigger,
-          horizontalTween,
-          section,
-          viewport,
-          track,
-          panels
+      return horizontalTween;
+    };
+
+    const desktopConfig = {
+      pin: config.desktopPin,
+      scrub: config.desktopScrub ?? config.scrub,
+      start: config.desktopStart ?? config.start,
+      breakpointName: "desktop"
+    };
+
+    const mobileConfig = {
+      pin: config.mobilePin,
+      scrub: config.mobileScrub ?? config.scrub,
+      start: config.mobileStart ?? config.start,
+      breakpointName: "mobile"
+    };
+
+    const setup = () => {
+      media = gsap.matchMedia();
+
+      media.add(
+        {
+          desktop: `(min-width: ${config.breakpoint}px)`,
+          mobile: `(max-width: ${config.breakpoint - 1}px)`,
+          reduceMotion: "(prefers-reduced-motion: reduce)"
+        },
+        (context) => {
+          const {
+            desktop,
+            mobile,
+            reduceMotion
+          } = context.conditions;
+
+          if (reduceMotion) {
+            gsap.set(track, {
+              clearProps: "transform"
+            });
+
+            horizontalTween = null;
+
+            return;
+          }
+
+          if (desktop) {
+            createHorizontalAnimation(desktopConfig);
+          }
+
+          if (mobile) {
+            createHorizontalAnimation(mobileConfig);
+          }
+
+          return () => {
+            horizontalTween = null;
+          };
+        }
+      );
+
+      if (config.refreshOnResizeObserver && "ResizeObserver" in window) {
+        resizeObserver = new ResizeObserver(refresh);
+
+        resizeObserver.observe(viewport);
+        resizeObserver.observe(track);
+
+        panels.forEach((panel) => {
+          resizeObserver.observe(panel);
         });
       }
-
-      const refresh = function () {
-        if (!destroyed) ScrollTrigger.refresh();
-      };
-
-      if (config.refreshOnImages) {
-        track.querySelectorAll("img").forEach(function (img) {
-          if (img.complete) return;
-          const done = function () { refresh(); };
-          img.addEventListener("load", done, { once: true });
-          img.addEventListener("error", done, { once: true });
-          imageListeners.push([img, done]);
-        });
-      }
-
-      const onResize = function () {
-        window.clearTimeout(resizeTimer);
-        resizeTimer = window.setTimeout(refresh, 180);
-      };
 
       if (config.refreshOnResize) {
-        window.addEventListener("resize", onResize, { passive: true });
-        window.addEventListener("orientationchange", onResize, { passive: true });
+        window.addEventListener("resize", refresh, {
+          passive: true
+        });
       }
 
-      if (typeof config.onRefresh === "function") {
-        config.onRefresh({ refresh, horizontalTween, section, viewport, track, panels });
+      if (config.refreshOnOrientationChange) {
+        window.addEventListener("orientationchange", refresh, {
+          passive: true
+        });
       }
+
+      listenForImages();
 
       refresh();
-
-      return function () {
-        window.clearTimeout(resizeTimer);
-        if (config.refreshOnResize) {
-          window.removeEventListener("resize", onResize);
-          window.removeEventListener("orientationchange", onResize);
-        }
-        imageListeners.forEach(function (entry) {
-          entry[0].removeEventListener("load", entry[1]);
-          entry[0].removeEventListener("error", entry[1]);
-        });
-      };
-    });
+    };
 
     const instance = {
-      section,
       viewport,
       track,
       panels,
-      refresh: function () { ScrollTrigger.refresh(); },
-      destroy: function () {
+
+      get tween() {
+        return horizontalTween;
+      },
+
+      get distance() {
+        return getDistance();
+      },
+
+      refresh,
+
+      destroy() {
         if (destroyed) return;
+
         destroyed = true;
-        media.revert();
-        instances.delete(section);
+
+        clearTimeout(refreshTimeout);
+
+        if (media) {
+          media.revert();
+          media = null;
+        }
+
+        if (resizeObserver) {
+          resizeObserver.disconnect();
+          resizeObserver = null;
+        }
+
+        removeImageListeners();
+
+        window.removeEventListener("resize", refresh);
+        window.removeEventListener("orientationchange", refresh);
+
+        gsap.set(track, {
+          clearProps: "transform"
+        });
+
+        if (originalTransform) {
+          track.style.transform = originalTransform;
+        }
+
+        instances.delete(viewport);
+
+        ScrollTrigger.refresh();
       }
     };
 
-    instances.set(section, instance);
+    instances.set(viewport, instance);
+
+    setup();
+
     return instance;
   }
 
-  window.NewSaintHorizontal = Object.freeze({
-    create: createHorizontalSection
-  });
-})(window, document);
+  window.NewSaintHorizontal = {
+    create
+  };
+
+})(window);
