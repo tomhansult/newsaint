@@ -1,25 +1,25 @@
-
 /**
- * NEW SAINT — Unified Horizontal Scroll Engine
+ * NEW SAINT — Horizontal Scroll Engine
  * GSAP 3.12.5 + ScrollTrigger
  *
- * Responsibilities:
- * - Horizontal travel calculation
+ * Features:
+ * - Responsive desktop/mobile horizontal scroll
  * - ScrollTrigger pinning
- * - Responsive configurations
+ * - Resize and orientation handling
  * - Reduced-motion support
- * - Resize/image refresh lifecycle
- * - Duplicate initialization protection
- * - Cleanup
+ * - Image loading refresh
+ * - Lifecycle cleanup
+ * - No duplicated GSAP instances
  */
 
 (function (window) {
   "use strict";
 
-  if (!window.gsap || !window.ScrollTrigger) {
-    console.error(
-      "[NewSaintHorizontal] GSAP and ScrollTrigger are required."
-    );
+  const gsap = window.gsap;
+  const ScrollTrigger = window.ScrollTrigger;
+
+  if (!gsap || !ScrollTrigger) {
+    console.error("[NewSaintHorizontal] GSAP or ScrollTrigger missing.");
     return;
   }
 
@@ -27,44 +27,13 @@
 
   const instances = new WeakMap();
 
-  const DEFAULTS = {
-    start: "top top",
-    scrub: 1,
-    anticipatePin: 1,
-    pin: true,
-    invalidateOnRefresh: true,
-    ease: "none",
-    breakpoint: 900,
-    mobilePin: true,
-    desktopPin: true,
-    refreshOnImages: true,
-    refreshOnResize: true,
-    refreshOnOrientationChange: true,
-    refreshOnResizeObserver: true
-  };
-
   function create(options = {}) {
-    const config = {
-      ...DEFAULTS,
-      ...options
-    };
-
-    const viewport =
-      typeof config.viewport === "string"
-        ? document.querySelector(config.viewport)
-        : config.viewport;
-
-    const track =
-      typeof config.track === "string"
-        ? document.querySelector(config.track)
-        : config.track;
+    const viewport = options.viewport;
+    const track = options.track;
+    const panels = options.panels || [];
 
     if (!viewport || !track) {
-      console.warn(
-        "[NewSaintHorizontal] Missing viewport or track.",
-        config
-      );
-
+      console.error("[NewSaintHorizontal] Viewport or track missing.");
       return null;
     }
 
@@ -72,197 +41,174 @@
       return instances.get(viewport);
     }
 
-    const panels = config.panels
-      ? Array.from(config.panels)
-      : Array.from(track.querySelectorAll("[data-horizontal-panel]"));
+    const breakpoint = options.breakpoint || 900;
 
     let destroyed = false;
-    let media;
+    let matchMedia;
     let resizeObserver;
-    let imageListeners = [];
-    let refreshTimeout;
+    let parentTween = null;
+    let childCleanup = null;
+    let refreshTimer = null;
 
-    let horizontalTween = null;
+    const imageListeners = [];
 
-    const originalTransform = track.style.transform;
+    function getDistance() {
+      return Math.max(0, track.scrollWidth - viewport.clientWidth);
+    }
 
-    const getDistance = () =>
-      Math.max(0, track.scrollWidth - viewport.clientWidth);
-
-    const refresh = () => {
+    function refresh() {
       if (destroyed) return;
 
-      clearTimeout(refreshTimeout);
+      window.clearTimeout(refreshTimer);
 
-      refreshTimeout = setTimeout(() => {
-        if (destroyed) return;
+      refreshTimer = window.setTimeout(() => {
+        if (!destroyed) {
+          ScrollTrigger.refresh();
+        }
+      }, 150);
+    }
 
-        ScrollTrigger.refresh();
-      }, 100);
-    };
-
-    const removeImageListeners = () => {
-      imageListeners.forEach(({ image, event, handler }) => {
-        image.removeEventListener(event, handler);
-      });
-
-      imageListeners = [];
-    };
-
-    const listenForImages = () => {
-      if (!config.refreshOnImages) return;
-
-      removeImageListeners();
-
-      const images = Array.from(track.querySelectorAll("img"));
-
-      images.forEach((image) => {
+    function watchImages() {
+      track.querySelectorAll("img").forEach((image) => {
         if (image.complete) return;
 
-        ["load", "error"].forEach((event) => {
-          const handler = refresh;
-
-          image.addEventListener(event, handler, {
-            once: true
-          });
+        ["load", "error"].forEach((eventName) => {
+          image.addEventListener(eventName, refresh, { once: true });
 
           imageListeners.push({
             image,
-            event,
-            handler
+            eventName,
+            handler: refresh
           });
         });
       });
-    };
+    }
 
-    const createHorizontalAnimation = ({
-      pin,
-      scrub,
-      start,
-      end,
-      breakpointName
-    }) => {
-      const distance = getDistance();
-
-      gsap.set(track, {
-        x: 0
+    function unwatchImages() {
+      imageListeners.forEach(({ image, eventName, handler }) => {
+        image.removeEventListener(eventName, handler);
       });
 
-      if (distance <= 0) {
-        horizontalTween = null;
-        return null;
+      imageListeners.length = 0;
+    }
+
+    function cleanupChildren() {
+      if (typeof childCleanup === "function") {
+        childCleanup();
+        childCleanup = null;
+      }
+    }
+
+    function buildAnimation(mode) {
+      cleanupChildren();
+
+      if (parentTween) {
+        parentTween.scrollTrigger?.kill();
+        parentTween.kill();
+        parentTween = null;
       }
 
-      horizontalTween = gsap.to(track, {
+      gsap.set(track, { x: 0 });
+
+      if (getDistance() <= 0) return;
+
+      parentTween = gsap.to(track, {
         x: () => -getDistance(),
         ease: "none",
 
         scrollTrigger: {
           trigger: viewport,
-          start,
+          start: "top top",
           end: () => `+=${getDistance()}`,
-          pin,
-          scrub,
-          anticipatePin: config.anticipatePin,
-          invalidateOnRefresh: true,
-          pinSpacing: true,
-
-          onRefresh: () => {
-            gsap.set(track, {
-              x: 0
-            });
-          },
-
-          id: config.id
-            ? `${config.id}-${breakpointName}`
-            : undefined
+          pin: mode.pin,
+          pinSpacing: mode.pin,
+          scrub: mode.scrub,
+          anticipatePin: 1,
+          invalidateOnRefresh: true
         }
       });
 
-      return horizontalTween;
-    };
+      if (typeof options.onAnimation === "function") {
+        childCleanup = options.onAnimation(
+          parentTween,
+          mode.name
+        );
+      }
+    }
 
-    const desktopConfig = {
-      pin: config.desktopPin,
-      scrub: config.desktopScrub ?? config.scrub,
-      start: config.desktopStart ?? config.start,
-      breakpointName: "desktop"
-    };
+    matchMedia = gsap.matchMedia();
 
-    const mobileConfig = {
-      pin: config.mobilePin,
-      scrub: config.mobileScrub ?? config.scrub,
-      start: config.mobileStart ?? config.start,
-      breakpointName: "mobile"
-    };
+    matchMedia.add(
+      {
+        desktop: `(min-width: ${breakpoint}px)`,
+        mobile: `(max-width: ${breakpoint - 1}px)`,
+        reduceMotion: "(prefers-reduced-motion: reduce)"
+      },
 
-    const setup = () => {
-      media = gsap.matchMedia();
+      (context) => {
+        const conditions = context.conditions;
 
-      media.add(
-        {
-          desktop: `(min-width: ${config.breakpoint}px)`,
-          mobile: `(max-width: ${config.breakpoint - 1}px)`,
-          reduceMotion: "(prefers-reduced-motion: reduce)"
-        },
-        (context) => {
-          const {
-            desktop,
-            mobile,
-            reduceMotion
-          } = context.conditions;
+        if (conditions.reduceMotion) {
+          gsap.set(track, {
+            clearProps: "transform"
+          });
 
-          if (reduceMotion) {
-            gsap.set(track, {
-              clearProps: "transform"
-            });
+          parentTween = null;
 
-            horizontalTween = null;
-
-            return;
-          }
-
-          if (desktop) {
-            createHorizontalAnimation(desktopConfig);
-          }
-
-          if (mobile) {
-            createHorizontalAnimation(mobileConfig);
-          }
-
-          return () => {
-            horizontalTween = null;
-          };
+          return;
         }
-      );
 
-      if (config.refreshOnResizeObserver && "ResizeObserver" in window) {
-        resizeObserver = new ResizeObserver(refresh);
+        if (conditions.desktop) {
+          buildAnimation({
+            name: "desktop",
+            pin: options.desktopPin !== false,
+            scrub: options.desktopScrub ?? 1
+          });
+        }
 
-        resizeObserver.observe(viewport);
-        resizeObserver.observe(track);
+        if (conditions.mobile) {
+          buildAnimation({
+            name: "mobile",
+            pin: options.mobilePin !== false,
+            scrub: options.mobileScrub ?? 1
+          });
+        }
 
-        panels.forEach((panel) => {
-          resizeObserver.observe(panel);
-        });
+        return () => {
+          cleanupChildren();
+
+          if (parentTween) {
+            parentTween.scrollTrigger?.kill();
+            parentTween.kill();
+            parentTween = null;
+          }
+
+          gsap.set(track, { x: 0 });
+        };
       }
+    );
 
-      if (config.refreshOnResize) {
-        window.addEventListener("resize", refresh, {
-          passive: true
-        });
-      }
+    if ("ResizeObserver" in window) {
+      resizeObserver = new ResizeObserver(refresh);
 
-      if (config.refreshOnOrientationChange) {
-        window.addEventListener("orientationchange", refresh, {
-          passive: true
-        });
-      }
+      resizeObserver.observe(viewport);
+      resizeObserver.observe(track);
 
-      listenForImages();
+      panels.forEach((panel) => {
+        resizeObserver.observe(panel);
+      });
+    }
 
-      refresh();
-    };
+    window.addEventListener("resize", refresh, {
+      passive: true
+    });
+
+    window.addEventListener("orientationchange", refresh, {
+      passive: true
+    });
+
+    watchImages();
+    refresh();
 
     const instance = {
       viewport,
@@ -270,7 +216,7 @@
       panels,
 
       get tween() {
-        return horizontalTween;
+        return parentTween;
       },
 
       get distance() {
@@ -284,19 +230,15 @@
 
         destroyed = true;
 
-        clearTimeout(refreshTimeout);
+        window.clearTimeout(refreshTimer);
 
-        if (media) {
-          media.revert();
-          media = null;
-        }
+        cleanupChildren();
 
-        if (resizeObserver) {
-          resizeObserver.disconnect();
-          resizeObserver = null;
-        }
+        matchMedia.revert();
 
-        removeImageListeners();
+        resizeObserver?.disconnect();
+
+        unwatchImages();
 
         window.removeEventListener("resize", refresh);
         window.removeEventListener("orientationchange", refresh);
@@ -305,10 +247,6 @@
           clearProps: "transform"
         });
 
-        if (originalTransform) {
-          track.style.transform = originalTransform;
-        }
-
         instances.delete(viewport);
 
         ScrollTrigger.refresh();
@@ -316,8 +254,6 @@
     };
 
     instances.set(viewport, instance);
-
-    setup();
 
     return instance;
   }
